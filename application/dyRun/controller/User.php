@@ -29,69 +29,36 @@ class User extends Api
     }
 
     /**
-     * @ApiSummary  (http://local.foreignpay.com/dyrun/user/index)
-     * 会员中心
-     */
-    public function index()
-    {
-        $this->success('', ['welcome' => $this->auth->nickname]);
-    }
-
-    /**
-     * 注册会员
-     * @ApiMethod (POST)
-     * @param string $username 用户名
-     * @param string $password 密码
-     * @param string $email    邮箱
-     * @param string $mobile   手机号
-     * @param string $code     验证码
-     */
-    public function register()
-    {
-        $username = $this->request->post('username');
-        $password = $this->request->post('password');
-        $email    = $this->request->post('email');
-        $mobile   = $this->request->post('mobile');
-        $code     = $this->request->post('code');
-        if (!$username || !$password) {
-            $this->error(__('Invalid parameters'));
-        }
-        if ($email && !Validate::is($email, "email")) {
-            $this->error(__('Email is incorrect'));
-        }
-        if ($mobile && !Validate::regex($mobile, "^1\d{10}$")) {
-            $this->error(__('Mobile is incorrect'));
-        }
-        $ret = Sms::check($mobile, $code, 'register');
-        if (!$ret) {
-            $this->error(__('Captcha is incorrect'));
-        }
-        $ret = $this->auth->register($username, $password, $email, $mobile, []);
-        if ($ret) {
-            $data = ['userinfo' => $this->auth->getUserinfo()];
-            $this->success(__('Sign up successful'), $data);
-        } else {
-            $this->error($this->auth->getError());
-        }
-    }
-
-    /**
      * 会员登录
      * @ApiSummary  (http://local.foreignpay.com/dyrun/user/login)
      * @ApiMethod (POST)
+     * @ApiBody ({
+    'username':'dy001',
+    'password':'123456',
+    'captcha':'fmyh'
+    })
      * @param string $username  账号
      * @param string $password 密码
+     * @param string $captcha 验证码
+     * @ApiReturn ({
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':{},
+    })
      */
     public function login()
     {
-        $username = $this->request->post('username');
-        $password = $this->request->post('password');
-        if (!$username || !$password) {
+        $params   = $this->request->post();
+        $username = $params['username'];
+        $password = $params['password'];
+        $captcha  = $params['captcha'];
+        if (!$username || !$password || !$captcha) {
             $this->error(__('Invalid parameters'));
         }
         if (Config::get('fastadmin.login_captcha')) {
             $rule['captcha'] = 'require|captcha';
-            $data['captcha'] = $this->request->post('captcha');
+            $data['captcha'] = $captcha;
         }
         $validate = new Validate($rule, [], ['username' => __('Username'), 'password' => __('Password'), 'captcha' => __('Captcha')]);
         $result   = $validate->check($data);
@@ -110,6 +77,13 @@ class User extends Api
     /**
      * 退出登录
      * @ApiMethod (POST)
+     * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
+     * @ApiReturn {
+     * "code": 401,
+     * "msg": "请登录后操作",
+     * "time": "1700547678",
+     * "data": null
+     * }
      */
     public function logout()
     {
@@ -123,9 +97,16 @@ class User extends Api
     /**
      * 重置密码
      * @ApiMethod (POST)
+     * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @param string $mobile      手机号
      * @param string $newpassword 新密码
      * @param string $captcha     验证码
+     * @ApiReturn {
+     *                            "code": 1,
+     *                            "msg": "成功",
+     *                            "time": "1700547678",
+     *                            "data": null
+     *                            }
      */
     private function resetpwd()
     {
@@ -195,6 +176,44 @@ class User extends Api
         ]);
         $captcha = new Captcha((array)Config::get('captcha'));
         return $captcha->entry($id);
+    }
+
+    /**
+     * 注册会员
+     * @ApiMethod (POST)
+     * @param string $username 用户名
+     * @param string $password 密码
+     * @param string $email    邮箱
+     * @param string $mobile   手机号
+     * @param string $code     验证码
+     */
+    protected function register()
+    {
+        $username = $this->request->post('username');
+        $password = $this->request->post('password');
+        $email    = $this->request->post('email');
+        $mobile   = $this->request->post('mobile');
+        $code     = $this->request->post('code');
+        if (!$username || !$password) {
+            $this->error(__('Invalid parameters'));
+        }
+        if ($email && !Validate::is($email, "email")) {
+            $this->error(__('Email is incorrect'));
+        }
+        if ($mobile && !Validate::regex($mobile, "^1\d{10}$")) {
+            $this->error(__('Mobile is incorrect'));
+        }
+        $ret = Sms::check($mobile, $code, 'register');
+        if (!$ret) {
+            $this->error(__('Captcha is incorrect'));
+        }
+        $ret = $this->auth->register($username, $password, $email, $mobile, []);
+        if ($ret) {
+            $data = ['userinfo' => $this->auth->getUserinfo()];
+            $this->success(__('Sign up successful'), $data);
+        } else {
+            $this->error($this->auth->getError());
+        }
     }
 
 }

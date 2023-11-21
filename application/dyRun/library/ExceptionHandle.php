@@ -1,6 +1,6 @@
 <?php
 
-namespace app\api\library;
+namespace app\dyRun\library;
 
 use Exception;
 use think\exception\Handle;
@@ -16,21 +16,31 @@ class ExceptionHandle extends Handle
         // 在生产环境下返回code信息
         if (!\think\Config::get('app_debug')) {
             $statuscode = $code = 500;
-            $msg = 'An error occurred';
+            $msg        = 'An error occurred';
             // 验证异常
             if ($e instanceof \think\exception\ValidateException) {
-                $code = 0;
+                $code       = 0;
                 $statuscode = 200;
-                $msg = $e->getError();
+                $msg        = $e->getError();
             }
             // Http异常
             if ($e instanceof \think\exception\HttpException) {
                 $statuscode = $code = $e->getStatusCode();
             }
+            $line = $e->getLine();
+            $file = $e->getFile();
+            $m    = $e->getMessage();
+            $str = "接口异常：错误行号：{$line}，在 {$file}，错误信息：{$m}";
+            \think\Log::record($str, 'error');
             return json(['code' => $code, 'msg' => $msg, 'time' => time(), 'data' => null], $statuscode);
         }
 
-        //其它此交由系统处理
+        /*//其它此交由系统处理
+        $line = $e->getLine();
+        // $file = $e->getFile();
+        $m    = $e->getMessage();
+        $str = "接口异常：错误行号：{$line}，错误信息：{$m}";
+        \think\Log::record($str, 'error');*/
         return parent::render($e);
     }
 

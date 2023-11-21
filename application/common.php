@@ -560,3 +560,18 @@ EOT;
         return $icon;
     }
 }
+
+if (!function_exists('dd')) {
+    /**
+     * 调试
+     * @param mixed ...$vars
+     * @author Xionglin
+     */
+    function dd(...$vars)
+    {
+        foreach ($vars as $v) {
+            dump($v);
+        }
+        exit(1);
+    }
+}

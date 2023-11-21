@@ -170,8 +170,10 @@ return [
         'type'  => 'File',
         // 日志保存目录
         'path'  => LOG_PATH,
-        // 日志记录级别
+        // 日志记录级别  所有日志都会打印
         'level' => [],
+        // 时间格式
+        // 'time_format' => 'Y-m-d H:i:s',
     ],
     // +----------------------------------------------------------------------
     // | Trace设置 开启 app_trace 后 有效
@@ -305,5 +307,40 @@ return [
         'version'               => '1.4.0.20230711',
         //API接口地址
         'api_url'               => 'https://api.fastadmin.net',
+    ],
+
+    //数据库配置1
+    'foreign_pay' => [
+        // 数据库类型
+        'type'        => 'mysql',
+        // 服务器地址
+        'hostname'    => '127.0.0.1',
+        // 数据库名
+        'database'    => 'foreign_pay',
+        // 数据库用户名
+        'username'    => 'root',
+        // 数据库密码
+        'password'    => '123456',
+        // 数据库编码默认采用utf8
+        'charset'     => 'utf8',
+        // 数据库表前缀
+        'prefix'      => 'fp_',
+    ],
+    //数据库配置2
+    'foreign_pay_log' => [
+        // 数据库类型
+        'type'        => 'mysql',
+        // 服务器地址
+        'hostname'    => '127.0.0.1',
+        // 数据库名
+        'database'    => 'foreign_pay_log',
+        // 数据库用户名
+        'username'    => 'root',
+        // 数据库密码
+        'password'    => '123456',
+        // 数据库编码默认采用utf8
+        'charset'     => 'utf8',
+        // 数据库表前缀
+        'prefix'      => 'fp_',
     ],
 ];

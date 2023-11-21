@@ -4,7 +4,7 @@ return array (
   'name' => '大娱海外支付平台',
   'beian' => '',
   'cdnurl' => '',
-  'version' => '1.0.3',
+  'version' => '1.0.5',
   'timezone' => 'Asia/Shanghai',
   'forbiddenip' => '',
   'languages' => 
