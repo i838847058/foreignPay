@@ -171,6 +171,10 @@
                                                 <a href="javascript:;" data-id="3" class="list-group-item">验证码                            <span class="tag">
                                                             </span>
                         </a>
+                                                <a href="javascript:;" data-id="4" class="list-group-item">修改用户信息                            <span class="tag">
+                                                                    <span class="label label-success pull-right noneedlogin">登</span>
+                                                            </span>
+                        </a>
                                             </div>
                                     </div>
             </div>
@@ -678,7 +682,12 @@
                                 <div class="tab-pane" id="sample2">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <pre id="sample_response2">无</pre>
+                                            <pre id="sample_response2">{
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':{},
+    }</pre>
                                         </div>
                                     </div>
                                 </div><!-- #sample -->
@@ -818,6 +827,180 @@
                         </div>
                     </div>
                 </div>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-4">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion4" href="#collapseOne4"> 修改用户信息 <span class="text-muted">/dyRun/user/updateProfile</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne4" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab4">
+                                <li class="active"><a href="#info4" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox4" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample4" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info4">
+                                    <div class="well">
+                                        修改用户信息                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>权限</strong></div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    <td>登录</td>
+                                                    <td>是</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>鉴权</td>
+                                                    <td>否</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>token</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>请求的Token</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>org_password</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>原密码</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>new_password</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>新密码</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            无                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>Headers</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="headers">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="token">token</label>
+                                                            <input type="text" class="form-control input-sm" id="token" required placeholder="请求的Token - Ex: " name="token">
+                                                        </div>
+                                                                                                            </div>
+                                                </div>
+                                            </div>
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong>
+                                                <div class="pull-right">
+                                                    <a href="javascript:" class="btn btn-xs btn-info btn-append">追加</a>
+                                                </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/updateProfile" method="POST" name="form4" id="form4">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="org_password">org_password</label>
+                                                            <input type="text" class="form-control input-sm" id="org_password" required placeholder="原密码" name="org_password">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="new_password">new_password</label>
+                                                            <input type="text" class="form-control input-sm" id="new_password" required placeholder="新密码" name="new_password">
+                                                        </div>
+                                                                                                                <div class="form-group form-group-submit">
+                                                            <button type="submit" class="btn btn-success send" rel="4">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="4">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers4"></pre>
+                                                            <pre id="response4"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response4">{
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':{},
+    }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
                             </div>
 
             <hr>
@@ -827,7 +1010,7 @@
 
                 </div>
                 <div class="col-md-6" align="right">
-                    Generated on 2023-11-21 14:46:16 <a href="./" target="_blank">大娱海外支付平台</a>
+                    Generated on 2023-11-22 15:20:42 <a href="./" target="_blank">大娱海外支付平台</a>
                 </div>
             </div>
 

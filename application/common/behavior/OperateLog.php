@@ -9,7 +9,9 @@ class OperateLog
         //只记录POST请求的日志
         if (request()->isPost() && config('fastadmin.auto_record_log')) {
             $header = request()->header();
-            \app\common\model\OperateLog::record($header['token']);
+            if(isset($header['token'])){
+                \app\common\model\OperateLog::record($header['token']);
+            }
         }
     }
 }

@@ -78,12 +78,12 @@ class User extends Api
      * 退出登录
      * @ApiMethod (POST)
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
-     * @ApiReturn {
-     * "code": 401,
-     * "msg": "请登录后操作",
-     * "time": "1700547678",
-     * "data": null
-     * }
+     * @ApiReturn ({
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':{},
+    })
      */
     public function logout()
     {
@@ -92,71 +92,6 @@ class User extends Api
         }
         $this->auth->logout();
         $this->success(__('Logout successful'));
-    }
-
-    /**
-     * 重置密码
-     * @ApiMethod (POST)
-     * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
-     * @param string $mobile      手机号
-     * @param string $newpassword 新密码
-     * @param string $captcha     验证码
-     * @ApiReturn {
-     *                            "code": 1,
-     *                            "msg": "成功",
-     *                            "time": "1700547678",
-     *                            "data": null
-     *                            }
-     */
-    private function resetpwd()
-    {
-        $type        = $this->request->post("type", "mobile");
-        $mobile      = $this->request->post("mobile");
-        $email       = $this->request->post("email");
-        $newpassword = $this->request->post("newpassword");
-        $captcha     = $this->request->post("captcha");
-        if (!$newpassword || !$captcha) {
-            $this->error(__('Invalid parameters'));
-        }
-        //验证Token
-        if (!Validate::make()->check(['newpassword' => $newpassword], ['newpassword' => 'require|regex:\S{6,30}'])) {
-            $this->error(__('Password must be 6 to 30 characters'));
-        }
-        if ($type == 'mobile') {
-            if (!Validate::regex($mobile, "^1\d{10}$")) {
-                $this->error(__('Mobile is incorrect'));
-            }
-            $user = \app\common\model\User::getByMobile($mobile);
-            if (!$user) {
-                $this->error(__('User not found'));
-            }
-            $ret = Sms::check($mobile, $captcha, 'resetpwd');
-            if (!$ret) {
-                $this->error(__('Captcha is incorrect'));
-            }
-            Sms::flush($mobile, 'resetpwd');
-        } else {
-            if (!Validate::is($email, "email")) {
-                $this->error(__('Email is incorrect'));
-            }
-            $user = \app\common\model\User::getByEmail($email);
-            if (!$user) {
-                $this->error(__('User not found'));
-            }
-            $ret = Ems::check($email, $captcha, 'resetpwd');
-            if (!$ret) {
-                $this->error(__('Captcha is incorrect'));
-            }
-            Ems::flush($email, 'resetpwd');
-        }
-        //模拟一次登录
-        $this->auth->direct($user->id);
-        $ret = $this->auth->changepwd($newpassword, '', true);
-        if ($ret) {
-            $this->success(__('Reset password successful'));
-        } else {
-            $this->error($this->auth->getError());
-        }
     }
 
     /**
@@ -214,6 +149,37 @@ class User extends Api
         } else {
             $this->error($this->auth->getError());
         }
+    }
+
+
+    /**
+     * 修改用户信息
+     * @ApiMethod (POST)
+     * @param string $org_password 原密码
+     * @param string $new_password 新密码
+     * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
+     * @ApiReturn ({
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':{},
+    })
+     */
+    public function updateProfile()
+    {
+        $user         = $this->auth->getUser();
+        $org_password = $this->request->post('org_password');
+        $new_password = $this->request->post('new_password');
+
+        if (!$org_password || !$new_password) {
+            $this->error(__('Invalid parameters'));
+        }
+        if ($user->password != getEncryptPassword($org_password, $user->salt)) {
+            $this->error('修改失败！原始密码错误');
+        }
+        $user->password = getEncryptPassword($new_password, $user->salt);
+        $user->save();
+        $this->success();
     }
 
 }
