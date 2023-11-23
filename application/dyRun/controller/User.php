@@ -30,7 +30,7 @@ class User extends Api
 
     /**
      * 会员登录
-     * @ApiSummary  (http://local.foreignpay.com/dyrun/user/login)
+     * @ApiSummary  (dyrun/user/login)
      * @ApiMethod (POST)
      * @ApiBody ({
     'username':'dy001',
@@ -96,7 +96,7 @@ class User extends Api
 
     /**
      * 验证码
-     * @ApiSummary  (http://local.foreignpay.com/dyrun/common/captcha)
+     * @ApiSummary  (dyrun/common/captcha)
      * @param $id
      * @return \think\Response
      */
