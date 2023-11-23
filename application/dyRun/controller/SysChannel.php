@@ -63,10 +63,10 @@ class SysChannel extends Api
     "channel_name': '中国银行上海支行',
     'channel_short_name': '中行',
     'channel_num': 'ZH001',
-    'pay_product': '游戏',
+    'pay_product': 0,
     'trans_currency': '人民币',
     'country_id': 1,
-    'support_product_type_id': 1,
+    'support_product': '游戏、棋牌',
     'no_product': '黄，赌，毒',
     'pay_method': '线上',
     'pay_rate': '10.00',
@@ -79,10 +79,10 @@ class SysChannel extends Api
      * @param string $channel_name  渠道名称
      * @param string $channel_short_name  渠道简称
      * @param string $channel_num  渠道号
-     * @param string $pay_product  支付产品
+     * @param tinyint $pay_product  支付产品：0=代收；1=代付；
      * @param string $trans_currency  交易货币
      * @param int $country_id  国家ID
-     * @param int $support_product_type_id  支持的产品ID
+     * @param string $support_product  支持产品
      * @param string $no_product  禁止产品
      * @param string $pay_method  支付方式
      * @param decimal $pay_rate  支付费率
@@ -151,10 +151,10 @@ class SysChannel extends Api
      * @param string $channel_name  渠道名称
      * @param string $channel_short_name  渠道简称
      * @param string $channel_num  渠道号
-     * @param string $pay_product  支付产品
+     * @param tinyint $pay_product  支付产品：0=代收；1=代付；
      * @param string $trans_currency  交易货币
      * @param int $country_id  国家ID
-     * @param int $support_product_type_id  支持的产品ID
+     * @param string $support_product  支持产品
      * @param string $no_product  禁止产品
      * @param string $pay_method  支付方式
      * @param decimal $pay_rate  支付费率
