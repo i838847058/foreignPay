@@ -28,19 +28,10 @@ class SysCountry extends Model
      * @throws \think\exception\DbException
      * @author hsy 2023-11-23
      */
-    public static function getSysCountryList($params)
+    public static function getSysCountryList()
     {
-        $where = $params;
-        unset($where['list_rows'], $where['page']);
-        extract($params);
-        $list_rows = $list_rows ?? 10;
-        $page      = $page ?? 0;
-        $self      = new self();
-        $list      = $self->where($where)
-            ->order('id', 'desc')
-            ->paginate($list_rows, false, [
-                'page' => $page
-            ]);
+        $self = new self();
+        $list = $self->column('id,name');
         return $list;
     }
 
