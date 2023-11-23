@@ -21,13 +21,13 @@ class SysChannel extends Api
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (GET)
      * @ApiBody ({
-    "channel_name": "中国银行上海支行",
-    "channel_short_name": "中行",
-    "channel_num": "ZH001",
-    "created": "2023-11-22 18:04:09",
-    "updated": "2023-11-22 18:04:09",
-    "list_rows": 10,
-    "page": 1,
+    'channel_name': '中国银行上海支行',
+    'channel_short_name': '中行',
+    'channel_num': 'ZH001',
+    'created': '2023-11-22 18:04:09',
+    'updated': '2023-11-22 18:04:09',
+    'list_rows': 10,
+    'page': 1,
     })
      * @param string $channel_name  渠道名称
      * @param string $channel_short_name  渠道简称
@@ -60,21 +60,21 @@ class SysChannel extends Api
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (POST)
      * @ApiBody ({
-    "channel_name": "中国银行上海支行",
-    "channel_short_name": "中行",
-    "channel_num": "ZH001",
-    "pay_product": "游戏",
-    "trans_currency": "人民币",
-    "country_id": 1,
-    "support_product_type_id": 1,
-    "no_product": "黄，赌，毒",
-    "pay_method": "线上",
-    "pay_rate": "10.00",
-    "settlement_cycle": "T+1",
-    "status": 1,
-    "margin_balance": "100000.00",
-    "created": "2023-11-22 18:04:09",
-    "updated": "2023-11-22 18:04:09"
+    "channel_name': '中国银行上海支行',
+    'channel_short_name': '中行',
+    'channel_num': 'ZH001',
+    'pay_product': '游戏',
+    'trans_currency': '人民币',
+    'country_id': 1,
+    'support_product_type_id': 1,
+    'no_product': '黄，赌，毒',
+    'pay_method': '线上',
+    'pay_rate': '10.00',
+    'settlement_cycle': 'T+1',
+    'status': 1,
+    'margin_balance': '100000.00',
+    'created': '2023-11-22 18:04:09',
+    'updated': '2023-11-22 18:04:09'
     })
      * @param string $channel_name  渠道名称
      * @param string $channel_short_name  渠道简称
@@ -130,22 +130,22 @@ class SysChannel extends Api
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (POST)
      * @ApiBody ({
-    "id": "1",
-    "channel_name": "中国银行上海支行",
-    "channel_short_name": "中行",
-    "channel_num": "ZH001",
-    "pay_product": "游戏",
-    "trans_currency": "人民币",
-    "country_id": 1,
-    "support_product_type_id": 1,
-    "no_product": "黄，赌，毒",
-    "pay_method": "线上",
-    "pay_rate": "10.00",
-    "settlement_cycle": "T+1",
-    "status": 1,
-    "margin_balance": "100000.00",
-    "created": "2023-11-22 18:04:09",
-    "updated": "2023-11-22 18:04:09"
+    'id': '1',
+    'channel_name': '中国银行上海支行',
+    'channel_short_name': '中行',
+    'channel_num': 'ZH001',
+    'pay_product': '游戏',
+    'trans_currency': '人民币',
+    'country_id': 1,
+    'support_product_type_id': 1,
+    'no_product': '黄，赌，毒',
+    'pay_method': '线上',
+    'pay_rate': '10.00',
+    'settlement_cycle': 'T+1',
+    'status': 1,
+    'margin_balance': '100000.00',
+    'created': '2023-11-22 18:04:09',
+    'updated': '2023-11-22 18:04:09'
     })
      * @param int $id  ID
      * @param string $channel_name  渠道名称
@@ -194,8 +194,8 @@ class SysChannel extends Api
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (POST)
      * @ApiBody ({
-    "id": "1",
-    "status": 1,
+    'id': '1',
+    'status': 1,
     })
      * @param int $id  ID
      * @param tinyint $status  状态：0=禁用；1=启用；

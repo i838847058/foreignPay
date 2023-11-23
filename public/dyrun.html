@@ -159,19 +159,38 @@
                                                             </span>
                         </a>
                                             </div>
-                                        <a href="#会员接口" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">会员接口  <i class="fa fa-caret-down"></i></a>
-                    <div class="child collapse" id="会员接口">
-                                                <a href="javascript:;" data-id="1" class="list-group-item">会员登录                            <span class="tag">
-                                                            </span>
-                        </a>
-                                                <a href="javascript:;" data-id="2" class="list-group-item">退出登录                            <span class="tag">
+                                        <a href="#渠道管理" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">渠道管理  <i class="fa fa-caret-down"></i></a>
+                    <div class="child collapse" id="渠道管理">
+                                                <a href="javascript:;" data-id="1" class="list-group-item">获取渠道列表                            <span class="tag">
                                                                     <span class="label label-success pull-right noneedlogin">登</span>
                                                             </span>
                         </a>
-                                                <a href="javascript:;" data-id="3" class="list-group-item">验证码                            <span class="tag">
+                                                <a href="javascript:;" data-id="2" class="list-group-item">新增渠道                            <span class="tag">
+                                                                    <span class="label label-success pull-right noneedlogin">登</span>
                                                             </span>
                         </a>
-                                                <a href="javascript:;" data-id="4" class="list-group-item">修改用户信息                            <span class="tag">
+                                                <a href="javascript:;" data-id="3" class="list-group-item">编辑渠道                            <span class="tag">
+                                                                    <span class="label label-success pull-right noneedlogin">登</span>
+                                                            </span>
+                        </a>
+                                                <a href="javascript:;" data-id="4" class="list-group-item">更新渠道状态                            <span class="tag">
+                                                                    <span class="label label-success pull-right noneedlogin">登</span>
+                                                            </span>
+                        </a>
+                                            </div>
+                                        <a href="#会员接口" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">会员接口  <i class="fa fa-caret-down"></i></a>
+                    <div class="child collapse" id="会员接口">
+                                                <a href="javascript:;" data-id="5" class="list-group-item">会员登录                            <span class="tag">
+                                                            </span>
+                        </a>
+                                                <a href="javascript:;" data-id="6" class="list-group-item">退出登录                            <span class="tag">
+                                                                    <span class="label label-success pull-right noneedlogin">登</span>
+                                                            </span>
+                        </a>
+                                                <a href="javascript:;" data-id="7" class="list-group-item">验证码                            <span class="tag">
+                                                            </span>
+                        </a>
+                                                <a href="javascript:;" data-id="8" class="list-group-item">修改用户信息                            <span class="tag">
                                                                     <span class="label label-success pull-right noneedlogin">登</span>
                                                             </span>
                         </a>
@@ -388,13 +407,13 @@
                         </div>
                     </div>
                 </div>
-                                <h2>会员接口</h2>
+                                <h2>渠道管理</h2>
                 <hr>
                                 <div class="panel panel-default">
                     <div class="panel-heading" id="heading-1">
                         <h4 class="panel-title">
-                            <span class="label label-primary">POST</span>
-                            <a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1"> 会员登录 <span class="text-muted">/dyRun/user/login</span></a>
+                            <span class="label label-success">GET</span>
+                            <a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1"> 获取渠道列表 <span class="text-muted">/dyRun/sys_channel/getSysChannelList</span></a>
                         </h4>
                     </div>
                     <div id="collapseOne1" class="panel-collapse collapse">
@@ -412,7 +431,1049 @@
 
                                 <div class="tab-pane active" id="info1">
                                     <div class="well">
-                                        http://local.foreignpay.com/dyrun/user/login                                    </div>
+                                        dyrun/sys_channel/getSysChannelList                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>权限</strong></div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    <td>登录</td>
+                                                    <td>是</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>鉴权</td>
+                                                    <td>否</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>token</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>请求的Token</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>channel_name</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>渠道名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>channel_short_name</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>渠道简称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>channel_num</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>渠道号</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>created</td>
+                                                        <td>timestamp</td>
+                                                        <td>是</td>
+                                                        <td>创建时间</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>updated</td>
+                                                        <td>timestamp</td>
+                                                        <td>是</td>
+                                                        <td>更新时间</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>list_rows</td>
+                                                        <td>int</td>
+                                                        <td>是</td>
+                                                        <td>每页条数</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>page</td>
+                                                        <td>int</td>
+                                                        <td>是</td>
+                                                        <td>页数</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            {
+    'channel_name': '中国银行上海支行',
+    'channel_short_name': '中行',
+    'channel_num': 'ZH001',
+    'created': '2023-11-22 18:04:09',
+    'updated': '2023-11-22 18:04:09',
+    'list_rows': 10,
+    'page': 1,
+    }                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>Headers</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="headers">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="token">token</label>
+                                                            <input type="text" class="form-control input-sm" id="token" required placeholder="请求的Token - Ex: " name="token">
+                                                        </div>
+                                                                                                            </div>
+                                                </div>
+                                            </div>
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong>
+                                                <div class="pull-right">
+                                                    <a href="javascript:" class="btn btn-xs btn-info btn-append">追加</a>
+                                                </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/sys_channel/getSysChannelList" method="GET" name="form1" id="form1">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="channel_name">channel_name</label>
+                                                            <input type="text" class="form-control input-sm" id="channel_name" required placeholder="渠道名称" name="channel_name">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="channel_short_name">channel_short_name</label>
+                                                            <input type="text" class="form-control input-sm" id="channel_short_name" required placeholder="渠道简称" name="channel_short_name">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="channel_num">channel_num</label>
+                                                            <input type="text" class="form-control input-sm" id="channel_num" required placeholder="渠道号" name="channel_num">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="created">created</label>
+                                                            <input type="text" class="form-control input-sm" id="created" required placeholder="创建时间" name="created">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="updated">updated</label>
+                                                            <input type="text" class="form-control input-sm" id="updated" required placeholder="更新时间" name="updated">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="list_rows">list_rows</label>
+                                                            <input type="text" class="form-control input-sm" id="list_rows" required placeholder="每页条数" name="list_rows">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="page">page</label>
+                                                            <input type="text" class="form-control input-sm" id="page" required placeholder="页数" name="page">
+                                                        </div>
+                                                                                                                <div class="form-group form-group-submit">
+                                                            <button type="submit" class="btn btn-success send" rel="1">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="1">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers1"></pre>
+                                                            <pre id="response1"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response1">{
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':null,
+    }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-2">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2"> 新增渠道 <span class="text-muted">/dyRun/sys_channel/addChannel</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne2" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab2">
+                                <li class="active"><a href="#info2" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox2" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample2" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info2">
+                                    <div class="well">
+                                        dyrun/sys_channel/addchannel                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>权限</strong></div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    <td>登录</td>
+                                                    <td>是</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>鉴权</td>
+                                                    <td>否</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>token</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>请求的Token</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>channel_name</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>渠道名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>channel_short_name</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>渠道简称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>channel_num</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>渠道号</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>pay_product</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>支付产品</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>trans_currency</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>交易货币</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>country_id</td>
+                                                        <td>int</td>
+                                                        <td>是</td>
+                                                        <td>国家ID</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>support_product_type_id</td>
+                                                        <td>int</td>
+                                                        <td>是</td>
+                                                        <td>支持的产品ID</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>no_product</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>禁止产品</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>pay_method</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>支付方式</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>pay_rate</td>
+                                                        <td>decimal</td>
+                                                        <td>是</td>
+                                                        <td>支付费率</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>settlement_cycle</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>结算周期</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>status</td>
+                                                        <td>tinyint</td>
+                                                        <td>是</td>
+                                                        <td>状态：0=禁用；1=启用；</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>margin_balance</td>
+                                                        <td>decimal</td>
+                                                        <td>是</td>
+                                                        <td>保证金余额</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>created</td>
+                                                        <td>timestamp</td>
+                                                        <td>是</td>
+                                                        <td>创建时间</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>updated</td>
+                                                        <td>timestamp</td>
+                                                        <td>是</td>
+                                                        <td>更新时间</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            {
+    "channel_name': '中国银行上海支行',
+    'channel_short_name': '中行',
+    'channel_num': 'ZH001',
+    'pay_product': '游戏',
+    'trans_currency': '人民币',
+    'country_id': 1,
+    'support_product_type_id': 1,
+    'no_product': '黄，赌，毒',
+    'pay_method': '线上',
+    'pay_rate': '10.00',
+    'settlement_cycle': 'T+1',
+    'status': 1,
+    'margin_balance': '100000.00',
+    'created': '2023-11-22 18:04:09',
+    'updated': '2023-11-22 18:04:09'
+    }                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>Headers</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="headers">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="token">token</label>
+                                                            <input type="text" class="form-control input-sm" id="token" required placeholder="请求的Token - Ex: " name="token">
+                                                        </div>
+                                                                                                            </div>
+                                                </div>
+                                            </div>
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong>
+                                                <div class="pull-right">
+                                                    <a href="javascript:" class="btn btn-xs btn-info btn-append">追加</a>
+                                                </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/sys_channel/addChannel" method="POST" name="form2" id="form2">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="channel_name">channel_name</label>
+                                                            <input type="text" class="form-control input-sm" id="channel_name" required placeholder="渠道名称" name="channel_name">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="channel_short_name">channel_short_name</label>
+                                                            <input type="text" class="form-control input-sm" id="channel_short_name" required placeholder="渠道简称" name="channel_short_name">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="channel_num">channel_num</label>
+                                                            <input type="text" class="form-control input-sm" id="channel_num" required placeholder="渠道号" name="channel_num">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="pay_product">pay_product</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_product" required placeholder="支付产品" name="pay_product">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="trans_currency">trans_currency</label>
+                                                            <input type="text" class="form-control input-sm" id="trans_currency" required placeholder="交易货币" name="trans_currency">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="country_id">country_id</label>
+                                                            <input type="text" class="form-control input-sm" id="country_id" required placeholder="国家ID" name="country_id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="support_product_type_id">support_product_type_id</label>
+                                                            <input type="text" class="form-control input-sm" id="support_product_type_id" required placeholder="支持的产品ID" name="support_product_type_id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="no_product">no_product</label>
+                                                            <input type="text" class="form-control input-sm" id="no_product" required placeholder="禁止产品" name="no_product">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="pay_method">pay_method</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_method" required placeholder="支付方式" name="pay_method">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="pay_rate">pay_rate</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_rate" required placeholder="支付费率" name="pay_rate">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="settlement_cycle">settlement_cycle</label>
+                                                            <input type="text" class="form-control input-sm" id="settlement_cycle" required placeholder="结算周期" name="settlement_cycle">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="status">status</label>
+                                                            <input type="text" class="form-control input-sm" id="status" required placeholder="状态：0=禁用；1=启用；" name="status">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="margin_balance">margin_balance</label>
+                                                            <input type="text" class="form-control input-sm" id="margin_balance" required placeholder="保证金余额" name="margin_balance">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="created">created</label>
+                                                            <input type="text" class="form-control input-sm" id="created" required placeholder="创建时间" name="created">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="updated">updated</label>
+                                                            <input type="text" class="form-control input-sm" id="updated" required placeholder="更新时间" name="updated">
+                                                        </div>
+                                                                                                                <div class="form-group form-group-submit">
+                                                            <button type="submit" class="btn btn-success send" rel="2">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="2">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers2"></pre>
+                                                            <pre id="response2"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response2">{
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':null,
+    }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-3">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion3" href="#collapseOne3"> 编辑渠道 <span class="text-muted">/dyRun/sys_channel/editChannel</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne3" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab3">
+                                <li class="active"><a href="#info3" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox3" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample3" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info3">
+                                    <div class="well">
+                                        dyrun/sys_channel/editchannel                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>权限</strong></div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    <td>登录</td>
+                                                    <td>是</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>鉴权</td>
+                                                    <td>否</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>token</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>请求的Token</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>id</td>
+                                                        <td>int</td>
+                                                        <td>是</td>
+                                                        <td>ID</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>channel_name</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>渠道名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>channel_short_name</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>渠道简称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>channel_num</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>渠道号</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>pay_product</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>支付产品</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>trans_currency</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>交易货币</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>country_id</td>
+                                                        <td>int</td>
+                                                        <td>是</td>
+                                                        <td>国家ID</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>support_product_type_id</td>
+                                                        <td>int</td>
+                                                        <td>是</td>
+                                                        <td>支持的产品ID</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>no_product</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>禁止产品</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>pay_method</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>支付方式</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>pay_rate</td>
+                                                        <td>decimal</td>
+                                                        <td>是</td>
+                                                        <td>支付费率</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>settlement_cycle</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>结算周期</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>status</td>
+                                                        <td>tinyint</td>
+                                                        <td>是</td>
+                                                        <td>状态：0=禁用；1=启用；</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>margin_balance</td>
+                                                        <td>decimal</td>
+                                                        <td>是</td>
+                                                        <td>保证金余额</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            {
+    'id': '1',
+    'channel_name': '中国银行上海支行',
+    'channel_short_name': '中行',
+    'channel_num': 'ZH001',
+    'pay_product': '游戏',
+    'trans_currency': '人民币',
+    'country_id': 1,
+    'support_product_type_id': 1,
+    'no_product': '黄，赌，毒',
+    'pay_method': '线上',
+    'pay_rate': '10.00',
+    'settlement_cycle': 'T+1',
+    'status': 1,
+    'margin_balance': '100000.00',
+    'created': '2023-11-22 18:04:09',
+    'updated': '2023-11-22 18:04:09'
+    }                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>Headers</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="headers">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="token">token</label>
+                                                            <input type="text" class="form-control input-sm" id="token" required placeholder="请求的Token - Ex: " name="token">
+                                                        </div>
+                                                                                                            </div>
+                                                </div>
+                                            </div>
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong>
+                                                <div class="pull-right">
+                                                    <a href="javascript:" class="btn btn-xs btn-info btn-append">追加</a>
+                                                </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/sys_channel/editChannel" method="POST" name="form3" id="form3">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="id">id</label>
+                                                            <input type="text" class="form-control input-sm" id="id" required placeholder="ID" name="id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="channel_name">channel_name</label>
+                                                            <input type="text" class="form-control input-sm" id="channel_name" required placeholder="渠道名称" name="channel_name">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="channel_short_name">channel_short_name</label>
+                                                            <input type="text" class="form-control input-sm" id="channel_short_name" required placeholder="渠道简称" name="channel_short_name">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="channel_num">channel_num</label>
+                                                            <input type="text" class="form-control input-sm" id="channel_num" required placeholder="渠道号" name="channel_num">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="pay_product">pay_product</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_product" required placeholder="支付产品" name="pay_product">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="trans_currency">trans_currency</label>
+                                                            <input type="text" class="form-control input-sm" id="trans_currency" required placeholder="交易货币" name="trans_currency">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="country_id">country_id</label>
+                                                            <input type="text" class="form-control input-sm" id="country_id" required placeholder="国家ID" name="country_id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="support_product_type_id">support_product_type_id</label>
+                                                            <input type="text" class="form-control input-sm" id="support_product_type_id" required placeholder="支持的产品ID" name="support_product_type_id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="no_product">no_product</label>
+                                                            <input type="text" class="form-control input-sm" id="no_product" required placeholder="禁止产品" name="no_product">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="pay_method">pay_method</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_method" required placeholder="支付方式" name="pay_method">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="pay_rate">pay_rate</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_rate" required placeholder="支付费率" name="pay_rate">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="settlement_cycle">settlement_cycle</label>
+                                                            <input type="text" class="form-control input-sm" id="settlement_cycle" required placeholder="结算周期" name="settlement_cycle">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="status">status</label>
+                                                            <input type="text" class="form-control input-sm" id="status" required placeholder="状态：0=禁用；1=启用；" name="status">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="margin_balance">margin_balance</label>
+                                                            <input type="text" class="form-control input-sm" id="margin_balance" required placeholder="保证金余额" name="margin_balance">
+                                                        </div>
+                                                                                                                <div class="form-group form-group-submit">
+                                                            <button type="submit" class="btn btn-success send" rel="3">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="3">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers3"></pre>
+                                                            <pre id="response3"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response3">{
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':null,
+    }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-4">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion4" href="#collapseOne4"> 更新渠道状态 <span class="text-muted">/dyRun/sys_channel/updateStatus</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne4" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab4">
+                                <li class="active"><a href="#info4" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox4" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample4" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info4">
+                                    <div class="well">
+                                        dyrun/sys_channel/updatestatus                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>权限</strong></div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    <td>登录</td>
+                                                    <td>是</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>鉴权</td>
+                                                    <td>否</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>token</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>请求的Token</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>id</td>
+                                                        <td>int</td>
+                                                        <td>是</td>
+                                                        <td>ID</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>status</td>
+                                                        <td>tinyint</td>
+                                                        <td>是</td>
+                                                        <td>状态：0=禁用；1=启用；</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            {
+    'id': '1',
+    'status': 1,
+    }                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>Headers</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="headers">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="token">token</label>
+                                                            <input type="text" class="form-control input-sm" id="token" required placeholder="请求的Token - Ex: " name="token">
+                                                        </div>
+                                                                                                            </div>
+                                                </div>
+                                            </div>
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong>
+                                                <div class="pull-right">
+                                                    <a href="javascript:" class="btn btn-xs btn-info btn-append">追加</a>
+                                                </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/sys_channel/updateStatus" method="POST" name="form4" id="form4">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="id">id</label>
+                                                            <input type="text" class="form-control input-sm" id="id" required placeholder="ID" name="id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="status">status</label>
+                                                            <input type="text" class="form-control input-sm" id="status" required placeholder="状态：0=禁用；1=启用；" name="status">
+                                                        </div>
+                                                                                                                <div class="form-group form-group-submit">
+                                                            <button type="submit" class="btn btn-success send" rel="4">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="4">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers4"></pre>
+                                                            <pre id="response4"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response4">{
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':null,
+    }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <h2>会员接口</h2>
+                <hr>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-5">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion5" href="#collapseOne5"> 会员登录 <span class="text-muted">/dyRun/user/login</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne5" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab5">
+                                <li class="active"><a href="#info5" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox5" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample5" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info5">
+                                    <div class="well">
+                                        dyrun/user/login                                    </div>
                                     <div class="panel panel-default">
                                         <div class="panel-heading"><strong>权限</strong></div>
                                         <div class="panel-body">
@@ -482,7 +1543,7 @@
                                     </div>
                                 </div><!-- #info -->
 
-                                <div class="tab-pane" id="sandbox1">
+                                <div class="tab-pane" id="sandbox5">
                                     <div class="row">
                                         <div class="col-md-12">
                                                                                         <div class="panel panel-default">
@@ -492,7 +1553,7 @@
                                                 </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/login" method="POST" name="form1" id="form1">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/login" method="POST" name="form5" id="form5">
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="username">username</label>
                                                             <input type="text" class="form-control input-sm" id="username" required placeholder="账号" name="username">
@@ -506,8 +1567,8 @@
                                                             <input type="text" class="form-control input-sm" id="captcha" required placeholder="验证码" name="captcha">
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
-                                                            <button type="submit" class="btn btn-success send" rel="1">提交</button>
-                                                            <button type="reset" class="btn btn-info" rel="1">重置</button>
+                                                            <button type="submit" class="btn btn-success send" rel="5">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="5">重置</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -517,8 +1578,8 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12" style="overflow-x:auto">
-                                                            <pre id="response_headers1"></pre>
-                                                            <pre id="response1"></pre>
+                                                            <pre id="response_headers5"></pre>
+                                                            <pre id="response5"></pre>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -533,10 +1594,10 @@
                                     </div>
                                 </div><!-- #sandbox -->
 
-                                <div class="tab-pane" id="sample1">
+                                <div class="tab-pane" id="sample5">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <pre id="sample_response1">{
+                                            <pre id="sample_response5">{
     'code':'1',
     'msg':'成功',
     'time':'1700547489',
@@ -551,26 +1612,26 @@
                     </div>
                 </div>
                                 <div class="panel panel-default">
-                    <div class="panel-heading" id="heading-2">
+                    <div class="panel-heading" id="heading-6">
                         <h4 class="panel-title">
                             <span class="label label-primary">POST</span>
-                            <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2"> 退出登录 <span class="text-muted">/dyRun/user/logout</span></a>
+                            <a data-toggle="collapse" data-parent="#accordion6" href="#collapseOne6"> 退出登录 <span class="text-muted">/dyRun/user/logout</span></a>
                         </h4>
                     </div>
-                    <div id="collapseOne2" class="panel-collapse collapse">
+                    <div id="collapseOne6" class="panel-collapse collapse">
                         <div class="panel-body">
 
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" id="doctab2">
-                                <li class="active"><a href="#info2" data-toggle="tab">基础信息</a></li>
-                                <li><a href="#sandbox2" data-toggle="tab">在线测试</a></li>
-                                <li><a href="#sample2" data-toggle="tab">返回示例</a></li>
+                            <ul class="nav nav-tabs" id="doctab6">
+                                <li class="active"><a href="#info6" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox6" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample6" data-toggle="tab">返回示例</a></li>
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content">
 
-                                <div class="tab-pane active" id="info2">
+                                <div class="tab-pane active" id="info6">
                                     <div class="well">
                                         退出登录                                    </div>
                                     <div class="panel panel-default">
@@ -626,7 +1687,7 @@
                                     </div>
                                 </div><!-- #info -->
 
-                                <div class="tab-pane" id="sandbox2">
+                                <div class="tab-pane" id="sandbox6">
                                     <div class="row">
                                         <div class="col-md-12">
                                                                                         <div class="panel panel-default">
@@ -647,13 +1708,13 @@
                                                 </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/logout" method="POST" name="form2" id="form2">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/logout" method="POST" name="form6" id="form6">
                                                                                                                 <div class="form-group">
                                                             无
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
-                                                            <button type="submit" class="btn btn-success send" rel="2">提交</button>
-                                                            <button type="reset" class="btn btn-info" rel="2">重置</button>
+                                                            <button type="submit" class="btn btn-success send" rel="6">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="6">重置</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -663,8 +1724,8 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12" style="overflow-x:auto">
-                                                            <pre id="response_headers2"></pre>
-                                                            <pre id="response2"></pre>
+                                                            <pre id="response_headers6"></pre>
+                                                            <pre id="response6"></pre>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -679,10 +1740,10 @@
                                     </div>
                                 </div><!-- #sandbox -->
 
-                                <div class="tab-pane" id="sample2">
+                                <div class="tab-pane" id="sample6">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <pre id="sample_response2">{
+                                            <pre id="sample_response6">{
     'code':'1',
     'msg':'成功',
     'time':'1700547489',
@@ -697,28 +1758,28 @@
                     </div>
                 </div>
                                 <div class="panel panel-default">
-                    <div class="panel-heading" id="heading-3">
+                    <div class="panel-heading" id="heading-7">
                         <h4 class="panel-title">
                             <span class="label label-success">GET</span>
-                            <a data-toggle="collapse" data-parent="#accordion3" href="#collapseOne3"> 验证码 <span class="text-muted">/dyRun/user/captcha</span></a>
+                            <a data-toggle="collapse" data-parent="#accordion7" href="#collapseOne7"> 验证码 <span class="text-muted">/dyRun/user/captcha</span></a>
                         </h4>
                     </div>
-                    <div id="collapseOne3" class="panel-collapse collapse">
+                    <div id="collapseOne7" class="panel-collapse collapse">
                         <div class="panel-body">
 
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" id="doctab3">
-                                <li class="active"><a href="#info3" data-toggle="tab">基础信息</a></li>
-                                <li><a href="#sandbox3" data-toggle="tab">在线测试</a></li>
-                                <li><a href="#sample3" data-toggle="tab">返回示例</a></li>
+                            <ul class="nav nav-tabs" id="doctab7">
+                                <li class="active"><a href="#info7" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox7" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample7" data-toggle="tab">返回示例</a></li>
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content">
 
-                                <div class="tab-pane active" id="info3">
+                                <div class="tab-pane active" id="info7">
                                     <div class="well">
-                                        http://local.foreignpay.com/dyrun/common/captcha                                    </div>
+                                        dyrun/common/captcha                                    </div>
                                     <div class="panel panel-default">
                                         <div class="panel-heading"><strong>权限</strong></div>
                                         <div class="panel-body">
@@ -772,7 +1833,7 @@
                                     </div>
                                 </div><!-- #info -->
 
-                                <div class="tab-pane" id="sandbox3">
+                                <div class="tab-pane" id="sandbox7">
                                     <div class="row">
                                         <div class="col-md-12">
                                                                                         <div class="panel panel-default">
@@ -782,14 +1843,14 @@
                                                 </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/captcha" method="get" name="form3" id="form3">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/captcha" method="get" name="form7" id="form7">
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for=""></label>
                                                             <input type="text" class="form-control input-sm" id="" required placeholder="" name="">
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
-                                                            <button type="submit" class="btn btn-success send" rel="3">提交</button>
-                                                            <button type="reset" class="btn btn-info" rel="3">重置</button>
+                                                            <button type="submit" class="btn btn-success send" rel="7">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="7">重置</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -799,8 +1860,8 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12" style="overflow-x:auto">
-                                                            <pre id="response_headers3"></pre>
-                                                            <pre id="response3"></pre>
+                                                            <pre id="response_headers7"></pre>
+                                                            <pre id="response7"></pre>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -815,10 +1876,10 @@
                                     </div>
                                 </div><!-- #sandbox -->
 
-                                <div class="tab-pane" id="sample3">
+                                <div class="tab-pane" id="sample7">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <pre id="sample_response3">无</pre>
+                                            <pre id="sample_response7">无</pre>
                                         </div>
                                     </div>
                                 </div><!-- #sample -->
@@ -828,26 +1889,26 @@
                     </div>
                 </div>
                                 <div class="panel panel-default">
-                    <div class="panel-heading" id="heading-4">
+                    <div class="panel-heading" id="heading-8">
                         <h4 class="panel-title">
                             <span class="label label-primary">POST</span>
-                            <a data-toggle="collapse" data-parent="#accordion4" href="#collapseOne4"> 修改用户信息 <span class="text-muted">/dyRun/user/updateProfile</span></a>
+                            <a data-toggle="collapse" data-parent="#accordion8" href="#collapseOne8"> 修改用户信息 <span class="text-muted">/dyRun/user/updateProfile</span></a>
                         </h4>
                     </div>
-                    <div id="collapseOne4" class="panel-collapse collapse">
+                    <div id="collapseOne8" class="panel-collapse collapse">
                         <div class="panel-body">
 
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" id="doctab4">
-                                <li class="active"><a href="#info4" data-toggle="tab">基础信息</a></li>
-                                <li><a href="#sandbox4" data-toggle="tab">在线测试</a></li>
-                                <li><a href="#sample4" data-toggle="tab">返回示例</a></li>
+                            <ul class="nav nav-tabs" id="doctab8">
+                                <li class="active"><a href="#info8" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox8" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample8" data-toggle="tab">返回示例</a></li>
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content">
 
-                                <div class="tab-pane active" id="info4">
+                                <div class="tab-pane active" id="info8">
                                     <div class="well">
                                         修改用户信息                                    </div>
                                     <div class="panel panel-default">
@@ -926,7 +1987,7 @@
                                     </div>
                                 </div><!-- #info -->
 
-                                <div class="tab-pane" id="sandbox4">
+                                <div class="tab-pane" id="sandbox8">
                                     <div class="row">
                                         <div class="col-md-12">
                                                                                         <div class="panel panel-default">
@@ -947,7 +2008,7 @@
                                                 </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/updateProfile" method="POST" name="form4" id="form4">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/updateProfile" method="POST" name="form8" id="form8">
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="org_password">org_password</label>
                                                             <input type="text" class="form-control input-sm" id="org_password" required placeholder="原密码" name="org_password">
@@ -957,8 +2018,8 @@
                                                             <input type="text" class="form-control input-sm" id="new_password" required placeholder="新密码" name="new_password">
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
-                                                            <button type="submit" class="btn btn-success send" rel="4">提交</button>
-                                                            <button type="reset" class="btn btn-info" rel="4">重置</button>
+                                                            <button type="submit" class="btn btn-success send" rel="8">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="8">重置</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -968,8 +2029,8 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12" style="overflow-x:auto">
-                                                            <pre id="response_headers4"></pre>
-                                                            <pre id="response4"></pre>
+                                                            <pre id="response_headers8"></pre>
+                                                            <pre id="response8"></pre>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -984,10 +2045,10 @@
                                     </div>
                                 </div><!-- #sandbox -->
 
-                                <div class="tab-pane" id="sample4">
+                                <div class="tab-pane" id="sample8">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <pre id="sample_response4">{
+                                            <pre id="sample_response8">{
     'code':'1',
     'msg':'成功',
     'time':'1700547489',
@@ -1010,7 +2071,7 @@
 
                 </div>
                 <div class="col-md-6" align="right">
-                    Generated on 2023-11-22 15:20:42 <a href="./" target="_blank">大娱海外支付平台</a>
+                    Generated on 2023-11-23 15:16:46 <a href="./" target="_blank">大娱海外支付平台</a>
                 </div>
             </div>
 
