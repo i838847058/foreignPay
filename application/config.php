@@ -320,7 +320,7 @@ return [
         // 数据库用户名
         'username' => Env::get('foreign_pay.username', 'root'),
         // 数据库密码
-        'password' => Env::get('foreign_pay.password', '123456'),
+        'password' => Env::get('foreign_pay.password', '123123'),
         // 数据库编码默认采用utf8
         'charset' => 'utf8',
         // 数据库表前缀
@@ -337,7 +337,7 @@ return [
         // 数据库用户名
         'username' => Env::get('foreign_pay.username', 'root'),
         // 数据库密码
-        'password' => Env::get('foreign_pay.password', '123456'),
+        'password' => Env::get('foreign_pay.password', '123123'),
         // 数据库编码默认采用utf8
         'charset' => 'utf8',
         // 数据库表前缀
