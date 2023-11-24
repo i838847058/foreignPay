@@ -1,6 +1,6 @@
 <?php
 
-namespace app\dyRun\validate;
+namespace app\dyrun\validate;
 
 use think\Validate;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\dyRun\library;
+namespace app\dyrun\library;
 
 use Exception;
 use think\exception\Handle;

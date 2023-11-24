@@ -1,6 +1,6 @@
 <?php
 
-namespace app\dyRun\controller;
+namespace app\dyrun\controller;
 
 use app\common\controller\Api;
 use app\common\model\SysCountry as SysCountryModel;

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\dyRun\model;
+namespace app\dyrun\model;
 
 use think\Model;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace app\dyRun\controller;
+namespace app\dyrun\controller;
 
 use app\common\controller\Api;
-use app\dyRun\model\SysChannel as SysChannelModel;
+use app\dyrun\model\SysChannel as SysChannelModel;
 use think\Loader;
 
 /**
