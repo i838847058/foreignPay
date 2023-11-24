@@ -96,7 +96,8 @@ class User extends Api
 
     /**
      * 验证码
-     * @ApiSummary  (dyrun/common/captcha)
+     * @ApiMethod (GET)
+     * @ApiSummary  (dyrun/user/captcha)
      * @param $id
      * @return \think\Response
      */
@@ -122,7 +123,7 @@ class User extends Api
      * @param string $mobile   手机号
      * @param string $code     验证码
      */
-    protected function register()
+    public function register()
     {
         $username = $this->request->post('username');
         $password = $this->request->post('password');

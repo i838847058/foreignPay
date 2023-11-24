@@ -26,10 +26,13 @@ class SysCountry extends Api
     })
      * @param string $name  中文名字
      * @ApiReturn ({
-    'code':'1',
-    'msg':'成功',
-    'time':'1700547489',
-    'data':null,
+    'code': 1,
+    'msg': '',
+    'time': '1700731394',
+    'data': {
+    '241': '中非共和国',
+    '242': '中国'
+    }
     })
      * 这样的操作对于大量数据是非常低效的，但是在数据量小的情况下可以使用。
      */

@@ -196,7 +196,10 @@
                                                 <a href="javascript:;" data-id="8" class="list-group-item">验证码                            <span class="tag">
                                                             </span>
                         </a>
-                                                <a href="javascript:;" data-id="9" class="list-group-item">修改用户信息                            <span class="tag">
+                                                <a href="javascript:;" data-id="9" class="list-group-item">注册会员                            <span class="tag">
+                                                            </span>
+                        </a>
+                                                <a href="javascript:;" data-id="10" class="list-group-item">修改用户信息                            <span class="tag">
                                                                     <span class="label label-success pull-right noneedlogin">登</span>
                                                             </span>
                         </a>
@@ -1539,30 +1542,6 @@
                                                         <td>是</td>
                                                         <td>中文名字</td>
                                                     </tr>
-                                                                                                        <tr>
-                                                        <td>code</td>
-                                                        <td>string</td>
-                                                        <td>是</td>
-                                                        <td>简称</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>en_name</td>
-                                                        <td>string</td>
-                                                        <td>是</td>
-                                                        <td>英文名字</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>list_rows</td>
-                                                        <td>int</td>
-                                                        <td>是</td>
-                                                        <td>每页条数</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>page</td>
-                                                        <td>int</td>
-                                                        <td>是</td>
-                                                        <td>页数</td>
-                                                    </tr>
                                                                                                     </tbody>
                                             </table>
                                                                                     </div>
@@ -1571,11 +1550,8 @@
                                         <div class="panel-heading"><strong>正文</strong></div>
                                         <div class="panel-body">
                                             {
+    'id': 1,
     'name': '中文名字',
-    'code': '简称',
-    'en_name': '英文名字',
-    'list_rows': 10,
-    'page': 1,
     }                                        </div>
                                     </div>
                                 </div><!-- #info -->
@@ -1605,22 +1581,6 @@
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="name">name</label>
                                                             <input type="text" class="form-control input-sm" id="name" required placeholder="中文名字" name="name">
-                                                        </div>
-                                                                                                                <div class="form-group">
-                                                            <label class="control-label" for="code">code</label>
-                                                            <input type="text" class="form-control input-sm" id="code" required placeholder="简称" name="code">
-                                                        </div>
-                                                                                                                <div class="form-group">
-                                                            <label class="control-label" for="en_name">en_name</label>
-                                                            <input type="text" class="form-control input-sm" id="en_name" required placeholder="英文名字" name="en_name">
-                                                        </div>
-                                                                                                                <div class="form-group">
-                                                            <label class="control-label" for="list_rows">list_rows</label>
-                                                            <input type="text" class="form-control input-sm" id="list_rows" required placeholder="每页条数" name="list_rows">
-                                                        </div>
-                                                                                                                <div class="form-group">
-                                                            <label class="control-label" for="page">page</label>
-                                                            <input type="text" class="form-control input-sm" id="page" required placeholder="页数" name="page">
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
                                                             <button type="submit" class="btn btn-success send" rel="5">提交</button>
@@ -1654,10 +1614,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <pre id="sample_response5">{
-    'code':'1',
-    'msg':'成功',
-    'time':'1700547489',
-    'data':null,
+    'code': 1,
+    'msg': '',
+    'time': '1700731394',
+    'data': {
+    '241': '中非共和国',
+    '242': '中国'
+    }
     }</pre>
                                         </div>
                                     </div>
@@ -1997,7 +1960,7 @@
 
                                 <div class="tab-pane active" id="info8">
                                     <div class="well">
-                                        dyrun/common/captcha                                    </div>
+                                        dyrun/user/captcha                                    </div>
                                     <div class="panel panel-default">
                                         <div class="panel-heading"><strong>权限</strong></div>
                                         <div class="panel-body">
@@ -2061,7 +2024,7 @@
                                                 </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/captcha" method="get" name="form8" id="form8">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/captcha" method="GET" name="form8" id="form8">
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for=""></label>
                                                             <input type="text" class="form-control input-sm" id="" required placeholder="" name="">
@@ -2110,7 +2073,7 @@
                     <div class="panel-heading" id="heading-9">
                         <h4 class="panel-title">
                             <span class="label label-primary">POST</span>
-                            <a data-toggle="collapse" data-parent="#accordion9" href="#collapseOne9"> 修改用户信息 <span class="text-muted">/dyRun/user/updateProfile</span></a>
+                            <a data-toggle="collapse" data-parent="#accordion9" href="#collapseOne9"> 注册会员 <span class="text-muted">/dyRun/user/register</span></a>
                         </h4>
                     </div>
                     <div id="collapseOne9" class="panel-collapse collapse">
@@ -2127,6 +2090,177 @@
                             <div class="tab-content">
 
                                 <div class="tab-pane active" id="info9">
+                                    <div class="well">
+                                        注册会员                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>权限</strong></div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    <td>登录</td>
+                                                    <td>否</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>鉴权</td>
+                                                    <td>否</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        无
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>username</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>用户名</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>password</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>密码</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>email</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>邮箱</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>mobile</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>手机号</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>code</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>验证码</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            无                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox9">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong>
+                                                <div class="pull-right">
+                                                    <a href="javascript:" class="btn btn-xs btn-info btn-append">追加</a>
+                                                </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/register" method="POST" name="form9" id="form9">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="username">username</label>
+                                                            <input type="text" class="form-control input-sm" id="username" required placeholder="用户名" name="username">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="password">password</label>
+                                                            <input type="password" class="form-control input-sm" id="password" required placeholder="密码" name="password">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="email">email</label>
+                                                            <input type="text" class="form-control input-sm" id="email" required placeholder="邮箱" name="email">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="mobile">mobile</label>
+                                                            <input type="text" class="form-control input-sm" id="mobile" required placeholder="手机号" name="mobile">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="code">code</label>
+                                                            <input type="text" class="form-control input-sm" id="code" required placeholder="验证码" name="code">
+                                                        </div>
+                                                                                                                <div class="form-group form-group-submit">
+                                                            <button type="submit" class="btn btn-success send" rel="9">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="9">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers9"></pre>
+                                                            <pre id="response9"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample9">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response9">无</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-10">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion10" href="#collapseOne10"> 修改用户信息 <span class="text-muted">/dyRun/user/updateProfile</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne10" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab10">
+                                <li class="active"><a href="#info10" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox10" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample10" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info10">
                                     <div class="well">
                                         修改用户信息                                    </div>
                                     <div class="panel panel-default">
@@ -2205,7 +2339,7 @@
                                     </div>
                                 </div><!-- #info -->
 
-                                <div class="tab-pane" id="sandbox9">
+                                <div class="tab-pane" id="sandbox10">
                                     <div class="row">
                                         <div class="col-md-12">
                                                                                         <div class="panel panel-default">
@@ -2226,7 +2360,7 @@
                                                 </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/updateProfile" method="POST" name="form9" id="form9">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/dyRun/user/updateProfile" method="POST" name="form10" id="form10">
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="org_password">org_password</label>
                                                             <input type="text" class="form-control input-sm" id="org_password" required placeholder="原密码" name="org_password">
@@ -2236,8 +2370,8 @@
                                                             <input type="text" class="form-control input-sm" id="new_password" required placeholder="新密码" name="new_password">
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
-                                                            <button type="submit" class="btn btn-success send" rel="9">提交</button>
-                                                            <button type="reset" class="btn btn-info" rel="9">重置</button>
+                                                            <button type="submit" class="btn btn-success send" rel="10">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="10">重置</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -2247,8 +2381,8 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12" style="overflow-x:auto">
-                                                            <pre id="response_headers9"></pre>
-                                                            <pre id="response9"></pre>
+                                                            <pre id="response_headers10"></pre>
+                                                            <pre id="response10"></pre>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2263,10 +2397,10 @@
                                     </div>
                                 </div><!-- #sandbox -->
 
-                                <div class="tab-pane" id="sample9">
+                                <div class="tab-pane" id="sample10">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <pre id="sample_response9">{
+                                            <pre id="sample_response10">{
     'code':'1',
     'msg':'成功',
     'time':'1700547489',
@@ -2289,7 +2423,7 @@
 
                 </div>
                 <div class="col-md-6" align="right">
-                    Generated on 2023-11-23 15:46:04 <a href="./" target="_blank">大娱海外支付平台</a>
+                    Generated on 2023-11-24 15:12:54 <a href="./" target="_blank">大娱海外支付平台</a>
                 </div>
             </div>
 
