@@ -16,10 +16,10 @@ class Option extends Api
     public function get(Request $request)
     {
         $validate = new Validate([
-            'name' => 'unique:sys_option'
+            'name' => 'require'
         ]);
         if (!$validate->check($request->get())) {
-            dump($validate->getError());
+            $this->error($validate->getError());
         }
         $name = $request->get('name');
         $model = SysOption::all(function ($query) use ($name) {
