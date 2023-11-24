@@ -16,7 +16,7 @@ class Option extends Api
     public function get(Request $request)
     {
         $validate = new Validate([
-            'name' => 'unique:fp_sys_option'
+            'name' => 'unique:sys_option'
         ]);
         if (!$validate->check($request->get())) {
             dump($validate->getError());
