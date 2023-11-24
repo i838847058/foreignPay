@@ -3,8 +3,7 @@
 namespace app\dyrun\controller;
 
 use app\common\controller\Api;
-use app\common\model\SysOption;
-use app\common\model\SysOptionValue;
+use app\dyrun\service\BaseData;
 use think\Request;
 use think\Validate;
 
@@ -16,25 +15,14 @@ class Option extends Api
     public function get(Request $request)
     {
         $validate = new Validate([
-            'name' => 'require'
+            'name' => 'chsDash'
         ]);
         if (!$validate->check($request->get())) {
             $this->error($validate->getError());
         }
         $name = $request->get('name');
-        $model = SysOption::all(function ($query) use ($name) {
-            $query->where('state', 1);
-            if (!empty($name)) {
-                $query->where('name', $name);
-            }
-        });
-        $list = [];
-        foreach ($model as $item) {
-            $list[] = [
-                'name' => $item->name,
-                'value' => SysOptionValue::where('oid', $item->id)->column('id,value')
-            ];
-        }
+        $service = new BaseData();
+        $list = $service->getConfigByName($name);
         $this->success('get success', $list);
     }
 }
