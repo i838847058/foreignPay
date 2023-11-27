@@ -60,37 +60,31 @@ class SysChannel extends Api
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (POST)
      * @ApiBody ({
-    "channel_name': '中国银行上海支行',
-    'channel_short_name': '中行',
-    'channel_num': 'ZH001',
-    'pay_product': 0,
-    'trans_currency': '人民币',
-    'country_id': 1,
-    'support_product': '游戏、棋牌',
-    'no_product': '黄，赌，毒',
-    'pay_method': '线上',
-    'pay_rate': '10.00',
-    'settlement_cycle': 'T+1',
+    'channel_name': '中国银行上海支行',
+    'channel_num': 'ZH002',
+    'country_ids': '1,2,3',
+    'product_type_ids': '33,34',
+    'coin_ids': '1,2',
+    'pay_way_ids': '25,26',
+    'billing_ids': '29,30',
+    'out_pay_way_ids': '25,26',
+    'pay_rate': 10.00,
     'status': 1,
-    'margin_balance': '100000.00',
-    'created': '2023-11-22 18:04:09',
-    'updated': '2023-11-22 18:04:09'
+    'margin_balance': 100000.00,
+    'balance': 0.00,
     })
      * @param string $channel_name  渠道名称
-     * @param string $channel_short_name  渠道简称
      * @param string $channel_num  渠道号
-     * @param tinyint $pay_product  支付产品：0=代收；1=代付；
-     * @param string $trans_currency  交易货币
-     * @param int $country_id  国家ID
-     * @param string $support_product  支持产品
-     * @param string $no_product  禁止产品
-     * @param string $pay_method  支付方式
-     * @param decimal $pay_rate  支付费率
-     * @param string $settlement_cycle  结算周期
+     * @param string $country_ids  国家多选
+     * @param string $product_type_ids  支持产品类型
+     * @param string $coin_ids  代收货币
+     * @param string $pay_way_ids  代收支付方式
+     * @param string $billing_ids  结算周期ID
+     * @param string $out_pay_way_ids  代付支付方式
+     * @param decimal $pay_rate  通道费率
      * @param tinyint $status  状态：0=禁用；1=启用；
-     * @param decimal $margin_balance  保证金余额
-     * @param timestamp $created  创建时间
-     * @param timestamp $updated  更新时间
+     * @param decimal $margin_balance  保证金
+     * @param decimal $balance  余额
      * @ApiReturn ({
     'code':'1',
     'msg':'成功',
@@ -132,35 +126,31 @@ class SysChannel extends Api
      * @ApiBody ({
     'id': '1',
     'channel_name': '中国银行上海支行',
-    'channel_short_name': '中行',
-    'channel_num': 'ZH001',
-    'pay_product': '游戏',
-    'trans_currency': '人民币',
-    'country_id': 1,
-    'support_product_type_id': 1,
-    'no_product': '黄，赌，毒',
-    'pay_method': '线上',
-    'pay_rate': '10.00',
-    'settlement_cycle': 'T+1',
+    'channel_num': 'ZH002',
+    'country_ids': '1,2,3',
+    'product_type_ids': '33,34',
+    'coin_ids': '1,2',
+    'pay_way_ids': '25,26',
+    'billing_ids': '29,30',
+    'out_pay_way_ids': '25,26',
+    'pay_rate': 10.00,
     'status': 1,
-    'margin_balance': '100000.00',
-    'created': '2023-11-22 18:04:09',
-    'updated': '2023-11-22 18:04:09'
+    'margin_balance': 100000.00,
+    'balance': 0.00,
     })
      * @param int $id  ID
      * @param string $channel_name  渠道名称
-     * @param string $channel_short_name  渠道简称
      * @param string $channel_num  渠道号
-     * @param tinyint $pay_product  支付产品：0=代收；1=代付；
-     * @param string $trans_currency  交易货币
-     * @param int $country_id  国家ID
-     * @param string $support_product  支持产品
-     * @param string $no_product  禁止产品
-     * @param string $pay_method  支付方式
-     * @param decimal $pay_rate  支付费率
-     * @param string $settlement_cycle  结算周期
+     * @param string $country_ids  国家多选
+     * @param string $product_type_ids  支持产品类型
+     * @param string $coin_ids  代收货币
+     * @param string $pay_way_ids  代收支付方式
+     * @param string $billing_ids  结算周期ID
+     * @param string $out_pay_way_ids  代付支付方式
+     * @param decimal $pay_rate  通道费率
      * @param tinyint $status  状态：0=禁用；1=启用；
-     * @param decimal $margin_balance  保证金余额
+     * @param decimal $margin_balance  保证金
+     * @param decimal $balance  余额
      * @ApiReturn ({
     'code':'1',
     'msg':'成功',
@@ -216,17 +206,14 @@ class SysChannel extends Api
         if (!$validate->scene('updateStatus')->check($params)) {
             $this->error($validate->getError());
         }
-        try {
-            $ret = SysChannelModel::update($params, [
-                'id' => $params['id']
-            ]);
-            if (!$ret) {
-                $this->error('更新渠道状态失败，请稍后重试');
-            }
-            $this->success('更新渠道状态成功');
-        } catch (\Exception $e) {
-            $this->error($e->getMessage());
+        $ret = SysChannelModel::update($params, [
+            'id' => $params['id']
+        ]);
+        if (!$ret) {
+            $this->error('更新渠道状态失败，请稍后重试');
         }
+        $this->success('更新渠道状态成功');
+
     }
 
 }

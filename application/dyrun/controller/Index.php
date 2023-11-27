@@ -2,6 +2,7 @@
 
 namespace app\dyrun\controller;
 
+use think\Db;
 use app\common\controller\Api;
 
 /**
@@ -32,6 +33,10 @@ class Index extends Api
      */
     public function index()
     {
+        /*$info = Db::name('sys_channel')->where([
+            'id' => 24
+        ])->find();
+        dd($info['margin_balance'],898);*/
         $this->success('请求成功');
     }
 }
