@@ -12,6 +12,17 @@ class Option extends Api
     protected $noNeedLogin = ['get'];
     protected $noNeedRight = '*';
 
+    /**
+     * 配置获取
+     * @ApiSummary  (dyrun/option/get)
+     * @ApiMethod (GET)
+     * @ApiReturn ({
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':{},
+    })
+     */
     public function get(Request $request)
     {
         $validate = new Validate([

@@ -4,12 +4,14 @@ namespace app\dyrun\service;
 
 use app\common\model\SysOption;
 use app\common\model\SysOptionValue;
+use think\Exception;
 
 class BaseData
 {
     /**
      * @param string|null $name
      * @return array
+     * @throws Exception
      */
     public function getConfigByName(string $name = null): array
     {
@@ -28,6 +30,7 @@ class BaseData
             }
             return $list;
         } catch (\think\exception\DbException $e) {
+            throw new Exception($e->getMessage());
         }
     }
 }

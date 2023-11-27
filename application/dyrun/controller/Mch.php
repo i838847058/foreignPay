@@ -7,7 +7,7 @@ use think\Request;
 
 class Mch extends Api
 {
-    protected $noNeedLogin = '';
+    protected $noNeedLogin = ['get','post'];
     protected $noNeedRight = '*';
 
     public function new(Request $request){
