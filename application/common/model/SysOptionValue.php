@@ -6,6 +6,6 @@ use think\Model;
 
 class SysOptionValue extends Model
 {
-    protected $field = ['oid', 'value','remark'];
+    protected $field = ['oid', 'value', 'remark'];
 
 }

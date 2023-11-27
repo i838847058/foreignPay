@@ -31,7 +31,7 @@ class SysCountry extends Model
     public static function getSysCountryList()
     {
         $self = new self();
-        $list = $self->column('id,name');
+        $list = $self->where('')->column('id,name');
         return $list;
     }
 

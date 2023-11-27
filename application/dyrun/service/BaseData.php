@@ -4,10 +4,31 @@ namespace app\dyrun\service;
 
 use app\common\model\SysOption;
 use app\common\model\SysOptionValue;
+use think\Db;
+use think\db\exception\DataNotFoundException;
+use think\db\exception\ModelNotFoundException;
 use think\Exception;
+use think\exception\DbException;
+use think\Model;
 
 class BaseData
 {
+    /**
+     * @param Model $model
+     * @param string $columns
+     * @param string $value
+     * @return bool
+     * @throws Exception
+     */
+    public function isValueExistsModel(Model $model, string $columns, string $value): bool
+    {
+        try {
+            return $model->where($columns, $value)->count() > 0;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     /**
      * @param string|null $name
      * @param string|null $value
@@ -37,5 +58,17 @@ class BaseData
         } catch (\think\exception\DbException $e) {
             throw new Exception($e->getMessage());
         }
+    }
+
+    /**
+     * @param $countryId
+     * @return array|bool|\PDOStatement|string|Model|null
+     * @throws DataNotFoundException
+     * @throws ModelNotFoundException
+     * @throws DbException
+     */
+    public function getCurrencyByCountry($countryId)
+    {
+        return Db::table('fp_sys_country_coins_view')->where('country_id', $countryId)->field('currency_id as id,currency_name as name')->find();
     }
 }

@@ -3,6 +3,7 @@
 namespace app\dyrun\controller;
 
 use app\common\controller\Api;
+use app\dyrun\service\MchService;
 use think\Request;
 use think\Validate;
 
@@ -11,10 +12,23 @@ use think\Validate;
  */
 class Mch extends Api
 {
-    protected $noNeedLogin = ['get', 'account'];
+    protected $noNeedLogin = ['searchAccount', 'createAccount', 'createMch'];
     protected $noNeedRight = '*';
 
-    public function account(Request $request)
+    public function createMch(Request $request)
+    {
+        $validate = new Validate([
+            'user_id' => 'require|chsDash',
+            'merchant_type' => 'require|chsDash',
+            'merchant_name' => 'require|in:1,2',
+            'country_id' => 'require|in:1,2',
+        ]);
+        if (!$validate->check($request->post())) {
+            $this->error($validate->getError());
+        }
+    }
+
+    public function createAccount(Request $request)
     {
         $validate = new Validate([
             'username' => 'require|chsDash',
@@ -31,5 +45,18 @@ class Mch extends Api
         } else {
             $this->error($this->auth->getError());
         }
+    }
+
+    public function searchAccount(Request $request)
+    {
+        $validate = new Validate([
+            'text' => 'require|chsDash',
+        ]);
+        if (!$validate->check($request->get())) {
+            $this->error($validate->getError());
+        }
+        $service = new MchService();
+        $data = $service->getMchAccountList($request->get('text'));
+        $this->success(__('Searching successful'), $data);
     }
 }

@@ -13,7 +13,7 @@ use think\Validate;
  */
 class Option extends Api
 {
-    protected $noNeedLogin = ['get'];
+    protected $noNeedLogin = ['get', 'getCountryCurrency'];
     protected $noNeedRight = '*';
 
     /**
@@ -46,4 +46,19 @@ class Option extends Api
         $list['_list'] = $service->getConfigValue($name, $value);
         $this->success('get success', $list);
     }
+
+    public function getCountryCurrency(Request $request)
+    {
+        $validate = new Validate([
+            'country_id' => 'require|chsDash'
+        ]);
+        if (!$validate->check($request->get())) {
+            $this->error($validate->getError());
+        }
+        $service = new BaseData();
+        $list = $service->getCurrencyByCountry($request->get('country_id'));
+        $this->success('getCountryCurrency success', $list);
+    }
+
+
 }
