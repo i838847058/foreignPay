@@ -33,7 +33,7 @@ class Option extends Api
     public function get(Request $request)
     {
         $validate = new Validate([
-            'name' => 'chsDash',
+            'name' => 'chsDash', // |exists:sys_option:name
             'value' => 'chsDash'
         ]);
         if (!$validate->check($request->get())) {

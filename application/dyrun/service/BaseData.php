@@ -26,15 +26,12 @@ class BaseData
             });
             foreach ($model as $item) {
                 $oid = $item->id;
-                $items = SysOptionValue::all(function ($query) use ($oid, $value) {
+                $list[$item->name] = SysOptionValue::field('id,value,remark')->select(function ($query) use ($oid, $value) {
                     $query->where('oid', $oid);
                     if (!empty($value)) {
                         $query->where('value', 'like', '%' . $value . '%');
                     }
                 });
-                foreach ($items as $values) {
-                    $list[$item->name][$values->id] = $values->value;
-                }
             }
             return $list;
         } catch (\think\exception\DbException $e) {
