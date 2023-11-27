@@ -2,15 +2,17 @@
 
 namespace app\dyrun\controller;
 
-use app\admin\command\Api;
+use app\common\controller\Api;
 use think\Request;
 
 class Mch extends Api
 {
-    protected $noNeedLogin = ['get','post'];
+    protected $noNeedLogin = ['get', 'account'];
     protected $noNeedRight = '*';
 
-    public function new(Request $request){
-
+    public function account(Request $request, $option)
+    {
+//        $ret = $this->auth->register(1, 2);
+        dump($option);
     }
 }

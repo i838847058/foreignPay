@@ -10,23 +10,31 @@ class BaseData
 {
     /**
      * @param string|null $name
+     * @param string|null $value
      * @return array
      * @throws Exception
      */
-    public function getConfigByName(string $name = null): array
+    public function getConfigValue(string $name = null, string $value = null): array
     {
         try {
-            $model = SysOption::all(function ($query) use ($name) {
+            $list = [];
+            $model = SysOption::all(function ($query) use ($name, $value) {
                 $query->where('state', 1);
                 if (!empty($name)) {
                     $query->where('name', $name);
                 }
             });
-            $list = [];
             foreach ($model as $item) {
-                $list[] = [
-                    $item->name => SysOptionValue::where('oid', $item->id)->column('id,value')
-                ];
+                $oid = $item->id;
+                $items = SysOptionValue::all(function ($query) use ($oid, $value) {
+                    $query->where('oid', $oid);
+                    if (!empty($value)) {
+                        $query->where('value', 'like', '%' . $value . '%');
+                    }
+                });
+                foreach ($items as $values) {
+                    $list[$item->name][$values->id] = $values->value;
+                }
             }
             return $list;
         } catch (\think\exception\DbException $e) {

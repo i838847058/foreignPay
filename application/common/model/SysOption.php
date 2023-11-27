@@ -6,6 +6,6 @@ use think\Model;
 
 class SysOption extends Model
 {
-    public $field = ['name', 'state'];
+    public $field = ['name', 'remark', 'state'];
 
 }
