@@ -159,8 +159,8 @@
                                                             </span>
                         </a>
                                             </div>
-                                        <a href="#Mch" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">Mch  <i class="fa fa-caret-down"></i></a>
-                    <div class="child collapse" id="Mch">
+                                        <a href="#商户管理" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">商户管理  <i class="fa fa-caret-down"></i></a>
+                    <div class="child collapse" id="商户管理">
                                                 <a href="javascript:;" data-id="1" class="list-group-item">account                            <span class="tag">
                                                             </span>
                         </a>
@@ -428,7 +428,7 @@
                         </div>
                     </div>
                 </div>
-                                <h2>Mch</h2>
+                                <h2>商户管理</h2>
                 <hr>
                                 <div class="panel panel-default">
                     <div class="panel-heading" id="heading-1">
@@ -1009,64 +1009,52 @@
                                                         <td>渠道名称</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>channel_short_name</td>
-                                                        <td>string</td>
-                                                        <td>是</td>
-                                                        <td>渠道简称</td>
-                                                    </tr>
-                                                                                                        <tr>
                                                         <td>channel_num</td>
                                                         <td>string</td>
                                                         <td>是</td>
                                                         <td>渠道号</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>pay_product</td>
-                                                        <td>tinyint</td>
-                                                        <td>是</td>
-                                                        <td>支付产品：0=代收；1=代付；</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>trans_currency</td>
+                                                        <td>country_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>交易货币</td>
+                                                        <td>国家多选</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>country_id</td>
-                                                        <td>int</td>
-                                                        <td>是</td>
-                                                        <td>国家ID</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>support_product</td>
+                                                        <td>product_type_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>支持产品</td>
+                                                        <td>支持产品类型</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>no_product</td>
+                                                        <td>coin_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>禁止产品</td>
+                                                        <td>代收货币</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>pay_method</td>
+                                                        <td>pay_way_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>支付方式</td>
+                                                        <td>代收支付方式</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>billing_ids</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>结算周期ID</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>out_pay_way_ids</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>代付支付方式</td>
                                                     </tr>
                                                                                                         <tr>
                                                         <td>pay_rate</td>
                                                         <td>decimal</td>
                                                         <td>是</td>
-                                                        <td>支付费率</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>settlement_cycle</td>
-                                                        <td>string</td>
-                                                        <td>是</td>
-                                                        <td>结算周期</td>
+                                                        <td>通道费率</td>
                                                     </tr>
                                                                                                         <tr>
                                                         <td>status</td>
@@ -1078,19 +1066,13 @@
                                                         <td>margin_balance</td>
                                                         <td>decimal</td>
                                                         <td>是</td>
-                                                        <td>保证金余额</td>
+                                                        <td>保证金</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>created</td>
-                                                        <td>timestamp</td>
+                                                        <td>balance</td>
+                                                        <td>decimal</td>
                                                         <td>是</td>
-                                                        <td>创建时间</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>updated</td>
-                                                        <td>timestamp</td>
-                                                        <td>是</td>
-                                                        <td>更新时间</td>
+                                                        <td>余额</td>
                                                     </tr>
                                                                                                     </tbody>
                                             </table>
@@ -1100,21 +1082,18 @@
                                         <div class="panel-heading"><strong>正文</strong></div>
                                         <div class="panel-body">
                                             {
-    "channel_name': '中国银行上海支行',
-    'channel_short_name': '中行',
-    'channel_num': 'ZH001',
-    'pay_product': 0,
-    'trans_currency': '人民币',
-    'country_id': 1,
-    'support_product': '游戏、棋牌',
-    'no_product': '黄，赌，毒',
-    'pay_method': '线上',
-    'pay_rate': '10.00',
-    'settlement_cycle': 'T+1',
+    'channel_name': '中国银行上海支行',
+    'channel_num': 'ZH002',
+    'country_ids': '1,2,3',
+    'product_type_ids': '33,34',
+    'coin_ids': '1,2',
+    'pay_way_ids': '25,26',
+    'billing_ids': '29,30',
+    'out_pay_way_ids': '25,26',
+    'pay_rate': 10.00,
     'status': 1,
-    'margin_balance': '100000.00',
-    'created': '2023-11-22 18:04:09',
-    'updated': '2023-11-22 18:04:09'
+    'margin_balance': 100000.00,
+    'balance': 0.00,
     }                                        </div>
                                     </div>
                                 </div><!-- #info -->
@@ -1146,44 +1125,36 @@
                                                             <input type="text" class="form-control input-sm" id="channel_name" required placeholder="渠道名称" name="channel_name">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="channel_short_name">channel_short_name</label>
-                                                            <input type="text" class="form-control input-sm" id="channel_short_name" required placeholder="渠道简称" name="channel_short_name">
-                                                        </div>
-                                                                                                                <div class="form-group">
                                                             <label class="control-label" for="channel_num">channel_num</label>
                                                             <input type="text" class="form-control input-sm" id="channel_num" required placeholder="渠道号" name="channel_num">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="pay_product">pay_product</label>
-                                                            <input type="text" class="form-control input-sm" id="pay_product" required placeholder="支付产品：0=代收；1=代付；" name="pay_product">
+                                                            <label class="control-label" for="country_ids">country_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="country_ids" required placeholder="国家多选" name="country_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="trans_currency">trans_currency</label>
-                                                            <input type="text" class="form-control input-sm" id="trans_currency" required placeholder="交易货币" name="trans_currency">
+                                                            <label class="control-label" for="product_type_ids">product_type_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="product_type_ids" required placeholder="支持产品类型" name="product_type_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="country_id">country_id</label>
-                                                            <input type="text" class="form-control input-sm" id="country_id" required placeholder="国家ID" name="country_id">
+                                                            <label class="control-label" for="coin_ids">coin_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="coin_ids" required placeholder="代收货币" name="coin_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="support_product">support_product</label>
-                                                            <input type="text" class="form-control input-sm" id="support_product" required placeholder="支持产品" name="support_product">
+                                                            <label class="control-label" for="pay_way_ids">pay_way_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_way_ids" required placeholder="代收支付方式" name="pay_way_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="no_product">no_product</label>
-                                                            <input type="text" class="form-control input-sm" id="no_product" required placeholder="禁止产品" name="no_product">
+                                                            <label class="control-label" for="billing_ids">billing_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="billing_ids" required placeholder="结算周期ID" name="billing_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="pay_method">pay_method</label>
-                                                            <input type="text" class="form-control input-sm" id="pay_method" required placeholder="支付方式" name="pay_method">
+                                                            <label class="control-label" for="out_pay_way_ids">out_pay_way_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="out_pay_way_ids" required placeholder="代付支付方式" name="out_pay_way_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="pay_rate">pay_rate</label>
-                                                            <input type="text" class="form-control input-sm" id="pay_rate" required placeholder="支付费率" name="pay_rate">
-                                                        </div>
-                                                                                                                <div class="form-group">
-                                                            <label class="control-label" for="settlement_cycle">settlement_cycle</label>
-                                                            <input type="text" class="form-control input-sm" id="settlement_cycle" required placeholder="结算周期" name="settlement_cycle">
+                                                            <input type="text" class="form-control input-sm" id="pay_rate" required placeholder="通道费率" name="pay_rate">
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="status">status</label>
@@ -1191,15 +1162,11 @@
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="margin_balance">margin_balance</label>
-                                                            <input type="text" class="form-control input-sm" id="margin_balance" required placeholder="保证金余额" name="margin_balance">
+                                                            <input type="text" class="form-control input-sm" id="margin_balance" required placeholder="保证金" name="margin_balance">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="created">created</label>
-                                                            <input type="text" class="form-control input-sm" id="created" required placeholder="创建时间" name="created">
-                                                        </div>
-                                                                                                                <div class="form-group">
-                                                            <label class="control-label" for="updated">updated</label>
-                                                            <input type="text" class="form-control input-sm" id="updated" required placeholder="更新时间" name="updated">
+                                                            <label class="control-label" for="balance">balance</label>
+                                                            <input type="text" class="form-control input-sm" id="balance" required placeholder="余额" name="balance">
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
                                                             <button type="submit" class="btn btn-success send" rel="4">提交</button>
@@ -1335,64 +1302,52 @@
                                                         <td>渠道名称</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>channel_short_name</td>
-                                                        <td>string</td>
-                                                        <td>是</td>
-                                                        <td>渠道简称</td>
-                                                    </tr>
-                                                                                                        <tr>
                                                         <td>channel_num</td>
                                                         <td>string</td>
                                                         <td>是</td>
                                                         <td>渠道号</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>pay_product</td>
-                                                        <td>tinyint</td>
-                                                        <td>是</td>
-                                                        <td>支付产品：0=代收；1=代付；</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>trans_currency</td>
+                                                        <td>country_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>交易货币</td>
+                                                        <td>国家多选</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>country_id</td>
-                                                        <td>int</td>
-                                                        <td>是</td>
-                                                        <td>国家ID</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>support_product</td>
+                                                        <td>product_type_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>支持产品</td>
+                                                        <td>支持产品类型</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>no_product</td>
+                                                        <td>coin_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>禁止产品</td>
+                                                        <td>代收货币</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>pay_method</td>
+                                                        <td>pay_way_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>支付方式</td>
+                                                        <td>代收支付方式</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>billing_ids</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>结算周期ID</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>out_pay_way_ids</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>代付支付方式</td>
                                                     </tr>
                                                                                                         <tr>
                                                         <td>pay_rate</td>
                                                         <td>decimal</td>
                                                         <td>是</td>
-                                                        <td>支付费率</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>settlement_cycle</td>
-                                                        <td>string</td>
-                                                        <td>是</td>
-                                                        <td>结算周期</td>
+                                                        <td>通道费率</td>
                                                     </tr>
                                                                                                         <tr>
                                                         <td>status</td>
@@ -1404,7 +1359,13 @@
                                                         <td>margin_balance</td>
                                                         <td>decimal</td>
                                                         <td>是</td>
-                                                        <td>保证金余额</td>
+                                                        <td>保证金</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>balance</td>
+                                                        <td>decimal</td>
+                                                        <td>是</td>
+                                                        <td>余额</td>
                                                     </tr>
                                                                                                     </tbody>
                                             </table>
@@ -1416,20 +1377,17 @@
                                             {
     'id': '1',
     'channel_name': '中国银行上海支行',
-    'channel_short_name': '中行',
-    'channel_num': 'ZH001',
-    'pay_product': '游戏',
-    'trans_currency': '人民币',
-    'country_id': 1,
-    'support_product_type_id': 1,
-    'no_product': '黄，赌，毒',
-    'pay_method': '线上',
-    'pay_rate': '10.00',
-    'settlement_cycle': 'T+1',
+    'channel_num': 'ZH002',
+    'country_ids': '1,2,3',
+    'product_type_ids': '33,34',
+    'coin_ids': '1,2',
+    'pay_way_ids': '25,26',
+    'billing_ids': '29,30',
+    'out_pay_way_ids': '25,26',
+    'pay_rate': 10.00,
     'status': 1,
-    'margin_balance': '100000.00',
-    'created': '2023-11-22 18:04:09',
-    'updated': '2023-11-22 18:04:09'
+    'margin_balance': 100000.00,
+    'balance': 0.00,
     }                                        </div>
                                     </div>
                                 </div><!-- #info -->
@@ -1465,44 +1423,36 @@
                                                             <input type="text" class="form-control input-sm" id="channel_name" required placeholder="渠道名称" name="channel_name">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="channel_short_name">channel_short_name</label>
-                                                            <input type="text" class="form-control input-sm" id="channel_short_name" required placeholder="渠道简称" name="channel_short_name">
-                                                        </div>
-                                                                                                                <div class="form-group">
                                                             <label class="control-label" for="channel_num">channel_num</label>
                                                             <input type="text" class="form-control input-sm" id="channel_num" required placeholder="渠道号" name="channel_num">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="pay_product">pay_product</label>
-                                                            <input type="text" class="form-control input-sm" id="pay_product" required placeholder="支付产品：0=代收；1=代付；" name="pay_product">
+                                                            <label class="control-label" for="country_ids">country_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="country_ids" required placeholder="国家多选" name="country_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="trans_currency">trans_currency</label>
-                                                            <input type="text" class="form-control input-sm" id="trans_currency" required placeholder="交易货币" name="trans_currency">
+                                                            <label class="control-label" for="product_type_ids">product_type_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="product_type_ids" required placeholder="支持产品类型" name="product_type_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="country_id">country_id</label>
-                                                            <input type="text" class="form-control input-sm" id="country_id" required placeholder="国家ID" name="country_id">
+                                                            <label class="control-label" for="coin_ids">coin_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="coin_ids" required placeholder="代收货币" name="coin_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="support_product">support_product</label>
-                                                            <input type="text" class="form-control input-sm" id="support_product" required placeholder="支持产品" name="support_product">
+                                                            <label class="control-label" for="pay_way_ids">pay_way_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_way_ids" required placeholder="代收支付方式" name="pay_way_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="no_product">no_product</label>
-                                                            <input type="text" class="form-control input-sm" id="no_product" required placeholder="禁止产品" name="no_product">
+                                                            <label class="control-label" for="billing_ids">billing_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="billing_ids" required placeholder="结算周期ID" name="billing_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="pay_method">pay_method</label>
-                                                            <input type="text" class="form-control input-sm" id="pay_method" required placeholder="支付方式" name="pay_method">
+                                                            <label class="control-label" for="out_pay_way_ids">out_pay_way_ids</label>
+                                                            <input type="text" class="form-control input-sm" id="out_pay_way_ids" required placeholder="代付支付方式" name="out_pay_way_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="pay_rate">pay_rate</label>
-                                                            <input type="text" class="form-control input-sm" id="pay_rate" required placeholder="支付费率" name="pay_rate">
-                                                        </div>
-                                                                                                                <div class="form-group">
-                                                            <label class="control-label" for="settlement_cycle">settlement_cycle</label>
-                                                            <input type="text" class="form-control input-sm" id="settlement_cycle" required placeholder="结算周期" name="settlement_cycle">
+                                                            <input type="text" class="form-control input-sm" id="pay_rate" required placeholder="通道费率" name="pay_rate">
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="status">status</label>
@@ -1510,7 +1460,11 @@
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="margin_balance">margin_balance</label>
-                                                            <input type="text" class="form-control input-sm" id="margin_balance" required placeholder="保证金余额" name="margin_balance">
+                                                            <input type="text" class="form-control input-sm" id="margin_balance" required placeholder="保证金" name="margin_balance">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="balance">balance</label>
+                                                            <input type="text" class="form-control input-sm" id="balance" required placeholder="余额" name="balance">
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
                                                             <button type="submit" class="btn btn-success send" rel="5">提交</button>
@@ -2699,7 +2653,7 @@
 
                 </div>
                 <div class="col-md-6" align="right">
-                    Generated on 2023-11-27 11:49:21 <a href="./" target="_blank">大娱海外支付平台</a>
+                    Generated on 2023-11-27 14:12:18 <a href="./" target="_blank">大娱海外支付平台</a>
                 </div>
             </div>
 
