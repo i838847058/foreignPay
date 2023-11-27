@@ -104,7 +104,8 @@ class SysChannel extends Api
 
         }
         try {
-            $ret = SysChannelModel::insert($params);
+            $params = $this->getParams($params);
+            $ret    = SysChannelModel::insert($params);
             if (!$ret) {
                 exception('添加渠道失败', 400);
             }
@@ -168,7 +169,8 @@ class SysChannel extends Api
         if (!$validate->scene('edit')->check($params)) {
             $this->error($validate->getError());
         }
-        $ret = SysChannelModel::update($params, [
+        $params = $this->getParams($params);
+        $ret    = SysChannelModel::update($params, [
             'id' => $params['id']
         ]);
         if (!$ret) {
@@ -206,14 +208,34 @@ class SysChannel extends Api
         if (!$validate->scene('updateStatus')->check($params)) {
             $this->error($validate->getError());
         }
-        $ret = SysChannelModel::update($params, [
-            'id' => $params['id']
-        ]);
-        if (!$ret) {
-            $this->error('更新渠道状态失败，请稍后重试');
+        try {
+            $ret = SysChannelModel::update($params, [
+                'id' => $params['id']
+            ]);
+            if (!$ret) {
+                exception('更新渠道状态失败，请稍后重试', 400);
+            }
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
         }
         $this->success('更新渠道状态成功');
+    }
 
+    /**
+     * ${CARET}
+     * @param $params
+     * @return mixed
+     * @author hsy 2023-11-27
+     */
+    private function getParams($params)
+    {
+        $params['country_ids']      = is_array($params['country_ids']) ? implode(',', $params['country_ids']) : '';
+        $params['product_type_ids'] = is_array($params['product_type_ids']) ? implode(',', $params['product_type_ids']) : '';
+        $params['coin_ids']         = is_array($params['coin_ids']) ? implode(',', $params['coin_ids']) : '';
+        $params['pay_way_ids']      = is_array($params['pay_way_ids']) ? implode(',', $params['pay_way_ids']) : '';
+        $params['billing_ids']      = is_array($params['billing_ids']) ? implode(',', $params['billing_ids']) : '';
+        $params['out_pay_way_ids']  = is_array($params['out_pay_way_ids']) ? implode(',', $params['out_pay_way_ids']) : '';
+        return $params;
     }
 
 }
