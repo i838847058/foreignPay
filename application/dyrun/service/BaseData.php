@@ -21,7 +21,7 @@ class BaseData
      * @return bool
      * @throws Exception
      */
-    public function isValueExistsModel(Model $model, string $columns, string $value): bool
+    public static function isValueExistsModel(Model $model, string $columns, string $value): bool
     {
         try {
             return $model->where($columns, $value)->count() > 0;
@@ -68,9 +68,18 @@ class BaseData
      * @throws ModelNotFoundException
      * @throws DbException
      */
-    public function getCurrencyByCountry($countryId)
+    public function getCurrencyByCountry(string $countryId)
     {
-        return Db::table('fp_sys_country_coins_view')->where('country_id', $countryId)->field('currency_id as id,currency_name as name')->find();
+        if ($all = explode(',', $countryId) and is_array($all)) {
+            $list = [];
+            foreach ($all as $id) {
+                if ($item = Db::table('fp_sys_country_coins_view')->where('country_id', $id)->field('currency_id as id,currency_name as name')->find()) {
+                    $list[] = $item;
+                }
+            }
+            return $list;
+        }
+        return Db::table('fp_sys_country_coins_view')->where('country_id', $countryId)->field('currency_id as id,currency_name as name')->select();
     }
 
     /**

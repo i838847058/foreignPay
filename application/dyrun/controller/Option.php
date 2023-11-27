@@ -50,7 +50,7 @@ class Option extends Api
     public function getCountryCurrency(Request $request)
     {
         $validate = new Validate([
-            'country_id' => 'require|chsDash'
+            'country_id' => 'require'
         ]);
         if (!$validate->check($request->get())) {
             $this->error($validate->getError());
