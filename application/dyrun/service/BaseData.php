@@ -4,6 +4,7 @@ namespace app\dyrun\service;
 
 use app\common\model\SysOption;
 use app\common\model\SysOptionValue;
+use think\Collection;
 use think\Db;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\ModelNotFoundException;
@@ -70,5 +71,16 @@ class BaseData
     public function getCurrencyByCountry($countryId)
     {
         return Db::table('fp_sys_country_coins_view')->where('country_id', $countryId)->field('currency_id as id,currency_name as name')->find();
+    }
+
+    /**
+     * @return bool|\PDOStatement|string|Collection
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     */
+    public function getCountrys()
+    {
+        return Db::table('fp_sys_country_coins_view')->field('country_id as id,country_name as name')->select();
     }
 }

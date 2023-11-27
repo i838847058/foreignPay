@@ -13,7 +13,7 @@ use think\Validate;
  */
 class Option extends Api
 {
-    protected $noNeedLogin = ['get', 'getCountryCurrency'];
+    protected $noNeedLogin = ['get', 'getCountryCurrency', 'getCountrys'];
     protected $noNeedRight = '*';
 
     /**
@@ -58,6 +58,13 @@ class Option extends Api
         $service = new BaseData();
         $list = $service->getCurrencyByCountry($request->get('country_id'));
         $this->success('getCountryCurrency success', $list);
+    }
+
+
+    public function getCountrys(Request $request)
+    {
+        $service = new BaseData();
+        $this->success('getCountrys success', ['countrys' => $service->getCountrys()]);
     }
 
 
