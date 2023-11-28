@@ -47,6 +47,32 @@ class Merchant extends Model
         return [];
     }
 
+    public function getAgentRateInAttr($value): float
+    {
+        return (float)$value;
+    }
+
+    public function getAgentRateOutAttr($value): float
+    {
+        return (float)$value;
+    }
+
+
+    public function getFeeRateInAttr($value): float
+    {
+        return (float)$value;
+    }
+
+    public function getFeeRateOutAttr($value): float
+    {
+        return (float)$value;
+    }
+
+    public function getDepositRateAttr($value): float
+    {
+        return (float)$value;
+    }
+
     /**
      * @param $value
      * @return string
