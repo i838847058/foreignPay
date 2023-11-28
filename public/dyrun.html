@@ -1471,37 +1471,37 @@
                                                         <td>country_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>国家多选</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>product_type_ids</td>
-                                                        <td>string</td>
-                                                        <td>是</td>
-                                                        <td>支持产品类型</td>
+                                                        <td>国家-多选</td>
                                                     </tr>
                                                                                                         <tr>
                                                         <td>coin_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>代收货币</td>
+                                                        <td>代收货币-多选</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>pay_way_ids</td>
+                                                        <td>product_type_id</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>支持产品类型</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>pay_way_id</td>
                                                         <td>string</td>
                                                         <td>是</td>
                                                         <td>代收支付方式</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>billing_ids</td>
+                                                        <td>billing_id</td>
                                                         <td>string</td>
                                                         <td>是</td>
                                                         <td>结算周期ID</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>out_pay_way_ids</td>
-                                                        <td>string</td>
+                                                        <td>is_u</td>
+                                                        <td>tinyint</td>
                                                         <td>是</td>
-                                                        <td>代付支付方式</td>
+                                                        <td>状态：0=否；1=是；</td>
                                                     </tr>
                                                                                                         <tr>
                                                         <td>pay_rate</td>
@@ -1583,27 +1583,27 @@
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="country_ids">country_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="country_ids" required placeholder="国家多选" name="country_ids">
-                                                        </div>
-                                                                                                                <div class="form-group">
-                                                            <label class="control-label" for="product_type_ids">product_type_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="product_type_ids" required placeholder="支持产品类型" name="product_type_ids">
+                                                            <input type="text" class="form-control input-sm" id="country_ids" required placeholder="国家-多选" name="country_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="coin_ids">coin_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="coin_ids" required placeholder="代收货币" name="coin_ids">
+                                                            <input type="text" class="form-control input-sm" id="coin_ids" required placeholder="代收货币-多选" name="coin_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="pay_way_ids">pay_way_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="pay_way_ids" required placeholder="代收支付方式" name="pay_way_ids">
+                                                            <label class="control-label" for="product_type_id">product_type_id</label>
+                                                            <input type="text" class="form-control input-sm" id="product_type_id" required placeholder="支持产品类型" name="product_type_id">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="billing_ids">billing_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="billing_ids" required placeholder="结算周期ID" name="billing_ids">
+                                                            <label class="control-label" for="pay_way_id">pay_way_id</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_way_id" required placeholder="代收支付方式" name="pay_way_id">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="out_pay_way_ids">out_pay_way_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="out_pay_way_ids" required placeholder="代付支付方式" name="out_pay_way_ids">
+                                                            <label class="control-label" for="billing_id">billing_id</label>
+                                                            <input type="text" class="form-control input-sm" id="billing_id" required placeholder="结算周期ID" name="billing_id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="is_u">is_u</label>
+                                                            <input type="text" class="form-control input-sm" id="is_u" required placeholder="状态：0=否；1=是；" name="is_u">
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="pay_rate">pay_rate</label>
@@ -1764,37 +1764,37 @@
                                                         <td>country_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>国家多选</td>
-                                                    </tr>
-                                                                                                        <tr>
-                                                        <td>product_type_ids</td>
-                                                        <td>string</td>
-                                                        <td>是</td>
-                                                        <td>支持产品类型</td>
+                                                        <td>国家-多选</td>
                                                     </tr>
                                                                                                         <tr>
                                                         <td>coin_ids</td>
                                                         <td>string</td>
                                                         <td>是</td>
-                                                        <td>代收货币</td>
+                                                        <td>代收货币-多选</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>pay_way_ids</td>
+                                                        <td>product_type_id</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>支持产品类型</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>pay_way_id</td>
                                                         <td>string</td>
                                                         <td>是</td>
                                                         <td>代收支付方式</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>billing_ids</td>
+                                                        <td>billing_id</td>
                                                         <td>string</td>
                                                         <td>是</td>
                                                         <td>结算周期ID</td>
                                                     </tr>
                                                                                                         <tr>
-                                                        <td>out_pay_way_ids</td>
-                                                        <td>string</td>
+                                                        <td>is_u</td>
+                                                        <td>tinyint</td>
                                                         <td>是</td>
-                                                        <td>代付支付方式</td>
+                                                        <td>状态：0=否；1=是；</td>
                                                     </tr>
                                                                                                         <tr>
                                                         <td>pay_rate</td>
@@ -1881,27 +1881,27 @@
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="country_ids">country_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="country_ids" required placeholder="国家多选" name="country_ids">
-                                                        </div>
-                                                                                                                <div class="form-group">
-                                                            <label class="control-label" for="product_type_ids">product_type_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="product_type_ids" required placeholder="支持产品类型" name="product_type_ids">
+                                                            <input type="text" class="form-control input-sm" id="country_ids" required placeholder="国家-多选" name="country_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="coin_ids">coin_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="coin_ids" required placeholder="代收货币" name="coin_ids">
+                                                            <input type="text" class="form-control input-sm" id="coin_ids" required placeholder="代收货币-多选" name="coin_ids">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="pay_way_ids">pay_way_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="pay_way_ids" required placeholder="代收支付方式" name="pay_way_ids">
+                                                            <label class="control-label" for="product_type_id">product_type_id</label>
+                                                            <input type="text" class="form-control input-sm" id="product_type_id" required placeholder="支持产品类型" name="product_type_id">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="billing_ids">billing_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="billing_ids" required placeholder="结算周期ID" name="billing_ids">
+                                                            <label class="control-label" for="pay_way_id">pay_way_id</label>
+                                                            <input type="text" class="form-control input-sm" id="pay_way_id" required placeholder="代收支付方式" name="pay_way_id">
                                                         </div>
                                                                                                                 <div class="form-group">
-                                                            <label class="control-label" for="out_pay_way_ids">out_pay_way_ids</label>
-                                                            <input type="text" class="form-control input-sm" id="out_pay_way_ids" required placeholder="代付支付方式" name="out_pay_way_ids">
+                                                            <label class="control-label" for="billing_id">billing_id</label>
+                                                            <input type="text" class="form-control input-sm" id="billing_id" required placeholder="结算周期ID" name="billing_id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="is_u">is_u</label>
+                                                            <input type="text" class="form-control input-sm" id="is_u" required placeholder="状态：0=否；1=是；" name="is_u">
                                                         </div>
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="pay_rate">pay_rate</label>
@@ -3106,7 +3106,7 @@
 
                 </div>
                 <div class="col-md-6" align="right">
-                    Generated on 2023-11-28 13:03:14 <a href="./" target="_blank">大娱海外支付平台</a>
+                    Generated on 2023-11-28 13:13:35 <a href="./" target="_blank">大娱海外支付平台</a>
                 </div>
             </div>
 
