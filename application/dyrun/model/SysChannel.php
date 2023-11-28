@@ -67,12 +67,11 @@ class SysChannel extends Model
         $list_rows = $list_rows ?? 10;
         $page      = $page ?? 0;
         $self      = new self();
-        // dd($country_arr, $product_type_arr, $coin_arr, $pay_way_arr, $billing_arr,123);
-        $list = $self->where($where)
+        $list      = $self->where($where)
             ->order('id', 'desc')
             ->paginate($list_rows, false, [
                 'page' => $page
-            ])->each(function ($item) use ($country_arr, $product_type_arr, $coin_arr, $pay_way_arr, $billing_arr) {
+            ])->each(function ($item) use ($country_arr, $coin_arr, $product_type_arr, $pay_way_arr, $billing_arr) {
                 // 国家
                 $item['country_ids_text'] = '';
                 if ($item['country_ids'] && $country_arr) {
@@ -94,30 +93,18 @@ class SysChannel extends Model
                 // 支持产品类型
                 $item['product_type_id_text'] = '';
                 if ($item['product_type_id'] && $product_type_arr) {
-                    $item['product_type_id_text'] .= isset($product_type_arr[$item['product_type_id']]) ?: '';
-                    /*$new_country_ids = explode(',', $item['product_type_id']);
-                    foreach ($new_country_ids as $val) {
-                        $item['product_type_id_text'] .= isset($product_type_arr[$val])?"{$product_type_arr[$val]},":'';
-                    }*/
+                    $item['product_type_id_text'] = $product_type_arr[$item['product_type_id']] ?? '';
                 }
 
                 // 支付方式-代收
                 $item['pay_way_id_text'] = '';
-                if ($item['pay_way_id'] && $coin_arr) {
-                    $item['pay_way_id_text'] .= isset($coin_arr[$item['pay_way_id']]) ?: '';
-                    /*$new_coin_ids = explode(',', $item['pay_way_id']);
-                    foreach ($new_coin_ids as $val) {
-                        $item['pay_way_id_text'] .= isset($pay_way_arr[$val])?"{$pay_way_arr[$val]},":'';
-                    }*/
+                if ($item['pay_way_id'] && $pay_way_arr) {
+                    $item['pay_way_id_text'] = $pay_way_arr[$item['pay_way_id']] ?? '';
                 }
                 // 结算周期
                 $item['billing_id_text'] = '';
                 if ($item['billing_id'] && $billing_arr) {
-                    $item['billing_id_text'] .= isset($billing_arr[$item['billing_id']]) ?: '';
-                    /*$new_coin_ids = explode(',', $item['billing_id']);
-                    foreach ($new_coin_ids as $val) {
-                        $item['billing_id_text'] .= isset($billing_arr[$val])?"{$billing_arr[$val]},":'';
-                    }*/
+                    $item['billing_id_text'] = $billing_arr[$item['billing_id']] ?? '';
                 }
                 return $item;
             });
