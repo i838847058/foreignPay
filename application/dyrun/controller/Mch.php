@@ -6,7 +6,6 @@ use app\admin\library\Auth;
 use app\common\controller\Api;
 use app\common\model\Merchant;
 use app\common\model\SysCountryCoinsView;
-use app\common\model\SysOption;
 use app\common\model\SysOptionValue;
 use app\common\model\User;
 use app\dyrun\service\BaseData;
@@ -22,13 +21,14 @@ use think\Validate;
  */
 class Mch extends Api
 {
-    protected $noNeedLogin = ['searchAccount', 'createAccount', 'removeAccount', 'createMch', 'getAccountList', 'changeAccountPassword'];
+    protected $noNeedLogin = ['searchAccount', 'getMchList', 'createAccount', 'removeAccount', 'createMch', 'getAccountList', 'changeAccountPassword'];
     protected $noNeedRight = '*';
 
+    public function getMchList(Request $request)
+    {
+        $this->success(__('Sign up successful'));
+    }
 
-    /**
-     * @throws Exception
-     */
     public function createMch(Request $request)
     {
         $validate = new Validate([
@@ -142,6 +142,11 @@ class Mch extends Api
                 ->paginate($request->get('rows', 20), false, [
                     'page' => $request->get('page', 1)
                 ]);
+            foreach ($list as $key => $item) {
+                $item->logintime = date('Y-m-d H:i:s', $item->logintime);
+                $item->createtime = date('Y-m-d H:i:s', $item->createtime);
+                $item->updatetime = date('Y-m-d H:i:s', $item->updatetime);
+            }
             $this->success(__('Get Account List successful'), $list);
         } catch (DbException $e) {
             $this->error($e->getMessage());
