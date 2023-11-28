@@ -22,7 +22,6 @@ class SysChannel extends Api
      * @ApiMethod (GET)
      * @ApiBody ({
     'channel_name': '中国银行上海支行',
-    'channel_short_name': '中行',
     'channel_num': 'ZH001',
     'created': '2023-11-22 18:04:09',
     'updated': '2023-11-22 18:04:09',
@@ -30,7 +29,6 @@ class SysChannel extends Api
     'page': 1,
     })
      * @param string $channel_name  渠道名称
-     * @param string $channel_short_name  渠道简称
      * @param string $channel_num  渠道号
      * @param timestamp $created  创建时间
      * @param timestamp $updated  更新时间
@@ -60,18 +58,18 @@ class SysChannel extends Api
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (POST)
      * @ApiBody ({
-    'channel_name': '中国银行上海支行',
-    'channel_num': 'ZH002',
-    'country_ids': '1,2,3',
-    'product_type_ids': '33,34',
-    'coin_ids': '1,2',
-    'pay_way_ids': '25,26',
-    'billing_ids': '29,30',
-    'out_pay_way_ids': '25,26',
-    'pay_rate': 10.00,
-    'status': 1,
-    'margin_balance': 100000.00,
-    'balance': 0.00,
+    'channel_name':'payhuayu-巴西',
+    'channel_num':'ZH002',
+    'country_ids':'5,7,9',
+    'coin_ids':'1,2',
+    'product_type_id':'33',
+    'pay_way_id':'25',
+    'billing_id':'29',
+    'is_u':25,
+    'pay_rate':10.0,
+    'status':1,
+    'margin_balance':100000.0,
+    'balance':0.0,
     })
      * @param string $channel_name  渠道名称
      * @param string $channel_num  渠道号
@@ -125,19 +123,19 @@ class SysChannel extends Api
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (POST)
      * @ApiBody ({
-    'id': '1',
-    'channel_name': '中国银行上海支行',
-    'channel_num': 'ZH002',
-    'country_ids': '1,2,3',
-    'product_type_ids': '33,34',
-    'coin_ids': '1,2',
-    'pay_way_ids': '25,26',
-    'billing_ids': '29,30',
-    'out_pay_way_ids': '25,26',
-    'pay_rate': 10.00,
-    'status': 1,
-    'margin_balance': 100000.00,
-    'balance': 0.00,
+    'id':1,
+    'channel_name':'payhuayu-巴西',
+    'channel_num':'ZH002',
+    'country_ids':'5,7,9',
+    'coin_ids':'1,2',
+    'product_type_id':'33',
+    'pay_way_id':'25',
+    'billing_id':'29',
+    'is_u':25,
+    'pay_rate':10.0,
+    'status':1,
+    'margin_balance':100000.0,
+    'balance':0.0,
     })
      * @param int $id  ID
      * @param string $channel_name  渠道名称
