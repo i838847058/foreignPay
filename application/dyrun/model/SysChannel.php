@@ -81,14 +81,6 @@ class SysChannel extends Model
                         $item['country_ids_text'] .= isset($country_arr[$val])?"{$country_arr[$val]},":'';
                     }
                 }
-                // 支持产品类型
-                $item['product_type_ids_text'] = '';
-                if ($item['product_type_ids'] && $product_type_arr) {
-                    $new_country_ids = explode(',', $item['product_type_ids']);
-                    foreach ($new_country_ids as $val) {
-                        $item['product_type_ids_text'] .= isset($product_type_arr[$val])?"{$product_type_arr[$val]},":'';
-                    }
-                }
                 // 货币-代收
                 $item['coin_ids_text'] = '';
                 if ($item['coin_ids'] && $coin_arr) {
@@ -97,28 +89,29 @@ class SysChannel extends Model
                         $item['coin_ids_text'] .= isset($coin_arr[$val])?"{$coin_arr[$val]},":'';
                     }
                 }
+                // 支持产品类型
+                $item['product_type_id_text'] = '';
+                if ($item['product_type_id'] && $product_type_arr) {
+                    $new_country_ids = explode(',', $item['product_type_id']);
+                    foreach ($new_country_ids as $val) {
+                        $item['product_type_id_text'] .= isset($product_type_arr[$val])?"{$product_type_arr[$val]},":'';
+                    }
+                }
+
                 // 支付方式-代收
-                $item['pay_way_ids_text'] = '';
-                if ($item['pay_way_ids'] && $coin_arr) {
-                    $new_coin_ids = explode(',', $item['pay_way_ids']);
+                $item['pay_way_id_text'] = '';
+                if ($item['pay_way_id'] && $coin_arr) {
+                    $new_coin_ids = explode(',', $item['pay_way_id']);
                     foreach ($new_coin_ids as $val) {
-                        $item['pay_way_ids_text'] .= isset($pay_way_arr[$val])?"{$pay_way_arr[$val]},":'';
+                        $item['pay_way_id_text'] .= isset($pay_way_arr[$val])?"{$pay_way_arr[$val]},":'';
                     }
                 }
                 // 结算周期
-                $item['billing_ids_text'] = '';
-                if ($item['billing_ids'] && $coin_arr) {
-                    $new_coin_ids = explode(',', $item['billing_ids']);
+                $item['billing_id_text'] = '';
+                if ($item['billing_id'] && $coin_arr) {
+                    $new_coin_ids = explode(',', $item['billing_id']);
                     foreach ($new_coin_ids as $val) {
-                        $item['billing_ids_text'] .= isset($billing_arr[$val])?"{$billing_arr[$val]},":'';
-                    }
-                }
-                // 支付方式-代付
-                $item['out_pay_way_ids_text'] = '';
-                if ($item['out_pay_way_ids'] && $coin_arr) {
-                    $new_coin_ids = explode(',', $item['out_pay_way_ids']);
-                    foreach ($new_coin_ids as $val) {
-                        $item['out_pay_way_ids_text'] .= isset($pay_way_arr[$val])?"{$pay_way_arr[$val]},":'';
+                        $item['billing_id_text'] .= isset($billing_arr[$val])?"{$billing_arr[$val]},":'';
                     }
                 }
                 return $item;

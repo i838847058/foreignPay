@@ -73,12 +73,12 @@ class SysChannel extends Api
     })
      * @param string $channel_name  渠道名称
      * @param string $channel_num  渠道号
-     * @param string $country_ids  国家多选
-     * @param string $product_type_ids  支持产品类型
-     * @param string $coin_ids  代收货币
-     * @param string $pay_way_ids  代收支付方式
-     * @param string $billing_ids  结算周期ID
-     * @param string $out_pay_way_ids  代付支付方式
+     * @param string $country_ids  国家-多选
+     * @param string $coin_ids  代收货币-多选
+     * @param string $product_type_id  支持产品类型
+     * @param string $pay_way_id  代收支付方式
+     * @param string $billing_id  结算周期ID
+     * @param tinyint $is_u  状态：0=否；1=是；
      * @param decimal $pay_rate  通道费率
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param decimal $margin_balance  保证金
@@ -140,12 +140,12 @@ class SysChannel extends Api
      * @param int $id  ID
      * @param string $channel_name  渠道名称
      * @param string $channel_num  渠道号
-     * @param string $country_ids  国家多选
-     * @param string $product_type_ids  支持产品类型
-     * @param string $coin_ids  代收货币
-     * @param string $pay_way_ids  代收支付方式
-     * @param string $billing_ids  结算周期ID
-     * @param string $out_pay_way_ids  代付支付方式
+     * @param string $country_ids  国家-多选
+     * @param string $coin_ids  代收货币-多选
+     * @param string $product_type_id  支持产品类型
+     * @param string $pay_way_id  代收支付方式
+     * @param string $billing_id  结算周期ID
+     * @param tinyint $is_u  状态：0=否；1=是；
      * @param decimal $pay_rate  通道费率
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param decimal $margin_balance  保证金
@@ -227,12 +227,8 @@ class SysChannel extends Api
      */
     private function getParams($params)
     {
-        $params['country_ids']      = is_array($params['country_ids']) ? implode(',', $params['country_ids']) : '';
-        $params['product_type_ids'] = is_array($params['product_type_ids']) ? implode(',', $params['product_type_ids']) : '';
-        $params['coin_ids']         = is_array($params['coin_ids']) ? implode(',', $params['coin_ids']) : '';
-        $params['pay_way_ids']      = is_array($params['pay_way_ids']) ? implode(',', $params['pay_way_ids']) : '';
-        $params['billing_ids']      = is_array($params['billing_ids']) ? implode(',', $params['billing_ids']) : '';
-        $params['out_pay_way_ids']  = is_array($params['out_pay_way_ids']) ? implode(',', $params['out_pay_way_ids']) : '';
+        $params['country_ids'] = is_array($params['country_ids']) ? implode(',', $params['country_ids']) : '';
+        $params['coin_ids']    = is_array($params['coin_ids']) ? implode(',', $params['coin_ids']) : '';
         return $params;
     }
 
