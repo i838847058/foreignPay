@@ -35,8 +35,8 @@ class MchService
     {
         $merchant = new Merchant();
         $data['merchant_no'] = BaseData::makeMerchantNo($data['user_id']);
-        $data['rate_in'] = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
-        $data['rate_out'] = $data['agent_user_id'] ? $data['agent_rate_out'] : 0;
+        $data['rate_in'] = $data['agent_user_id'] ? $data['rate_in'] : 0;
+        $data['rate_out'] = $data['agent_user_id'] ? $data['rate_out'] : 0;
         $result = $merchant->validate(
             [
                 'user_id' => 'require|chsDash',
