@@ -17,11 +17,11 @@ class User extends Model
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
     // 追加属性
-    protected $append = [
-        'prevtime_text',
-        'logintime_text',
-        'jointime_text'
-    ];
+//    protected $append = [
+//        'prevtime_text',
+//        'logintime_text',
+//        'jointime_text'
+//    ];
 
     public function getOriginData()
     {

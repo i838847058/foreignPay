@@ -4,6 +4,7 @@ namespace app\dyrun\service;
 
 use app\common\model\SysOption;
 use app\common\model\SysOptionValue;
+use PDOStatement;
 use think\Collection;
 use think\Db;
 use think\db\exception\DataNotFoundException;
@@ -62,11 +63,11 @@ class BaseData
     }
 
     /**
-     * @param $countryId
-     * @return array|bool|\PDOStatement|string|Model|null
+     * @param string $countryId
+     * @return array|bool|Collection|PDOStatement|string
      * @throws DataNotFoundException
-     * @throws ModelNotFoundException
      * @throws DbException
+     * @throws ModelNotFoundException
      */
     public function getCurrencyByCountry(string $countryId)
     {
@@ -83,7 +84,7 @@ class BaseData
     }
 
     /**
-     * @return bool|\PDOStatement|string|Collection
+     * @return bool|PDOStatement|string|Collection
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException

@@ -17,11 +17,14 @@ class MchService
      * @throws ModelNotFoundException
      * @throws DbException
      */
-    public function getMchAccountList(string $account_text)
+    public function getMchAccountList(string $account_text, int $role = 0)
     {
-        return User::field('id,username')->select(function ($query) use ($account_text) {
+        return User::field('id,username')->select(function ($query) use ($role, $account_text) {
             $query->where('status', 'normal');
             $query->where('username', 'like', $account_text . '%');
+            if ($role != 0) {
+                $query->where('role_id', $role);
+            }
         });
     }
 }

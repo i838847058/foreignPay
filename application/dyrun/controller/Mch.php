@@ -74,12 +74,13 @@ class Mch extends Api
     {
         $validate = new Validate([
             'text' => 'require|chsDash',
+            'role' => 'in:1,2',
         ]);
         if (!$validate->check($request->get())) {
             $this->error($validate->getError());
         }
         $service = new MchService();
-        $data = $service->getMchAccountList($request->get('text'));
+        $data = $service->getMchAccountList($request->get('text'), $request->get('role', 0));
         $this->success(__('Searching successful'), $data);
     }
 }
