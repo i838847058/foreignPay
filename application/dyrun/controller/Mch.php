@@ -21,7 +21,7 @@ use think\Validate;
  */
 class Mch extends Api
 {
-    protected $noNeedLogin = ['searchAccount', 'getMchList', 'createAccount', 'removeAccount', 'createMch', 'getAccountList', 'changeAccountPassword'];
+    protected $noNeedLogin = ['searchAccount', 'getMchList', 'createAccount', 'changeAccountMchStatus', 'createMch', 'getAccountList', 'changeAccountPassword'];
     protected $noNeedRight = '*';
 
     public function getMchList(Request $request)
@@ -91,10 +91,11 @@ class Mch extends Api
     /**
      * @throws Exception
      */
-    public function removeAccount(Request $request)
+    public function changeAccountMchStatus(Request $request)
     {
         $validate = new Validate([
             'user_id' => 'require|number',
+            'mch_status' => 'require|in:0,1',
         ]);
         if (!$validate->check($request->post())) {
             $this->error($validate->getError());
@@ -104,11 +105,10 @@ class Mch extends Api
             $this->error($this->NOT_EXISTS_MODEL_MSG('user_id'));
         }
         // 检查商户号
-        if (($count = Merchant::where('user_id', $request->post('user_id'))->count()) > 0) {
-            $this->error('merchant need remove first.', ['mch_count' => $count]);
-        }
-        User::get($request->post('user_id'))->delete();
-        $this->success(__('remove Account successful'));
+        $user = User::get($request->post('user_id'));
+        $user->mch_status = $request->post('mch_status');
+        $user->save();
+        $this->success(__('change Account Mch Status successful'));
     }
 
     public function changeAccountPassword(Request $request)
@@ -136,7 +136,7 @@ class Mch extends Api
     public function getAccountList(Request $request)
     {
         try {
-            $list = User::field('id,role_id as role,username,nickname,logintime,loginip,createtime,updatetime')
+            $list = User::field('id,role_id as role,username,nickname,logintime,loginip,createtime,updatetime,mch_status')
                 ->where('role_id', '>', 0)
                 ->order('id', 'desc')
                 ->paginate($request->get('rows', 20), false, [
