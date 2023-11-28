@@ -3,19 +3,22 @@
 namespace app\dyrun\service;
 
 use app\admin\model\User;
+use app\common\model\Merchant;
 use think\Collection;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\ModelNotFoundException;
+use think\Exception;
 use think\exception\DbException;
 
 class MchService
 {
     /**
      * @param string $account_text
+     * @param int $role
      * @return bool|\PDOStatement|string|Collection
      * @throws DataNotFoundException
-     * @throws ModelNotFoundException
      * @throws DbException
+     * @throws ModelNotFoundException
      */
     public function getMchAccountList(string $account_text, int $role = 0)
     {
@@ -26,5 +29,28 @@ class MchService
                 $query->where('role_id', $role);
             }
         });
+    }
+
+    public function newMchOne(array $data): array
+    {
+        $merchant = new Merchant();
+        $data['merchant_no'] = BaseData::makeMerchantNo($data['user_id']);
+        $result = $merchant->validate(
+            [
+                'user_id' => 'require|chsDash',
+                'merchant_name' => 'require|chsDash|unique:merchant',
+                'merchant_type' => 'require|number|in:1,2',
+                'merchant_no' => 'require|number|unique:merchant',
+                'country_id' => 'require|number',
+                'agent_user_id' => 'number',
+                'rate_in' => 'float',
+                'rate_out' => 'float',
+            ]
+        )->save($data);
+        if (false === $result) {
+            // 验证失败 输出错误信息
+            throw new Exception($merchant->getError());
+        }
+        return $data;
     }
 }

@@ -93,4 +93,13 @@ class BaseData
     {
         return Db::table('fp_sys_country_coins_view')->field('country_id as id,country_name as name')->select();
     }
+
+    /**
+     * @param $userId
+     * @return string
+     */
+    public static function makeMerchantNo($userId): string
+    {
+        return "1000" . rand(10, 88) . "0" . $userId . "0" . rand(100, 888);
+    }
 }
