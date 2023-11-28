@@ -169,10 +169,10 @@ class SysChannel extends Api
         }
         try {
             $params = $this->getParams($params);
-            $ret    = (new \app\dyrun\model\SysChannel)->allowField(true)->update($params, [
+            $ret    = (new \app\dyrun\model\SysChannel)->allowField(true)->save($params, [
                 'id' => $params['id']
             ]);
-            if (!$ret) {
+            if ($ret === false) {
                 exception('编辑渠道失败，请稍后重试', 400);
             }
         } catch (\Exception $e) {
