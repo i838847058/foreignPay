@@ -78,41 +78,46 @@ class SysChannel extends Model
                 if ($item['country_ids'] && $country_arr) {
                     $new_country_ids = explode(',', $item['country_ids']);
                     foreach ($new_country_ids as $val) {
-                        $item['country_ids_text'] .= isset($country_arr[$val])?"{$country_arr[$val]},":'';
+                        $item['country_ids_text'] .= isset($country_arr[$val]) ? "{$country_arr[$val]}," : '';
                     }
+                    $item['country_ids'] = $new_country_ids;
                 }
                 // 货币-代收
                 $item['coin_ids_text'] = '';
                 if ($item['coin_ids'] && $coin_arr) {
                     $new_coin_ids = explode(',', $item['coin_ids']);
                     foreach ($new_coin_ids as $val) {
-                        $item['coin_ids_text'] .= isset($coin_arr[$val])?"{$coin_arr[$val]},":'';
+                        $item['coin_ids_text'] .= isset($coin_arr[$val]) ? "{$coin_arr[$val]}," : '';
                     }
+                    $item['coin_ids'] = $new_coin_ids;
                 }
                 // 支持产品类型
                 $item['product_type_id_text'] = '';
                 if ($item['product_type_id'] && $product_type_arr) {
-                    $new_country_ids = explode(',', $item['product_type_id']);
+                    $item['product_type_id_text'] .= isset($product_type_arr[$item['product_type_id']]) ?: '';
+                    /*$new_country_ids = explode(',', $item['product_type_id']);
                     foreach ($new_country_ids as $val) {
                         $item['product_type_id_text'] .= isset($product_type_arr[$val])?"{$product_type_arr[$val]},":'';
-                    }
+                    }*/
                 }
 
                 // 支付方式-代收
                 $item['pay_way_id_text'] = '';
                 if ($item['pay_way_id'] && $coin_arr) {
-                    $new_coin_ids = explode(',', $item['pay_way_id']);
+                    $item['pay_way_id_text'] .= isset($coin_arr[$item['pay_way_id']]) ?: '';
+                    /*$new_coin_ids = explode(',', $item['pay_way_id']);
                     foreach ($new_coin_ids as $val) {
                         $item['pay_way_id_text'] .= isset($pay_way_arr[$val])?"{$pay_way_arr[$val]},":'';
-                    }
+                    }*/
                 }
                 // 结算周期
                 $item['billing_id_text'] = '';
-                if ($item['billing_id'] && $coin_arr) {
-                    $new_coin_ids = explode(',', $item['billing_id']);
+                if ($item['billing_id'] && $billing_arr) {
+                    $item['billing_id_text'] .= isset($billing_arr[$item['billing_id']]) ?: '';
+                    /*$new_coin_ids = explode(',', $item['billing_id']);
                     foreach ($new_coin_ids as $val) {
                         $item['billing_id_text'] .= isset($billing_arr[$val])?"{$billing_arr[$val]},":'';
-                    }
+                    }*/
                 }
                 return $item;
             });
