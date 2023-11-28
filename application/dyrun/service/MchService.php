@@ -31,28 +31,43 @@ class MchService
         });
     }
 
-    public function newMchOne(array $data): array
+    /**
+     * @param array $data
+     * @return Merchant
+     * @throws Exception
+     */
+    public function newMchOne(array $data): Merchant
     {
         $merchant = new Merchant();
         $data['merchant_no'] = BaseData::makeMerchantNo($data['user_id']);
-        $data['rate_in'] = $data['agent_user_id'] ? $data['rate_in'] : 0;
-        $data['rate_out'] = $data['agent_user_id'] ? $data['rate_out'] : 0;
+        $data['api_key'] = BaseData::makeKeyMd5($data['merchant_no']);
+        $data['agent_rate_in'] = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
+        $data['agent_rate_out'] = $data['agent_user_id'] ? $data['agent_rate_out'] : 0;
         $result = $merchant->validate(
             [
                 'user_id' => 'require|chsDash',
                 'merchant_name' => 'require|chsDash|unique:merchant',
                 'merchant_type' => 'require|number|in:1,2',
                 'merchant_no' => 'require|number|unique:merchant',
-                'country_id' => 'require|number',
+                'countrys' => 'require|array',
                 'agent_user_id' => 'number',
-                'rate_in' => 'float',
-                'rate_out' => 'float',
+                'agent_rate_in' => 'float',
+                'agent_rate_out' => 'float',
+                'product_type_id' => 'require|number',
+                'product_name' => 'require|chsDash|unique:merchant',
+                'pay_way_id' => 'require|number',
+                'coins_in' => 'require|array',
+                'fee_rate_in' => 'require|float',
+                'coins_out' => 'require|array',
+                'fee_rate_out' => 'require|float'
             ]
         )->save($data);
         if (false === $result) {
             // 验证失败 输出错误信息
             throw new Exception($merchant->getError());
         }
-        return $data;
+        unset($merchant->api_key);
+        unset($merchant->id);
+        return $merchant;
     }
 }
