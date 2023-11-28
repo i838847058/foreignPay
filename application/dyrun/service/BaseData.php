@@ -32,6 +32,16 @@ class BaseData
     }
 
     /**
+     * @param string $merchant_no
+     * @return string
+     */
+    public static function makeKeyMd5(string $merchant_no): string
+    {
+        $value = $merchant_no . time();
+        return md5($value);
+    }
+
+    /**
      * @param string|null $name
      * @param string|null $value
      * @return array

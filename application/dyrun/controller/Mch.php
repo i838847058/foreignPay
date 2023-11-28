@@ -4,6 +4,8 @@ namespace app\dyrun\controller;
 
 use app\common\controller\Api;
 use app\common\model\SysCountryCoinsView;
+use app\common\model\SysOption;
+use app\common\model\SysOptionValue;
 use app\common\model\User;
 use app\dyrun\service\BaseData;
 use app\dyrun\service\MchService;
@@ -29,26 +31,53 @@ class Mch extends Api
             'user_id' => 'require|chsDash',
             'merchant_name' => 'require|chsDash|unique:merchant',
             'merchant_type' => 'require|number|in:1,2',
-            'country_id' => 'require|number',
+            'countrys' => 'require|array',
             'agent_user_id' => 'number',
-            'rate_in' => 'float',
-            'rate_out' => 'float',
+            'agent_rate_in' => 'float|between:0,10',
+            'agent_rate_out' => 'float|between:0,10',
+            'product_type_id' => 'require|number',
+            'product_name' => 'require|chsDash|unique:merchant',
+            'pay_way_id' => 'require|number',
+            'coins_in' => 'require|array',
+            'fee_rate_in' => 'require|float|between:0,100',
+            'coins_out' => 'require|array',
+            'fee_rate_out' => 'require|float|between:0,100',
+            'deposit_rate' => 'require|float|between:0,100',
         ]);
-        if (!$validate->check($request->post())) {
+        $input = $request->post();
+        if (!$validate->check($input)) {
             $this->error($validate->getError());
         }
         // 判断是否存在数据表
         if (!BaseData::isValueExistsModel(new User(), 'id', $request->post('user_id'))) {
             $this->error($this->NOT_EXISTS_MODEL_MSG('user_id'));
         }
-        if (!BaseData::isValueExistsModel(new SysCountryCoinsView(), 'country_id', $request->post('country_id'))) {
-            $this->error($this->NOT_EXISTS_MODEL_MSG('country_id'));
+        foreach ($input['countrys'] as $countrys) {
+            if (!BaseData::isValueExistsModel(new SysCountryCoinsView(), 'country_id', $countrys)) {
+                $this->error($this->NOT_EXISTS_MODEL_MSG('country:' . $countrys));
+            }
+        }
+        foreach ($input['coins_in'] as $countrys) {
+            if (!BaseData::isValueExistsModel(new SysCountryCoinsView(), 'currency_id', $countrys)) {
+                $this->error($this->NOT_EXISTS_MODEL_MSG('country:' . $countrys));
+            }
+        }
+        foreach ($input['coins_out'] as $countrys) {
+            if (!BaseData::isValueExistsModel(new SysCountryCoinsView(), 'currency_id', $countrys)) {
+                $this->error($this->NOT_EXISTS_MODEL_MSG('country:' . $countrys));
+            }
+        }
+        if (!BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('product_type_id'))) {
+            $this->error($this->NOT_EXISTS_MODEL_MSG('agent_user_id'));
+        }
+        if (!BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('pay_way_id'))) {
+            $this->error($this->NOT_EXISTS_MODEL_MSG('agent_user_id'));
         }
         if ($request->post('agent_user_id') and !BaseData::isValueExistsModel(new User(), 'id', $request->post('agent_user_id'))) {
             $this->error($this->NOT_EXISTS_MODEL_MSG('agent_user_id'));
         }
-        if ($request->post('agent_user_id') and (!$request->post('rate_in') or !!$request->post('rate_in'))) {
-            $this->error('need rate_in and rate_out.');
+        if ($request->post('agent_user_id') and (!$request->post('agent_rate_in') or !!$request->post('agent_rate_in'))) {
+            $this->error('miss agent_rate_in or agent_rate_out.');
         }
         $service = new MchService();
         $infos = $service->newMchOne($request->post());
