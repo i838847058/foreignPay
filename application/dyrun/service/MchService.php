@@ -9,6 +9,7 @@ use think\db\exception\DataNotFoundException;
 use think\db\exception\ModelNotFoundException;
 use think\Exception;
 use think\exception\DbException;
+use think\Paginator;
 
 class MchService
 {
@@ -69,6 +70,31 @@ class MchService
         $data = Merchant::get($merchant->id);
         unset($data->api_key);
         unset($data->id);
+        return $data;
+    }
+
+    /**
+     * @param int $rows
+     * @param int $page
+     * @param int $mch_type
+     * @return Paginator
+     * @throws DbException
+     */
+    public function getMchList(int $rows = 20, int $page = 1, int $mch_type): \think\Paginator
+    {
+        $data = Merchant::order('id', 'desc')
+            ->where(function ($query) use ($mch_type) {
+                if ($mch_type != 0) {
+                    $query->where('merchant_type', $mch_type);
+                }
+            })
+            ->paginate($rows, false, [
+                'page' => $page
+            ]);;
+        $data->each(function ($item) {
+            unset($item->id);
+            unset($item->api_key);
+        });
         return $data;
     }
 }
