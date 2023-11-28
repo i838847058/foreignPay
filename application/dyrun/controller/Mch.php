@@ -10,6 +10,7 @@ use app\common\model\User;
 use app\dyrun\service\BaseData;
 use app\dyrun\service\MchService;
 use think\Exception;
+use think\exception\DbException;
 use think\Request;
 use think\Validate;
 
@@ -18,7 +19,7 @@ use think\Validate;
  */
 class Mch extends Api
 {
-    protected $noNeedLogin = ['searchAccount', 'createAccount', 'createMch'];
+    protected $noNeedLogin = ['searchAccount', 'createAccount', 'createMch', 'getAccountList'];
     protected $noNeedRight = '*';
 
 
@@ -82,6 +83,21 @@ class Mch extends Api
         $service = new MchService();
         $infos = $service->newMchOne($request->post());
         $this->success(__('Sign up successful'), $infos);
+    }
+
+    public function getAccountList(Request $request)
+    {
+        try {
+            $list = User::field('id,role_id as role,username,nickname,logintime,loginip,createtime,updatetime')
+                ->where('role_id', '>', 0)
+                ->order('id', 'desc')
+                ->paginate($request->get('rows', 20), false, [
+                    'page' => $request->get('page', 1)
+                ]);
+            $this->success(__('Get Account List successful'), $list);
+        } catch (DbException $e) {
+            $this->error($e->getMessage());
+        }
     }
 
     public function createAccount(Request $request)
