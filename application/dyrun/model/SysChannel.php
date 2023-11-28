@@ -80,7 +80,7 @@ class SysChannel extends Model
                     foreach ($new_country_ids as $val) {
                         $item['country_ids_text'] .= isset($country_arr[$val]) ? "{$country_arr[$val]}," : '';
                     }
-                    $item['country_ids'] = $new_country_ids;
+                    $item['country_ids'] = array_map('intval', $new_country_ids);
                 }
                 // 货币-代收
                 $item['coin_ids_text'] = '';
@@ -89,7 +89,7 @@ class SysChannel extends Model
                     foreach ($new_coin_ids as $val) {
                         $item['coin_ids_text'] .= isset($coin_arr[$val]) ? "{$coin_arr[$val]}," : '';
                     }
-                    $item['coin_ids'] = $new_coin_ids;
+                    $item['coin_ids'] = array_map('intval', $new_coin_ids);
                 }
                 // 支持产品类型
                 $item['product_type_id_text'] = '';
