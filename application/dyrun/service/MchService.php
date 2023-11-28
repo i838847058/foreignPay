@@ -42,8 +42,10 @@ class MchService
         $merchant = new Merchant();
         $data['merchant_no'] = BaseData::makeMerchantNo($data['user_id']);
         $data['api_key'] = BaseData::makeKeyMd5($data['merchant_no']);
-        $data['agent_rate_in'] = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
-        $data['agent_rate_out'] = $data['agent_user_id'] ? $data['agent_rate_out'] : 0;
+        if ($data['agent_rate_in'] ?? 0 and $data['agent_rate_out'] ?? 0) {
+            $data['agent_rate_in'] = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
+            $data['agent_rate_out'] = $data['agent_user_id'] ? $data['agent_rate_out'] : 0;
+        }
         $result = $merchant->validate(
             [
                 'user_id' => 'require|chsDash',
@@ -54,13 +56,13 @@ class MchService
                 'agent_user_id' => 'number',
                 'agent_rate_in' => 'float',
                 'agent_rate_out' => 'float',
-                'product_type_id' => 'require|number',
-                'product_name' => 'require|chsDash|unique:merchant',
-                'pay_way_id' => 'require|number',
-                'coins_in' => 'require|array',
-                'fee_rate_in' => 'require|float',
-                'coins_out' => 'require|array',
-                'fee_rate_out' => 'require|float'
+                'product_type_id' => 'number',
+                'product_name' => 'chsDash',
+                'pay_way_id' => 'number',
+                'coins_in' => 'array',
+                'fee_rate_in' => 'float',
+                'coins_out' => 'array',
+                'fee_rate_out' => 'float'
             ]
         )->save($data);
         if (false === $result) {

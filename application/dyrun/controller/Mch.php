@@ -49,14 +49,14 @@ class Mch extends Api
             'agent_user_id' => 'number',
             'agent_rate_in' => 'float|between:0,10',
             'agent_rate_out' => 'float|between:0,10',
-            'product_type_id' => 'require|number',
-            'product_name' => 'require|chsDash|unique:merchant',
-            'pay_way_id' => 'require|number',
-            'coins_in' => 'require|array',
-            'fee_rate_in' => 'require|float|between:0,100',
-            'coins_out' => 'require|array',
-            'fee_rate_out' => 'require|float|between:0,100',
-            'deposit_rate' => 'require|float|between:0,100',
+            'product_type_id' => 'number',
+            'product_name' => 'chsDash',
+            'pay_way_id' => 'number',
+            'coins_in' => 'array',
+            'fee_rate_in' => 'float|between:0,100',
+            'coins_out' => 'array',
+            'fee_rate_out' => 'float|between:0,100',
+            'deposit_rate' => 'float|between:0,100',
         ]);
         $input = $request->post();
         if (!$validate->check($input)) {
@@ -71,21 +71,21 @@ class Mch extends Api
                 $this->error($this->NOT_EXISTS_MODEL_MSG('country:' . $countrys));
             }
         }
-        foreach ($input['coins_in'] as $countrys) {
+        foreach ($input['coins_in'] ?? [] as $countrys) {
             if (!BaseData::isValueExistsModel(new SysCountryCoinsView(), 'currency_id', $countrys)) {
                 $this->error($this->NOT_EXISTS_MODEL_MSG('country:' . $countrys));
             }
         }
-        foreach ($input['coins_out'] as $countrys) {
+        foreach ($input['coins_out'] ?? [] as $countrys) {
             if (!BaseData::isValueExistsModel(new SysCountryCoinsView(), 'currency_id', $countrys)) {
                 $this->error($this->NOT_EXISTS_MODEL_MSG('country:' . $countrys));
             }
         }
-        if (!BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('product_type_id'))) {
-            $this->error($this->NOT_EXISTS_MODEL_MSG('agent_user_id'));
+        if ($request->post('product_type_id') and !BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('product_type_id'))) {
+            $this->error($this->NOT_EXISTS_MODEL_MSG('product_type_id'));
         }
-        if (!BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('pay_way_id'))) {
-            $this->error($this->NOT_EXISTS_MODEL_MSG('agent_user_id'));
+        if ($request->post('pay_way_id') and !BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('pay_way_id'))) {
+            $this->error($this->NOT_EXISTS_MODEL_MSG('pay_way_id'));
         }
         if ($request->post('agent_user_id') and !BaseData::isValueExistsModel(new User(), 'id', $request->post('agent_user_id'))) {
             $this->error($this->NOT_EXISTS_MODEL_MSG('agent_user_id'));
