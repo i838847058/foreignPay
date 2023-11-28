@@ -2,13 +2,16 @@
 
 namespace app\dyrun\controller;
 
+use app\admin\library\Auth;
 use app\common\controller\Api;
+use app\common\model\Merchant;
 use app\common\model\SysCountryCoinsView;
 use app\common\model\SysOption;
 use app\common\model\SysOptionValue;
 use app\common\model\User;
 use app\dyrun\service\BaseData;
 use app\dyrun\service\MchService;
+use fast\Random;
 use think\Exception;
 use think\exception\DbException;
 use think\Request;
@@ -19,7 +22,7 @@ use think\Validate;
  */
 class Mch extends Api
 {
-    protected $noNeedLogin = ['searchAccount', 'createAccount', 'createMch', 'getAccountList'];
+    protected $noNeedLogin = ['searchAccount', 'createAccount', 'removeAccount', 'createMch', 'getAccountList', 'changeAccountPassword'];
     protected $noNeedRight = '*';
 
 
@@ -83,6 +86,51 @@ class Mch extends Api
         $service = new MchService();
         $infos = $service->newMchOne($request->post());
         $this->success(__('Sign up successful'), $infos);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function removeAccount(Request $request)
+    {
+        $validate = new Validate([
+            'user_id' => 'require|number',
+        ]);
+        if (!$validate->check($request->post())) {
+            $this->error($validate->getError());
+        }
+        // 判断是否存在数据表
+        if (!BaseData::isValueExistsModel(new User(), 'id', $request->post('user_id'))) {
+            $this->error($this->NOT_EXISTS_MODEL_MSG('user_id'));
+        }
+        // 检查商户号
+        if (($count = Merchant::where('user_id', $request->post('user_id'))->count()) > 0) {
+            $this->error('merchant need remove first.', ['mch_count' => $count]);
+        }
+        User::get($request->post('user_id'))->delete();
+        $this->success(__('remove Account successful'));
+    }
+
+    public function changeAccountPassword(Request $request)
+    {
+        $validate = new Validate([
+            'user_id' => 'require|number',
+            'password' => 'require|chsDash|min:6|max:50',
+        ]);
+        if (!$validate->check($request->post())) {
+            $this->error($validate->getError());
+        }
+        // 判断是否存在数据表
+        if (!BaseData::isValueExistsModel(new User(), 'id', $request->post('user_id'))) {
+            $this->error($this->NOT_EXISTS_MODEL_MSG('user_id'));
+        }
+        // 获取用户
+        $user = User::get($request->post('user_id'));
+        $authService = new Auth();
+        $salt = Random::alnum();
+        $password = $authService->getEncryptPassword($request->post('password'), $salt);
+        $user->save(['loginfailure' => 0, 'password' => $password, 'salt' => $salt]);
+        $this->success(__('change Account Password successful'));
     }
 
     public function getAccountList(Request $request)
