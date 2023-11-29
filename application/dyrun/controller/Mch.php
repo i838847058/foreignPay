@@ -21,7 +21,7 @@ use think\Validate;
  */
 class Mch extends Api
 {
-    protected $noNeedLogin = ['changeMchInfo','searchAccount', 'getMchList', 'createAccount', 'changeAccountMchStatus', 'createMch', 'getAccountList', 'changeAccountPassword'];
+    protected $noNeedLogin = ['updateMchInfo', 'searchAccount', 'getMchList', 'createAccount', 'changeAccountMchStatus', 'createMch', 'getAccountList', 'changeAccountPassword'];
     protected $noNeedRight = '*';
 
     public function getMchList(Request $request)
@@ -39,15 +39,29 @@ class Mch extends Api
         $this->success(__('get Mch List successful'), $list);
     }
 
-    public function changeMchInfo(Request $request)
+    public function updateMchInfo(Request $request)
     {
         $validate = new Validate([
+            'id' => 'require|number',
             'key' => 'require',
             'value' => 'require',
         ]);
-        if (!$validate->check($request->get())) {
+        $post = $request->post();
+        if (!$validate->check($post)) {
             $this->error($validate->getError());
         }
+        // 判断是否存在数据表
+        if (!BaseData::isValueExistsModel(new Merchant(), 'id', $post['id'])) {
+            $this->error($this->NOT_EXISTS_MODEL_MSG('id'));
+        }
+        if (!$mch = Merchant::get($post['id'])) {
+            $this->error($this->NOT_EXISTS_MODEL_MSG('id'));
+        }
+        $service = new MchService();
+        if ($service->updateMchUserInfo($mch, $post['key'], $post['value'])) {
+            $this->success(__('update Mch Info successful'));
+        }
+        $this->error($validate->getError());
     }
 
     public function createMch(Request $request)

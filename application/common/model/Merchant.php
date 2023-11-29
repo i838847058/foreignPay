@@ -6,6 +6,23 @@ use think\Model;
 
 class Merchant extends Model
 {
+    const UPDATE_FIELD = [
+        'user_id',
+        'countrys',
+        'agent_id',
+        'agent_rate_in',
+        'agent_rate_out',
+        'product_type_id',
+        'product_name',
+        'pay_way_id',
+        'coins_in',
+        'fee_rate_in',
+        'coins_out',
+        'fee_rate_out',
+        'deposit_rate',
+        'status'
+    ];
+
     /**
      * @var string[]
      */

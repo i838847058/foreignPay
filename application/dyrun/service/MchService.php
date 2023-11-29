@@ -64,25 +64,23 @@ class MchService
             $data['agent_rate_in'] = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
             $data['agent_rate_out'] = $data['agent_user_id'] ? $data['agent_rate_out'] : 0;
         }
-        $result = $merchant->validate(
-            [
-                'user_id' => 'require|chsDash',
-                'merchant_name' => 'require|chsDash|unique:merchant',
-                'merchant_type' => 'require|number|in:1,2',
-                'merchant_no' => 'require|number|unique:merchant',
-                'countrys' => 'require|array',
-                'agent_user_id' => 'number',
-                'agent_rate_in' => 'float',
-                'agent_rate_out' => 'float',
-                'product_type_id' => 'number',
-                'product_name' => 'chsDash',
-                'pay_way_id' => 'number',
-                'coins_in' => 'array',
-                'fee_rate_in' => 'float',
-                'coins_out' => 'array',
-                'fee_rate_out' => 'float'
-            ]
-        )->save($data);
+        $result = $merchant->validate([
+            'user_id' => 'require|chsDash',
+            'merchant_name' => 'require|chsDash|unique:merchant',
+            'merchant_type' => 'require|number|in:1,2',
+            'merchant_no' => 'require|number|unique:merchant',
+            'countrys' => 'require|array',
+            'agent_user_id' => 'number',
+            'agent_rate_in' => 'float',
+            'agent_rate_out' => 'float',
+            'product_type_id' => 'number',
+            'product_name' => 'chsDash',
+            'pay_way_id' => 'number',
+            'coins_in' => 'array',
+            'fee_rate_in' => 'float',
+            'coins_out' => 'array',
+            'fee_rate_out' => 'float'
+        ])->save($data);
         if (false === $result) {
             // 验证失败 输出错误信息
             throw new Exception($merchant->getError());
@@ -112,7 +110,6 @@ class MchService
                 'page' => $page
             ]);;
         $data->each(function ($item) {
-            unset($item->id);
             unset($item->api_key);
         });
         return $data;
@@ -120,13 +117,30 @@ class MchService
 
     /**
      * @param Merchant $merchant
-     * @param $key
+     * @param string $key
      * @param $value
      * @return bool
      */
-    public function changeMchUserInfo(Merchant $merchant, $key, $value): bool
+    public function updateMchUserInfo(Merchant $merchant, string $key, $value): bool
     {
-        if ($merchant->id and $merchant->update([
+        if (in_array($key, Merchant::UPDATE_FIELD) and $merchant->id ?? 0 and
+            $merchant->validate([
+                'user_id' => 'require|chsDash',
+                'merchant_name' => 'require|chsDash|unique:merchant',
+                'merchant_type' => 'require|number|in:1,2',
+                'merchant_no' => 'require|number|unique:merchant',
+                'countrys' => 'require|array',
+                'agent_user_id' => 'number',
+                'agent_rate_in' => 'float',
+                'agent_rate_out' => 'float',
+                'product_type_id' => 'number',
+                'product_name' => 'chsDash',
+                'pay_way_id' => 'number',
+                'coins_in' => 'array',
+                'fee_rate_in' => 'float',
+                'coins_out' => 'array',
+                'fee_rate_out' => 'float'
+            ])->save([
                 $key => $value
             ])) {
             return true;
