@@ -139,6 +139,15 @@ class Merchant extends BaseModel
 
     /**
      * @param $value
+     * @return false|string
+     */
+    public function getCheckTimeAttr($value)
+    {
+        return $value == 0 ? 0 : date('Y-m-d H:i:s', $value);
+    }
+
+    /**
+     * @param $value
      * @return string
      */
     public function setCoinsOutAttr($value): string

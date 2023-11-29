@@ -12,7 +12,7 @@ class SysOptionValue extends Model
 
     public static function getValue($id)
     {
-        return self::get($id)->value('value');
+        return self::where('id', $id)->value('value');
     }
 
 }

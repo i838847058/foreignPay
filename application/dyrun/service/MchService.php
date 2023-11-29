@@ -117,6 +117,8 @@ class MchService
             $item->countrys_text = mb_substr($countrys, 0, -1);
             $item->coins_in_text = mb_substr($coins_in, 0, -1);
             $item->coins_out_text = mb_substr($coins_out, 0, -1);
+            $item->product_type_id_text = SysOptionValue::getValue($item->product_type_id);
+            $item->pay_way_id_text = SysOptionValue::getValue($item->pay_way_id);
             unset($item->api_key);
         });
         return $data;
