@@ -51,7 +51,7 @@ class MchService
      */
     public function getMchNoList(string $text, int $user_id = 0)
     {
-        return Merchant::field('id,merchant_no,merchant_name')->select(function ($query) use ($user_id, $text) {
+        return Merchant::select(function ($query) use ($user_id, $text) {
             $query->where('status', 1)->where('merchant_name', 'like', $text . '%');
             if ($user_id != 0) {
                 $query->where('user_id', $user_id);

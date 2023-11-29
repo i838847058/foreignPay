@@ -5,6 +5,7 @@ namespace app\dyrun\controller;
 use app\common\controller\Api;
 use app\dyrun\model\SysChannel as SysChannelModel;
 use think\Loader;
+use app\dyrun\service\SysChannelService;
 
 /**
  * 渠道管理
@@ -45,7 +46,8 @@ class SysChannel extends Api
     {
         $params = $this->request->get();
         try {
-            $datas = SysChannelModel::getSysChannelList($params);
+            $SysChannelService = new SysChannelService();
+            $datas             = $SysChannelService->getSysChannelList($params);
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
@@ -103,7 +105,7 @@ class SysChannel extends Api
         }
         try {
             $params = $this->getParams($params);
-            $ret    = SysChannelModel::insert($params);
+            $ret    = (new \app\dyrun\model\SysChannel)->insert($params);
             if (!$ret) {
                 exception('添加渠道失败', 400);
             }
@@ -211,7 +213,7 @@ class SysChannel extends Api
             $this->error($validate->getError());
         }
         try {
-            $ret = SysChannelModel::update($params, [
+            $ret = (new \app\dyrun\model\SysChannel)->allowField(true)->save($params, [
                 'id' => $params['id']
             ]);
             if (!$ret) {
