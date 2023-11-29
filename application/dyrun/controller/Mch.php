@@ -69,7 +69,6 @@ class Mch extends Api
         $validate = new Validate([
             'user_id' => 'require|chsDash',
             'merchant_name' => $request->post('merchant_name', 0) ? 'require|chsDash' : 'require|chsDash|unique:merchant',
-            'merchant_type' => 'require|number|in:1,2',
             'countrys' => 'require|array',
             'agent_user_id' => 'number',
             'agent_rate_in' => 'float|between:0,10',
