@@ -94,21 +94,14 @@ class MchService
      * @return Paginator
      * @throws DbException
      */
-    public function getMchList(int $rows = 20, int $page = 1, int $mch_type): \think\Paginator
+    public function getMchList(int $rows = 20, int $page = 1): \think\Paginator
     {
         $data = Merchant::order('id', 'desc')
-            ->where(function ($query) use ($mch_type) {
-                if ($mch_type != 0) {
-                    $query->where('merchant_type', $mch_type);
-                }
-            })
             ->paginate($rows, false, [
                 'page' => $page
             ]);;
         $data->each(function ($item) {
-            if ($item->agent_id) {
-                $item->agent_id_text = User::get($item->agent_id)->value('username');
-            }
+            $item->agent_user_text = $item->agent_user_id ? User::get($item->agent_user_id)->value('username') : null;
             $countrys = '';
             $coins_in = '';
             $coins_out = '';

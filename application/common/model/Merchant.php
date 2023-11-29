@@ -8,7 +8,7 @@ class Merchant extends BaseModel
     const UPDATE_FIELD = [
         'user_id',
         'countrys',
-        'agent_id',
+        'agent_user_id',
         'agent_rate_in',
         'agent_rate_out',
         'product_type_id',
@@ -26,10 +26,9 @@ class Merchant extends BaseModel
     const VALIDATE = [
         'user_id' => 'require|chsDash',
         'merchant_name' => 'require|chsDash|unique:merchant',
-        'merchant_type' => 'require|number|in:1,2',
         'merchant_no' => 'require|number|unique:merchant',
         'countrys' => 'require|array',
-        'agent_user_id' => 'number',
+        'agent_mch_id' => 'number',
         'agent_rate_in' => 'float',
         'agent_rate_out' => 'float',
         'product_type_id' => 'number',
@@ -47,7 +46,7 @@ class Merchant extends BaseModel
     /**
      * @var string[]
      */
-    protected $field = ['user_id', 'merchant_name', 'countrys', 'merchant_no', 'merchant_type', 'agent_id', 'check_user_id', 'check_time', 'agent_rate_in', 'agent_rate_out', 'product_type_id', 'product_name', 'pay_way_id', 'coins_in', 'fee_rate_in', 'coins_out', 'fee_rate_out', 'is_usdt_out', 'deposit_rate','api_key', 'status'];
+    protected $field = ['user_id', 'merchant_name', 'countrys', 'merchant_no', 'agent_user_id', 'agent_id', 'check_user_id', 'check_time', 'agent_rate_in', 'agent_rate_out', 'product_type_id', 'product_name', 'pay_way_id', 'coins_in', 'fee_rate_in', 'coins_out', 'fee_rate_out', 'is_usdt_out', 'deposit_rate', 'api_key', 'status'];
 
     /**
      * @param $value

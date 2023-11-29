@@ -29,13 +29,12 @@ class Mch extends Api
         $validate = new Validate([
             'rows' => 'require|number',
             'page' => 'require|number',
-            'merchant_type' => 'number|in:1,2',
         ]);
         if (!$validate->check($request->get())) {
             $this->error($validate->getError());
         }
         $service = new MchService();
-        $list = $service->getMchList($request->get('rows'), $request->get('page'), $request->get('merchant_type', 0));
+        $list = $service->getMchList($request->get('rows'), $request->get('page'));
         $this->success(__('get Mch List successful'), $list);
     }
 
@@ -70,7 +69,6 @@ class Mch extends Api
         $validate = new Validate([
             'user_id' => 'require|chsDash',
             'merchant_name' => $request->post('merchant_name', 0) ? 'require|chsDash' : 'require|chsDash|unique:merchant',
-            'merchant_type' => 'require|number|in:1,2',
             'countrys' => 'require|array',
             'agent_user_id' => 'number',
             'agent_rate_in' => 'float|between:0,10',
