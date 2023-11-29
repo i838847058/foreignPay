@@ -78,7 +78,7 @@ class MchService
             // 验证失败 输出错误信息
             throw new Exception($merchant->getError());
         }
-        $data = Merchant::get($merchant->id);
+        $data = Merchant::where('id', $$merchant->id);
         unset($data->api_key);
         return $data;
     }
@@ -104,17 +104,17 @@ class MchService
         $data->each(function ($item) {
             $item->countrys_text = '';
             foreach ($item->countrys as $id) {
-                $item->countrys_text .= SysCountryCoinsView::get($id)->value('country_name') . '，';
+                $item->countrys_text .= SysCountryCoinsView::where('id', $id)->value('country_name') . '，';
             }
             $item->countrys_text = mb_substr($item->countrys_text, 0, -1);
             $item->coins_in_text = '';
             foreach ($item->coins_in as $id) {
-                $item->coins_in_text .= SysCountryCoinsView::get($id)->value('currency_name') . '，';
+                $item->coins_in_text .= SysCountryCoinsView::where('id', $id)->value('currency_name') . '，';
             }
             $item->coins_in_text = mb_substr($item->coins_in_text, 0, -1);
             $item->coins_out_text = '';
             foreach ($item->coins_out as $id) {
-                $item->coins_out_text .= SysCountryCoinsView::get($id)->value('currency_name') . '，';
+                $item->coins_out_text .= SysCountryCoinsView::where('id', $id)->value('currency_name') . '，';
             }
             $item->coins_out_text = mb_substr($item->coins_out_text, 0, -1);
             unset($item->api_key);
