@@ -23,6 +23,24 @@ class Merchant extends Model
         'status'
     ];
 
+    const VALIDATE = [
+        'user_id' => 'require|chsDash',
+        'merchant_name' => 'require|chsDash|unique:merchant',
+        'merchant_type' => 'require|number|in:1,2',
+        'merchant_no' => 'require|number|unique:merchant',
+        'countrys' => 'require|array',
+        'agent_user_id' => 'number',
+        'agent_rate_in' => 'float',
+        'agent_rate_out' => 'float',
+        'product_type_id' => 'number',
+        'product_name' => 'chsDash',
+        'pay_way_id' => 'number',
+        'coins_in' => 'array',
+        'fee_rate_in' => 'float',
+        'coins_out' => 'array',
+        'fee_rate_out' => 'float'
+    ];
+
     /**
      * @var string[]
      */
