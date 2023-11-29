@@ -29,13 +29,12 @@ class Mch extends Api
         $validate = new Validate([
             'rows' => 'require|number',
             'page' => 'require|number',
-            'merchant_type' => 'number|in:1,2',
         ]);
         if (!$validate->check($request->get())) {
             $this->error($validate->getError());
         }
         $service = new MchService();
-        $list = $service->getMchList($request->get('rows'), $request->get('page'), $request->get('merchant_type', 0));
+        $list = $service->getMchList($request->get('rows'), $request->get('page'));
         $this->success(__('get Mch List successful'), $list);
     }
 
