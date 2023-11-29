@@ -106,20 +106,20 @@ class Mch extends Api
                 $this->error($this->NOT_EXISTS_MODEL_MSG('country:' . $countrys));
             }
         }
-        if ($request->post('product_type_id') and !BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('product_type_id'))) {
+        if (!$request->post('id') and $request->post('product_type_id') and !BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('product_type_id'))) {
             $this->error($this->NOT_EXISTS_MODEL_MSG('product_type_id'));
         }
-        if ($request->post('pay_way_id') and !BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('pay_way_id'))) {
+        if (!$request->post('id') and $request->post('pay_way_id') and !BaseData::isValueExistsModel(new SysOptionValue(), 'id', $request->post('pay_way_id'))) {
             $this->error($this->NOT_EXISTS_MODEL_MSG('pay_way_id'));
         }
-        if ($request->post('agent_user_id') and !BaseData::isValueExistsModel(new User(), 'id', $request->post('agent_user_id'))) {
+        if (!$request->post('id') and $request->post('agent_user_id') and !BaseData::isValueExistsModel(new User(), 'id', $request->post('agent_user_id'))) {
             $this->error($this->NOT_EXISTS_MODEL_MSG('agent_user_id'));
         }
         if ($request->post('agent_user_id') and (!$request->post('agent_rate_in') or !$request->post('agent_rate_in'))) {
             $this->error('miss agent_rate_in or agent_rate_out.');
         }
         $service = new MchService();
-        $infos = $service->newMchOne($request->post());
+        $infos = $service->createOrUpdateMchOne($request->post());
         $this->success(__('Sign up successful'), $infos);
     }
 

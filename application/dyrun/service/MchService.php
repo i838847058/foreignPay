@@ -64,7 +64,7 @@ class MchService
      * @return Merchant
      * @throws Exception
      */
-    public function newMchOne(array $data): Merchant
+    public function createOrUpdateMchOne(array $data): Merchant
     {
         $merchant = new Merchant();
         $data['merchant_no'] = BaseData::makeMerchantNo($data['user_id']);
@@ -73,12 +73,16 @@ class MchService
             $data['agent_rate_in'] = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
             $data['agent_rate_out'] = $data['agent_user_id'] ? $data['agent_rate_out'] : 0;
         }
-        $result = $merchant->validate(Merchant::VALIDATE)->save($data);
+        if ($id = ($data['id'] ?? 0)) {
+            $result = $merchant->validate(Merchant::VALIDATE)->save($data, ['id' => $id]);
+        } else {
+            $result = $merchant->validate(Merchant::VALIDATE)->save($data);
+        }
         if (false === $result) {
             // 验证失败 输出错误信息
             throw new Exception($merchant->getError());
         }
-        $data = Merchant::get($merchant->id);
+        $data = Merchant::get($merchant->id ?? $data['id']);
         unset($data->api_key);
         return $data;
     }
@@ -102,6 +106,9 @@ class MchService
                 'page' => $page
             ]);;
         $data->each(function ($item) {
+            if ($item->agent_id) {
+                $item->agent_id_text = User::get($item->agent_id)->value('username');
+            }
             $countrys = '';
             $coins_in = '';
             $coins_out = '';
