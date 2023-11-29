@@ -210,14 +210,15 @@ class Mch extends Api
     public function searchAccount(Request $request)
     {
         $validate = new Validate([
-            'text' => 'require|chsDash',
+            'rows' => 'number',
+            'text' => 'chsDash',
             'role' => 'in:0,1,2',
         ]);
         if (!$validate->check($request->get())) {
             $this->error($validate->getError());
         }
         $service = new MchService();
-        $data = $service->getMchAccountList($request->get('text'), $request->get('role', 0));
+        $data = $service->getMchAccountList($request->get('text', ''), $request->get('rows', 50), $request->get('role', 0));
         $this->success(__('Searching successful'), $data);
     }
 }

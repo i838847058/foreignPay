@@ -14,20 +14,26 @@ use think\Paginator;
 class MchService
 {
     /**
-     * @param string $account_text
+     * @param string $text
+     * @param int $rows
      * @param int $role
      * @return bool|\PDOStatement|string|Collection
      * @throws DataNotFoundException
      * @throws DbException
      * @throws ModelNotFoundException
      */
-    public function getMchAccountList(string $account_text, int $role = 0)
+    public function getMchAccountList(string $text, int $rows, int $role = 0)
     {
-        return User::field('id,username')->select(function ($query) use ($role, $account_text) {
+        return User::field('id,username')->select(function ($query) use ($rows, $role, $text) {
             $query->where('status', 'normal');
-            $query->where('username', 'like', $account_text . '%');
+            if($text){
+                $query->where('username', 'like', $text . '%');
+            }
             if ($role != 0) {
                 $query->where('role_id', $role);
+            }
+            if ($rows != 0 and $rows > 0) {
+                $query->limit($rows);
             }
         });
     }
