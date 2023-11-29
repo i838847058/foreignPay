@@ -4,6 +4,8 @@ namespace app\dyrun\service;
 
 use app\admin\model\User;
 use app\common\model\Merchant;
+use app\common\model\SysOption;
+use app\common\model\SysOptionValue;
 use think\Collection;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\ModelNotFoundException;
@@ -99,6 +101,9 @@ class MchService
                 'page' => $page
             ]);;
         $data->each(function ($item) {
+            foreach ($item->countrys as $countryId) {
+                $item->countrys_text .= SysOptionValue::getValue($countryId);
+            }
             unset($item->api_key);
         });
         return $data;
@@ -114,7 +119,7 @@ class MchService
     {
         if (in_array($key, Merchant::UPDATE_FIELD) and $merchant->id ?? 0 and
             $merchant->validate([
-                $key => Merchant::VALIDATE[$key]
+                $key => Merchant::VALIDATE[$key] ?? ''
             ])->save([
                 $key => $value
             ])) {

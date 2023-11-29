@@ -38,8 +38,10 @@ class Merchant extends BaseModel
         'coins_in' => 'array',
         'fee_rate_in' => 'float',
         'coins_out' => 'array',
+        'fee_rate_out' => 'float',
         'is_usdt_out' => 'number',
-        'fee_rate_out' => 'float'
+        'deposit_rate' => 'float',
+        'status' => 'in:0,1'
     ];
 
     /**
