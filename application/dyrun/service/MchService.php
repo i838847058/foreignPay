@@ -4,6 +4,7 @@ namespace app\dyrun\service;
 
 use app\admin\model\User;
 use app\common\model\Merchant;
+use app\common\model\SysCountryCoinsView;
 use app\common\model\SysOption;
 use app\common\model\SysOptionValue;
 use think\Collection;
@@ -101,9 +102,21 @@ class MchService
                 'page' => $page
             ]);;
         $data->each(function ($item) {
-            foreach ($item->countrys as $countryId) {
-                $item->countrys_text .= SysOptionValue::getValue($countryId);
+            $item->countrys_text = '';
+            foreach ($item->countrys as $id) {
+                $item->countrys_text .= SysCountryCoinsView::get($id)->value('country_name') . '，';
             }
+            $item->countrys_text = mb_substr($item->countrys_text, 0, -1);
+            $item->coins_in_text = '';
+            foreach ($item->coins_in as $id) {
+                $item->coins_in_text .= SysCountryCoinsView::get($id)->value('currency_name') . '，';
+            }
+            $item->coins_in_text = mb_substr($item->coins_in_text, 0, -1);
+            $item->coins_out_text = '';
+            foreach ($item->coins_out as $id) {
+                $item->coins_out_text .= SysCountryCoinsView::get($id)->value('currency_name') . '，';
+            }
+            $item->coins_out_text = mb_substr($item->coins_out_text, 0, -1);
             unset($item->api_key);
         });
         return $data;
