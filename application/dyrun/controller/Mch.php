@@ -21,7 +21,7 @@ use think\Validate;
  */
 class Mch extends Api
 {
-    protected $noNeedLogin = ['searchAccount', 'getMchList', 'createAccount', 'changeAccountMchStatus', 'createMch', 'getAccountList', 'changeAccountPassword'];
+    protected $noNeedLogin = ['changeMchInfo','searchAccount', 'getMchList', 'createAccount', 'changeAccountMchStatus', 'createMch', 'getAccountList', 'changeAccountPassword'];
     protected $noNeedRight = '*';
 
     public function getMchList(Request $request)
@@ -37,6 +37,17 @@ class Mch extends Api
         $service = new MchService();
         $list = $service->getMchList($request->get('rows'), $request->get('page'), $request->get('merchant_type', 0));
         $this->success(__('get Mch List successful'), $list);
+    }
+
+    public function changeMchInfo(Request $request)
+    {
+        $validate = new Validate([
+            'key' => 'require',
+            'value' => 'require',
+        ]);
+        if (!$validate->check($request->get())) {
+            $this->error($validate->getError());
+        }
     }
 
     public function createMch(Request $request)

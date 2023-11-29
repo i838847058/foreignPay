@@ -33,6 +33,24 @@ class MchService
     }
 
     /**
+     * @param string $text
+     * @param int $user_id
+     * @return bool|\PDOStatement|string|Collection
+     * @throws DataNotFoundException
+     * @throws DbException
+     * @throws ModelNotFoundException
+     */
+    public function getMchNoList(string $text, int $user_id = 0)
+    {
+        return Merchant::field('id,merchant_no,merchant_name')->select(function ($query) use ($user_id, $text) {
+            $query->where('status', 1)->where('merchant_name', 'like', $text . '%');
+            if ($user_id != 0) {
+                $query->where('user_id', $user_id);
+            }
+        });
+    }
+
+    /**
      * @param array $data
      * @return Merchant
      * @throws Exception
@@ -98,5 +116,21 @@ class MchService
             unset($item->api_key);
         });
         return $data;
+    }
+
+    /**
+     * @param Merchant $merchant
+     * @param $key
+     * @param $value
+     * @return bool
+     */
+    public function changeMchUserInfo(Merchant $merchant, $key, $value): bool
+    {
+        if ($merchant->id and $merchant->update([
+                $key => $value
+            ])) {
+            return true;
+        }
+        return false;
     }
 }
