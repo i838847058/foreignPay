@@ -11,11 +11,13 @@ class BaseModel extends Model
      */
     public function convertToFloat(&$array)
     {
-        foreach ($array as &$value) {
-            if (is_array($value)) {
-                $this->convertToFloat($value);
-            } elseif (is_numeric($value)) {
-                $value = (float)$value;
+        if (!empty($array)) {
+            foreach ($array as &$value) {
+                if (is_array($value)) {
+                    $this->convertToFloat($value);
+                } elseif (is_numeric($value)) {
+                    $value = (float)$value;
+                }
             }
         }
     }

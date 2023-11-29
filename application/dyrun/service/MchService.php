@@ -102,21 +102,21 @@ class MchService
                 'page' => $page
             ]);;
         $data->each(function ($item) {
-            $item->countrys_text = '';
+            $countrys = '';
+            $coins_in = '';
+            $coins_out = '';
             foreach ($item->countrys as $id) {
-                $item->countrys_text .= SysCountryCoinsView::where('id', $id)->value('country_name') . '，';
+                $countrys .= SysCountryCoinsView::where('country_id', $id)->value('country_name') . '，';
             }
-            $item->countrys_text = mb_substr($item->countrys_text, 0, -1);
-            $item->coins_in_text = '';
             foreach ($item->coins_in as $id) {
-                $item->coins_in_text .= SysCountryCoinsView::where('id', $id)->value('currency_name') . '，';
+                $coins_in .= SysCountryCoinsView::where('currency_id', $id)->value('currency_name') . '，';
             }
-            $item->coins_in_text = mb_substr($item->coins_in_text, 0, -1);
-            $item->coins_out_text = '';
             foreach ($item->coins_out as $id) {
-                $item->coins_out_text .= SysCountryCoinsView::where('id', $id)->value('currency_name') . '，';
+                $coins_out .= SysCountryCoinsView::where('currency_id', $id)->value('currency_name') . '，';
             }
-            $item->coins_out_text = mb_substr($item->coins_out_text, 0, -1);
+            $item->countrys_text = mb_substr($countrys, 0, -1);
+            $item->coins_in_text = mb_substr($coins_in, 0, -1);
+            $item->coins_out_text = mb_substr($coins_out, 0, -1);
             unset($item->api_key);
         });
         return $data;
