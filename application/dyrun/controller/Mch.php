@@ -115,7 +115,7 @@ class Mch extends Api
         if ($request->post('agent_user_id') and !BaseData::isValueExistsModel(new User(), 'id', $request->post('agent_user_id'))) {
             $this->error($this->NOT_EXISTS_MODEL_MSG('agent_user_id'));
         }
-        if ($request->post('agent_user_id') and (!$request->post('agent_rate_in') or !!$request->post('agent_rate_in'))) {
+        if ($request->post('agent_user_id') and (!$request->post('agent_rate_in') or !$request->post('agent_rate_in'))) {
             $this->error('miss agent_rate_in or agent_rate_out.');
         }
         $service = new MchService();

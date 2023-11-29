@@ -47,6 +47,19 @@ class Option extends Api
         $this->success('get success', $list);
     }
 
+    /**
+     * 获取可用货币
+     * @ApiSummary  (dyrun/option/getCountryCurrency)
+     * @ApiMethod (GET)
+     * @ApiParams   (name="country_id", type="string", required=true, description="127,29国家ID")
+     * @ApiReturn ({
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':{
+    },
+    })
+     */
     public function getCountryCurrency(Request $request)
     {
         $validate = new Validate([
@@ -61,6 +74,18 @@ class Option extends Api
     }
 
 
+    /**
+     * 获取可用国家
+     * @ApiSummary  (dyrun/option/getCountrys)
+     * @ApiMethod (GET)
+     * @ApiReturn ({
+    'code':'1',
+    'msg':'成功',
+    'time':'1700547489',
+    'data':{
+    },
+    })
+     */
     public function getCountrys(Request $request)
     {
         $service = new BaseData();
