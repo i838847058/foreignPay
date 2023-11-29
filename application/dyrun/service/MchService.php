@@ -78,7 +78,7 @@ class MchService
             // 验证失败 输出错误信息
             throw new Exception($merchant->getError());
         }
-        $data = Merchant::where('id', $$merchant->id);
+        $data = Merchant::get($merchant->id);
         unset($data->api_key);
         return $data;
     }
