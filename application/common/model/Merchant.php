@@ -47,7 +47,7 @@ class Merchant extends BaseModel
     /**
      * @var string[]
      */
-    protected $field = ['user_id', 'merchant_name', 'countrys', 'merchant_no', 'merchant_type', 'agent_id', 'check_user_id', 'check_time', 'agent_rate_in', 'agent_rate_out', 'product_type_id', 'product_name', 'pay_way_id', 'coins_in', 'fee_rate_in', 'coins_out', 'fee_rate_out', 'is_usdt_out', 'api_key', 'status'];
+    protected $field = ['user_id', 'merchant_name', 'countrys', 'merchant_no', 'merchant_type', 'agent_id', 'check_user_id', 'check_time', 'agent_rate_in', 'agent_rate_out', 'product_type_id', 'product_name', 'pay_way_id', 'coins_in', 'fee_rate_in', 'coins_out', 'fee_rate_out', 'is_usdt_out', 'deposit_rate','api_key', 'status'];
 
     /**
      * @param $value
