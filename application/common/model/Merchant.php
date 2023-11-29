@@ -2,9 +2,8 @@
 
 namespace app\common\model;
 
-use think\Model;
 
-class Merchant extends Model
+class Merchant extends BaseModel
 {
     const UPDATE_FIELD = [
         'user_id',
@@ -66,6 +65,7 @@ class Merchant extends Model
      */
     public function setCountrysAttr($value): string
     {
+        $this->convertToFloat($value);
         if (is_array($value)) {
             return json_encode($value, JSON_UNESCAPED_UNICODE);
         }
@@ -116,6 +116,7 @@ class Merchant extends Model
      */
     public function setCoinsInAttr($value): string
     {
+        $this->convertToFloat($value);
         if (is_array($value)) {
             return json_encode($value, JSON_UNESCAPED_UNICODE);
         }
@@ -140,6 +141,7 @@ class Merchant extends Model
      */
     public function setCoinsOutAttr($value): string
     {
+        $this->convertToFloat($value);
         if (is_array($value)) {
             return json_encode($value, JSON_UNESCAPED_UNICODE);
         }

@@ -26,7 +26,7 @@ class MchService
     {
         return User::field('id,username')->select(function ($query) use ($rows, $role, $text) {
             $query->where('status', 'normal');
-            if($text){
+            if ($text) {
                 $query->where('username', 'like', $text . '%');
             }
             if ($role != 0) {
@@ -77,7 +77,6 @@ class MchService
         }
         $data = Merchant::get($merchant->id);
         unset($data->api_key);
-        unset($data->id);
         return $data;
     }
 
