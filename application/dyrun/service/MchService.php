@@ -74,7 +74,7 @@ class MchService
             $data['agent_rate_out'] = $data['agent_user_id'] ? $data['agent_rate_out'] : 0;
         }
         if ($id = ($data['id'] ?? 0)) {
-            $result = $merchant->validate(Merchant::VALIDATE)->save($data, ['id' => $id]);
+            $result = $merchant->validate(Merchant::VALIDATE)->update($data, ['id' => $id]);
         } else {
             $result = $merchant->validate(Merchant::VALIDATE)->save($data);
         }
