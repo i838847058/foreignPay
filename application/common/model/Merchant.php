@@ -25,9 +25,9 @@ class Merchant extends BaseModel
 
     const VALIDATE = [
         'user_id' => 'require|chsDash',
-        'merchant_name' => 'require|chsDash|unique:merchant',
+        'merchant_name' => 'require|chsDash',
         'merchant_type' => 'require|number|in:1,2',
-        'merchant_no' => 'require|number|unique:merchant',
+        'merchant_no' => 'require|number',
         'countrys' => 'require|array',
         'agent_user_id' => 'number',
         'agent_rate_in' => 'float',

@@ -66,9 +66,10 @@ class Mch extends Api
 
     public function createMch(Request $request)
     {
+        $input = $request->post();
         $validate = new Validate([
             'user_id' => 'require|chsDash',
-            'merchant_name' => $request->post('merchant_name') ? 'require|chsDash' : 'require|chsDash|unique:merchant',
+            'merchant_name' => $request->post('merchant_name', 0) ? 'require|chsDash' : 'require|chsDash|unique:merchant',
             'merchant_type' => 'require|number|in:1,2',
             'countrys' => 'require|array',
             'agent_user_id' => 'number',
@@ -83,7 +84,6 @@ class Mch extends Api
             'fee_rate_out' => 'float|between:0,100',
             'deposit_rate' => 'float|between:0,100',
         ]);
-        $input = $request->post();
         if (!$validate->check($input)) {
             $this->error($validate->getError());
         }
