@@ -11,7 +11,6 @@ use app\dyrun\service\BaseData;
 class SysChannel extends Model
 {
 
-
     // 开启自动写入时间戳字段
     protected $autoWriteTimestamp = 'int';
     // 定义时间戳字段名
@@ -25,7 +24,7 @@ class SysChannel extends Model
     {
         if ($data['coin_ids']) {
             list($coin_arr, $pay_way_arr) = $this->getBaseOption();
-            $arr = explode(',', $data['coin_ids']);
+            $arr = is_array($data['coin_ids']) ? $data['coin_ids'] : explode(',', $data['coin_ids']);
             foreach ($arr as $v) {
                 $coin_arr_cn[] = $coin_arr[$v];
                 return implode(',', $coin_arr_cn);
@@ -46,13 +45,7 @@ class SysChannel extends Model
 
     protected function getBaseOption()
     {
-        /*// 国家
-        $country_arr  = [];
-        $country_list = $service->getCountrys();
-        foreach ($country_list as $v) {
-            $country_arr[$v['id']] = $v['name'];
-        }*/
-        $base_list = $this->baseDataService->getConfigValue();
+        $base_list = (new BaseData())->getConfigValue();
         // 货币
         $coin_arr = [];
         foreach ($base_list['coin'] as $v) {
@@ -63,20 +56,7 @@ class SysChannel extends Model
         foreach ($base_list['pay_way'] as $v) {
             $pay_way_arr[$v['id']] = $v['value'];
         }
-        /*// 结算周期
-        $billing_arr = [];
-        foreach ($base_list['billing'] as $v) {
-            $billing_arr[$v['id']] = $v['value'];
-        }
-        // 产品类型
-        $product_type_arr = [];
-        foreach ($base_list['product_type'] as $v) {
-            $product_type_arr[$v['id']] = $v['value'];
-        }*/
-        return [
-            'coin_arr'    => $coin_arr,
-            'pay_way_arr' => $pay_way_arr,
-        ];
+        return [$coin_arr, $pay_way_arr];
     }
 
 }

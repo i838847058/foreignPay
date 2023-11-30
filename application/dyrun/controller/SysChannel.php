@@ -216,7 +216,7 @@ class SysChannel extends Api
             $ret = (new \app\dyrun\model\SysChannel)->allowField(true)->save($params, [
                 'id' => $params['id']
             ]);
-            if (!$ret) {
+            if ($ret === false) {
                 exception('更新渠道状态失败，请稍后重试', 400);
             }
         } catch (\Exception $e) {
