@@ -24,7 +24,7 @@ class SysChannel extends Model
     {
         if ($data['coin_ids']) {
             list($coin_arr, $pay_way_arr) = $this->getBaseOption();
-            $arr = explode(',', $data['coin_ids']);
+            $arr = is_array($data['coin_ids']) ? $data['coin_ids'] : explode(',', $data['coin_ids']);
             foreach ($arr as $v) {
                 $coin_arr_cn[] = $coin_arr[$v];
                 return implode(',', $coin_arr_cn);

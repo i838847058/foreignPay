@@ -14,7 +14,7 @@ use think\Loader;
  */
 class SysRun extends Api
 {
-    protected $noNeedLogin = '*';
+    protected $noNeedLogin = '';
     protected $noNeedRight = '*';
     private   $mchService;
     private   $sysChannelService;
