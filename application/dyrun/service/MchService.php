@@ -101,7 +101,7 @@ class MchService
                 if (User::get($userId)) {
                     $query->where('user_id', $userId);
                 }
-                if ($check_state != 999) {
+                if (!empty($check_state) and $check_state != 999) {
                     $query->where('check_state', $check_state);
                 }
             })
