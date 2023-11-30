@@ -94,14 +94,14 @@ class MchService
      * @return Paginator
      * @throws DbException
      */
-    public function getMchList($userId, int $rows = 20, int $page = 1, int $check_state = 999): \think\Paginator
+    public function getMchList($userId, int $rows = 20, int $page = 1, $check_state = 999): \think\Paginator
     {
         $data = Merchant::order('id', 'desc')
             ->where(function ($query) use ($userId, $check_state) {
                 if (User::get($userId)) {
                     $query->where('user_id', $userId);
                 }
-                if ($check_state != 999) {
+                if (!empty($check_state) and $check_state != 999) {
                     $query->where('check_state', $check_state);
                 }
             })

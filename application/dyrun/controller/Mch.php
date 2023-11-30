@@ -31,7 +31,7 @@ class Mch extends Api
             'rows' => 'number',
             'page' => 'number',
             'user_id' => 'number',
-            'check_state' => 'in:-1,0,1',
+            'check_state' => 'in:-1,0,1'
         ]);
         if (!$validate->check($request->get())) {
             $this->error($validate->getError());
