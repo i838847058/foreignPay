@@ -29,7 +29,7 @@ class Mch extends Api
         $validate = new Validate([
             'rows' => 'number',
             'page' => 'number',
-            'user_id' => 'number',
+//            'user_id' => 'number',
         ]);
         if (!$validate->check($request->get())) {
             $this->error($validate->getError());
