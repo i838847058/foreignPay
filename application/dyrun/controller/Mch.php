@@ -35,7 +35,7 @@ class Mch extends Api
             $this->error($validate->getError());
         }
         $service = new MchService();
-        $list = $service->getMchList($request->get('user_id'), $request->get('rows', 20), $request->get('page', 1));
+        $list = $service->getMchList($request->get('user_id', 0), $request->get('rows', 20), $request->get('page', 1));
         $this->success(__('get Mch List successful'), $list);
     }
 
