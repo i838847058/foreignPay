@@ -36,9 +36,11 @@ class SysRunService
         if (!empty($product_name)) {
             $where['m.product_name'] = ['like', "{$product_name}%"];
         }
+        $field = ['r.*','m.merchant_name','c.channel_name','c.channel_num','c.pay_rate','m.fee_rate_in','m.coins_in','m.pay_way_id'];
         $rows = $rows ?? 10;
         $page = $page ?? 0;
         $list = $this->sysRunModel
+            ->field($field)
             ->where($where)
             ->order('r.id', 'desc')
             ->alias('r')
