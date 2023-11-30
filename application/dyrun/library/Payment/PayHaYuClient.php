@@ -2,37 +2,26 @@
 
 namespace app\dyrun\library\Payment;
 
-use GuzzleHttp\Client;
+use app\dyrun\library\HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
-use Psr\Http\Message\ResponseInterface;
 
-/**
- * @property ResponseInterface $clientResponse
- * @property array $jsonRaw
- */
-trait PayHaYuClient
+class PayHaYuClient
 {
-
-    public $httpClient;
-
-    /**
-     * @var ResponseInterface
-     */
-    public $clientResponse;
-
-    public $host = 'https://www.payhayu.com';
-
-    public $method = 'POST';
+    use HttpClient;
 
     /**
-     * @var string[]
+     * @var string
      */
-    public $jsonRaw = [];
-
     private $merchantNo = '6559218556';
 
+    /**
+     * @var string
+     */
     private $PAY_KEY_IN = 'dVptATLGMtIiDaZ2eGvpkw4L5prRXy0I';
 
+    /**
+     * @var string
+     */
     private $PAY_KEY_OUT = 'laKZBIFGgQMTe0z4WagAoZmpGltqpLkY';
 
     /**
@@ -40,12 +29,7 @@ trait PayHaYuClient
      */
     public function __construct(string $host = null)
     {
-        $this->httpClient = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => $host ?: $this->host,
-            // You can set any number of default request options.
-            'timeout' => 5.0,
-        ]);
+        $this->setHttpClient($host ?: $this->host, 5);
     }
 
     /**
@@ -114,9 +98,8 @@ trait PayHaYuClient
     {
         $this->jsonRaw['merchantNo'] = $this->merchantNo;
         $this->jsonRaw['sign'] = $this->getSignKey($this->jsonRaw);
-        $this->clientResponse = $this->httpClient->request($this->method, $uri, [
-            'json' => $this->jsonRaw['sign']
-        ]);
-        return true;
+        return $this->requestClient($uri);
     }
+
+
 }
