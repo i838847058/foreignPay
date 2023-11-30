@@ -225,27 +225,24 @@ class Mch extends Api
     public function setCheckState(Request $request)
     {
         $post = $request->post();
-        if (!is_array($post) and count($post) > 0) {
-            $this->error(__('need array data.'));
+        $validate = new Validate([
+            'ids' => 'require|array',
+            'state' => 'require|in:-1,1',
+            'reason' => 'chsDash|max:200'
+        ]);
+        if (!$validate->check($post)) {
+            $this->error($validate->getError());
         }
-        foreach ($post as $item) {
-            $validate = new Validate([
-                'id' => 'number',
-                'state' => 'in:-1,1',
-                'reason' => 'chsDash|max:200'
-            ]);
-            if (!$validate->check($item)) {
-                $this->error($validate->getError());
-            }
+        foreach ($post['ids'] as $id) {
             // 判断是否存在数据表
-            if (!BaseData::isValueExistsModel(new Merchant(), 'id', $item['id'])) {
+            if (!BaseData::isValueExistsModel(new Merchant(), 'id', $id)) {
                 $this->error($this->NOT_EXISTS_MODEL_MSG('id'));
             }
             if (!$user = $this->auth->getUser()) {
                 $this->error(__('miss check user.'));
             }
             $service = new MchService();
-            if (!$service->updateMchCheckState(Merchant::get($item['id']), $user, $item['state'], $item['reason'])) {
+            if (!$service->updateMchCheckState(Merchant::get($id), $user, $post['state'], $post['reason'])) {
                 $this->error(__('set check state fail'));
             }
         }
