@@ -21,16 +21,33 @@ class SysRunService
     // 列表
     public function getSysRun($params)
     {
-        $where = $params;
-        unset($where['list_rows'], $where['page']);
+        $where          = [];
+        $merchant_where = [];
         extract($params);
+        if (isset($merchant_id)) {
+            $where['merchant_id'] = $merchant_id;
+        }
+        if (isset($sys_channel_id)) {
+            $where['sys_channel_id '] = $sys_channel_id;
+        }
+        // 商户信息表的检索
+        if (isset($product_type_id)) {
+            $merchant_where['product_type_id'] = $product_type_id;
+        }
+        if (isset($product_name)) {
+            $merchant_where['product_name'] = ['like', "{$product_name}%"];
+        }
         $list_rows = $list_rows ?? 10;
         $page      = $page ?? 0;
-        // 查询fp_sys_run列表并关联fp_merchant和fp_sys_channel的数据
-        $list = $this->sysRunModel
+        $list      = $this->sysRunModel
             ->where($where)
             ->order('id', 'desc')
-            ->with('merchants,channels')
+            ->with([
+                'merchants' => function ($query) use ($merchant_where) {
+                    $query->where($merchant_where);
+                },
+                'channels'
+            ])
             ->paginate($list_rows, false, [
                 'page' => $page
             ]);

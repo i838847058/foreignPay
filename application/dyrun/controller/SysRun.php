@@ -42,8 +42,10 @@ class SysRun extends Api
     'list_rows': 10,
     'page': 1,
     })
-     * @param string $channel_name  渠道名称
-     * @param string $channel_num  渠道号
+     * @param int $merchant_id   商户信息表ID
+     * @param int $sys_channel_id  第三方支付渠道信息表ID
+     * @param int $product_type_id  产品ID
+     * @param string $product_name  产品名称
      * @param timestamp $created  创建时间
      * @param timestamp $updated  更新时间
      * @param int $list_rows  每页条数
