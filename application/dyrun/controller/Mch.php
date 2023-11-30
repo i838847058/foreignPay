@@ -217,7 +217,32 @@ class Mch extends Api
             $this->error($validate->getError());
         }
         $service = new MchService();
-        $data = $service->getMchAccountList($request->get('text', ''), $request->get('rows', 50), $request->get('role', 0));
+        $data = $service->getMchAccountList($request->get('text'), $request->get('rows', 50), $request->get('role', 0));
         $this->success(__('Searching successful'), $data);
+    }
+
+    public function setCheckState(Request $request)
+    {
+        $validate = new Validate([
+            'id' => 'number',
+            'state' => 'in:-1,1',
+            'reason' => 'chsDash|max:200'
+        ]);
+        $post = $request->post();
+        if (!$validate->check($post)) {
+            $this->error($validate->getError());
+        }
+        // 判断是否存在数据表
+        if (!BaseData::isValueExistsModel(new Merchant(), 'id', $request->post('id'))) {
+            $this->error($this->NOT_EXISTS_MODEL_MSG('id'));
+        }
+        if (!$user = $this->auth->getUser()) {
+            $this->error(__('miss check user.'));
+        }
+        $service = new MchService();
+        if ($service->updateMchCheckState(Merchant::get($post['id']), $user, $post['state'], $post['reason'])) {
+            $this->error(__('set check state fail'));
+        }
+        $this->success(__('set check state successful'), ['check_state' => $post['state']]);
     }
 }

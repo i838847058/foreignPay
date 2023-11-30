@@ -5,7 +5,6 @@ namespace app\dyrun\service;
 use app\admin\model\User;
 use app\common\model\Merchant;
 use app\common\model\SysCountryCoinsView;
-use app\common\model\SysOption;
 use app\common\model\SysOptionValue;
 use think\Collection;
 use think\db\exception\DataNotFoundException;
@@ -146,6 +145,26 @@ class MchService
             return true;
         }
 //        throw new Exception($merchant->getError());
+        return false;
+    }
+
+    /**
+     * @param Merchant $merchant
+     * @param User $user
+     * @param int $state
+     * @param string|null $reason
+     * @return bool
+     */
+    public function updateMchCheckState(Merchant $merchant, User $user, int $state = 0, string $reason = null): bool
+    {
+        if ($merchant->id ?? 0 and $user->id ?? 0) {
+            $merchant->check_user_id = $user->id;
+            $merchant->check_time = date('Y-m-d H:i:s');
+            $merchant->check_reason = $reason;
+            $merchant->check_state = $state;
+            $merchant->save();
+            return true;
+        }
         return false;
     }
 }
