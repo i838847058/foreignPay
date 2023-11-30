@@ -23,17 +23,17 @@ class SysRunService
     {
         $where = [];
         extract($params);
-        if (isset($merchant_id)) {
+        if (!empty($merchant_id)) {
             $where['r.merchant_id'] = $merchant_id;
         }
-        if (isset($sys_channel_id)) {
+        if (!empty($sys_channel_id)) {
             $where['r.sys_channel_id '] = $sys_channel_id;
         }
         // 商户信息表的检索
-        if (isset($product_type_id)) {
+        if (!empty($product_type_id)) {
             $where['m.product_type_id'] = $product_type_id;
         }
-        if (isset($product_name)) {
+        if (!empty($product_name)) {
             $where['m.product_name'] = ['like', "{$product_name}%"];
         }
         $rows = $rows ?? 10;
