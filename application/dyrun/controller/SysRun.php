@@ -85,6 +85,7 @@ class SysRun extends Api
      * @param string $sys_channel_id  第三方支付支付配置信息表ID
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param int $weigh  权重：越小越优先排；权重相同则轮询
+     * @param tinyint $pay_product  支付产品：0=代收；1=代付；
      * @param decimal $single_day_limit_money  单日限额
      * @param decimal $single_limit_money  单笔限额
      * @ApiReturn ({
@@ -146,6 +147,7 @@ class SysRun extends Api
      * @param string $sys_channel_id  第三方支付支付配置信息表ID
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param int $weigh  权重：越小越优先排；权重相同则轮询
+     * @param tinyint $pay_product  支付产品：0=代收；1=代付；
      * @param decimal $single_day_limit_money  单日限额
      * @param decimal $single_limit_money  单笔限额
      * @ApiReturn ({

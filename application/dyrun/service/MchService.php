@@ -17,8 +17,8 @@ class MchService
 {
     /**
      * @param string $text
-     * @param int $rows
-     * @param int $role
+     * @param int    $rows
+     * @param int    $role
      * @return bool|\PDOStatement|string|Collection
      * @throws DataNotFoundException
      * @throws DbException
@@ -42,7 +42,7 @@ class MchService
 
     /**
      * @param string $text
-     * @param int $user_id
+     * @param int    $user_id
      * @return bool|\PDOStatement|string|Collection
      * @throws DataNotFoundException
      * @throws DbException
@@ -50,12 +50,14 @@ class MchService
      */
     public function getMchNoList(string $text, int $user_id = 0)
     {
-        return Merchant::select(function ($query) use ($user_id, $text) {
-            $query->where('status', 1)->where('merchant_name', 'like', $text . '%');
-            if ($user_id != 0) {
-                $query->where('user_id', $user_id);
-            }
-        });
+        $where = [
+            'status'        => 1,
+            'merchant_name' => ['like', "{$text}%"],
+        ];
+        if ($user_id) {
+            $where['user_id'] = $user_id;
+        }
+        return Merchant::where($where)->select();
     }
 
     /**
@@ -65,11 +67,11 @@ class MchService
      */
     public function createOrUpdateMchOne(array $data): Merchant
     {
-        $merchant = new Merchant();
+        $merchant            = new Merchant();
         $data['merchant_no'] = BaseData::makeMerchantNo($data['user_id']);
-        $data['api_key'] = BaseData::makeKeyMd5($data['merchant_no']);
+        $data['api_key']     = BaseData::makeKeyMd5($data['merchant_no']);
         if ($data['agent_rate_in'] ?? 0 and $data['agent_rate_out'] ?? 0) {
-            $data['agent_rate_in'] = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
+            $data['agent_rate_in']  = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
             $data['agent_rate_out'] = $data['agent_user_id'] ? $data['agent_rate_out'] : 0;
         }
         if ($id = ($data['id'] ?? 0)) {
@@ -87,7 +89,7 @@ class MchService
     }
 
     /**
-     * @param $userId
+     * @param     $userId
      * @param int $rows
      * @param int $page
      * @param int $check_state
@@ -110,9 +112,9 @@ class MchService
             ]);;
         $data->each(function ($item) {
             $item->agent_user_text = $item->agent_user_id ? User::get($item->agent_user_id)->value('username') : null;
-            $countrys = '';
-            $coins_in = '';
-            $coins_out = '';
+            $countrys              = '';
+            $coins_in              = '';
+            $coins_out             = '';
             foreach ($item->countrys as $id) {
                 $countrys .= SysCountryCoinsView::where('country_id', $id)->value('country_name') . '，';
             }
@@ -122,11 +124,11 @@ class MchService
             foreach ($item->coins_out as $id) {
                 $coins_out .= SysCountryCoinsView::where('currency_id', $id)->value('currency_name') . '，';
             }
-            $item->countrys_text = mb_substr($countrys, 0, -1);
-            $item->coins_in_text = mb_substr($coins_in, 0, -1);
-            $item->coins_out_text = mb_substr($coins_out, 0, -1);
+            $item->countrys_text        = mb_substr($countrys, 0, -1);
+            $item->coins_in_text        = mb_substr($coins_in, 0, -1);
+            $item->coins_out_text       = mb_substr($coins_out, 0, -1);
             $item->product_type_id_text = SysOptionValue::getValue($item->product_type_id);
-            $item->pay_way_id_text = SysOptionValue::getValue($item->pay_way_id);
+            $item->pay_way_id_text      = SysOptionValue::getValue($item->pay_way_id);
             unset($item->api_key);
         });
         return $data;
@@ -134,8 +136,8 @@ class MchService
 
     /**
      * @param Merchant $merchant
-     * @param string $key
-     * @param $value
+     * @param string   $key
+     * @param          $value
      * @return bool
      */
     public function updateMchUserInfo(Merchant $merchant, string $key, $value): bool
@@ -148,14 +150,14 @@ class MchService
             ])) {
             return true;
         }
-//        throw new Exception($merchant->getError());
+        //        throw new Exception($merchant->getError());
         return false;
     }
 
     /**
-     * @param Merchant $merchant
-     * @param User $user
-     * @param int $state
+     * @param Merchant    $merchant
+     * @param User        $user
+     * @param int         $state
      * @param string|null $reason
      * @return bool
      */
@@ -163,9 +165,9 @@ class MchService
     {
         if ($merchant->id ?? 0 and $user->id ?? 0) {
             $merchant->check_user_id = $user->id;
-            $merchant->check_time = date('Y-m-d H:i:s');
-            $merchant->check_reason = $reason;
-            $merchant->check_state = $state;
+            $merchant->check_time    = date('Y-m-d H:i:s');
+            $merchant->check_reason  = $reason;
+            $merchant->check_state   = $state;
             $merchant->save();
             return true;
         }

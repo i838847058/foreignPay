@@ -15,6 +15,7 @@ class SysRun extends Validate
         'weigh'                  => 'require|integer',
         'single_day_limit_money' => 'require|float',
         'single_limit_money'     => 'require|float',
+        'pay_product'            => 'require|integer',
     ];
     protected $message = [
         'id'                             => '请选择一条操作记录',
@@ -30,10 +31,12 @@ class SysRun extends Validate
         'single_day_limit_money.float'   => '单日限额必须为浮点数',
         'single_limit_money.require'     => '单笔限额不能为空',
         'single_limit_money.float'       => '单笔限额必须为浮点数',
+        'pay_product.require'            => '支付产品不能为空',
+        'pay_product.float'              => '支付产品必须为浮点数',
     ];
     protected $scene   = [
-        'add'          => ['merchant_id', 'sys_channel_id', 'status', 'weigh', 'single_day_limit_money', 'single_limit_money'],
-        'edit'         => ['id' => 'require', 'merchant_id', 'sys_channel_id', 'status', 'weigh', 'single_day_limit_money', 'single_limit_money'],
+        'add'          => ['merchant_id', 'sys_channel_id', 'status', 'weigh', 'single_day_limit_money', 'single_limit_money', 'pay_product'],
+        'edit'         => ['id' => 'require', 'merchant_id', 'sys_channel_id', 'status', 'weigh', 'single_day_limit_money', 'single_limit_money', 'pay_product'],
         'updateStatus' => ['id' => 'require', 'status'],
     ];
 }
