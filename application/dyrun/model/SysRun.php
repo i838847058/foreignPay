@@ -5,20 +5,12 @@ namespace app\dyrun\model;
 use think\Model;
 use app\common\model\Merchant;
 use app\dyrun\model\SysChannel;
-use app\dyrun\service\BaseData;
 
 /**
  * 运营管理-支付配置
  */
 class SysRun extends Model
 {
-
-    protected $baseDataService;
-
-    public function __construct(BaseData $baseDataService)
-    {
-        $this->baseDataService = $baseDataService;
-    }
 
     // 开启自动写入时间戳字段
     protected $autoWriteTimestamp = 'int';

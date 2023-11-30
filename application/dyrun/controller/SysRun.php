@@ -59,7 +59,7 @@ class SysRun extends Api
     {
         $params = $this->request->get();
         try {
-            $datas             = $this->sysRunService->getSysRun($params);
+            $datas = $this->sysRunService->getSysRun($params);
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
