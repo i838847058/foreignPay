@@ -22,7 +22,6 @@ class SysRunService
     public function getSysRun($params)
     {
         $where          = [];
-        $merchant_where = [];
         extract($params);
         if (isset($merchant_id)) {
             $where['r.merchant_id'] = $merchant_id;
