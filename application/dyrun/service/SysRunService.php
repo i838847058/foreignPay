@@ -25,29 +25,26 @@ class SysRunService
         $merchant_where = [];
         extract($params);
         if (isset($merchant_id)) {
-            $where['merchant_id'] = $merchant_id;
+            $where['r.merchant_id'] = $merchant_id;
         }
         if (isset($sys_channel_id)) {
-            $where['sys_channel_id '] = $sys_channel_id;
+            $where['r.sys_channel_id '] = $sys_channel_id;
         }
         // 商户信息表的检索
         if (isset($product_type_id)) {
-            $merchant_where['product_type_id'] = $product_type_id;
+            $where['m.product_type_id'] = $product_type_id;
         }
         if (isset($product_name)) {
-            $merchant_where['product_name'] = ['like', "{$product_name}%"];
+            $where['m.product_name'] = ['like', "{$product_name}%"];
         }
         $list_rows = $list_rows ?? 10;
         $page      = $page ?? 0;
         $list      = $this->sysRunModel
             ->where($where)
-            ->order('id', 'desc')
-            ->with([
-                'merchants' => function ($query) use ($merchant_where) {
-                    $query->where($merchant_where);
-                },
-                'channels'
-            ])
+            ->order('r.id', 'desc')
+            ->alias('r')
+            ->join('merchant m', 'm.id = r.merchant_id')
+            ->join('sys_channel c', 'c.id = r.sys_channel_id')
             ->paginate($list_rows, false, [
                 'page' => $page
             ]);

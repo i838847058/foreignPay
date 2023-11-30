@@ -3,6 +3,7 @@
 namespace app\dyrun\controller;
 
 use app\common\controller\Api;
+use app\dyrun\service\BaseData;
 use app\dyrun\service\MchService;
 use app\dyrun\service\SysChannelService;
 use app\dyrun\service\SysRunService;
@@ -19,14 +20,15 @@ class SysRun extends Api
     private   $mchService;
     private   $sysChannelService;
     private   $sysRunService;
+    private   $baseDataService;
 
-
-    public function __construct(MchService $mchService, SysChannelService $sysChannelService, SysRunService $sysRunService)
+    public function __construct(MchService $mchService, SysChannelService $sysChannelService, SysRunService $sysRunService, BaseData $baseDataService)
     {
         parent::__construct();
         $this->mchService        = $mchService;
         $this->sysChannelService = $sysChannelService;
         $this->sysRunService     = $sysRunService;
+        $this->baseDataService   = $baseDataService;
     }
 
     /**
@@ -101,13 +103,21 @@ class SysRun extends Api
             $this->error($validate->getError());
         }
         try {
+            // 判断商家ID
+            if (!$this->baseDataService::isValueExistsModel(new \app\common\model\Merchant(), 'id', $params['merchant_id'])) {
+                exception('商家记录不存在，请核实', 400);
+            }
+            // 判断渠道ID
+            if (!$this->baseDataService::isValueExistsModel(new \app\dyrun\model\SysChannel(), 'id', $params['sys_channel_id'])) {
+                exception('渠道记录不存在，请核实', 400);
+            }
             $ret = $this->sysRunService->addSysRun($params);
             if (!$ret) {
                 exception('添加支付配置失败', 400);
             }
         } catch (\Exception $e) {
             if (preg_match("/.+Integrity constraint violation: 1062 Duplicate entry '(.+)' for key '(.+)'/is", $e->getMessage(), $matches)) {
-                $this->error('添加支付配置失败！商户信息ID、支付支付配置ID重复，请核实');
+                $this->error('失败！支付配置重复，请核实');
             } else {
                 $this->error($e->getMessage());
             }

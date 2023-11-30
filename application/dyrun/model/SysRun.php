@@ -28,16 +28,23 @@ class SysRun extends Model
     }
 
     // belongsToMany('关联模型名','中间表名','外键名','当前模型关联键名',['模型别名定义']);
-    // 定义与FpMerchant的多对多关联
+    // belongsTo('关联模型名','外键名','关联表主键名',['模型别名定义'],'join类型');
+    /*
+     ->with([
+            'merchants' => function ($query) use ($merchant_where) {
+                $query->where($merchant_where);
+            },
+            'channels'
+        ])
     public function merchants()
     {
-        return $this->belongsToMany(Merchant::class, 'sys_run', 'merchant_id', 'id');
+        return $this->belongsTo(Merchant::class,  'merchant_id', 'id');
     }
 
     // 定义与FpSysChannel的多对多关联
     public function channels()
     {
-        return $this->belongsToMany(SysChannel::class, 'sys_run', 'sys_channel_id', 'id');
-    }
+        return $this->belongsTo(SysChannel::class,  'sys_channel_id', 'id');
+    }*/
 
 }
