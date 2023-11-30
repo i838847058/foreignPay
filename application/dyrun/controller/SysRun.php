@@ -41,7 +41,7 @@ class SysRun extends Api
     'channel_num': 'ZH001',
     'created': '2023-11-22 18:04:09',
     'updated': '2023-11-22 18:04:09',
-    'list_rows': 10,
+    'rows': 10,
     'page': 1,
     })
      * @param int $merchant_id   商户信息表ID
@@ -50,7 +50,7 @@ class SysRun extends Api
      * @param string $product_name  产品名称
      * @param timestamp $created  创建时间
      * @param timestamp $updated  更新时间
-     * @param int $list_rows  每页条数
+     * @param int $rows  每页条数
      * @param int $page  页数
      * @ApiReturn ({
     'code':'1',

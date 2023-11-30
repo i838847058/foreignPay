@@ -21,7 +21,7 @@ class SysRunService
     // 列表
     public function getSysRun($params)
     {
-        $where          = [];
+        $where = [];
         extract($params);
         if (isset($merchant_id)) {
             $where['r.merchant_id'] = $merchant_id;
@@ -36,15 +36,15 @@ class SysRunService
         if (isset($product_name)) {
             $where['m.product_name'] = ['like', "{$product_name}%"];
         }
-        $list_rows = $list_rows ?? 10;
-        $page      = $page ?? 0;
-        $list      = $this->sysRunModel
+        $rows = $rows ?? 10;
+        $page = $page ?? 0;
+        $list = $this->sysRunModel
             ->where($where)
             ->order('r.id', 'desc')
             ->alias('r')
             ->join('merchant m', 'm.id = r.merchant_id')
             ->join('sys_channel c', 'c.id = r.sys_channel_id')
-            ->paginate($list_rows, false, [
+            ->paginate($rows, false, [
                 'page' => $page
             ]);
         return $list;
