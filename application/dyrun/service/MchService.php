@@ -88,15 +88,20 @@ class MchService
     }
 
     /**
+     * @param $userId
      * @param int $rows
      * @param int $page
-     * @param int $mch_type
      * @return Paginator
      * @throws DbException
      */
-    public function getMchList(int $rows = 20, int $page = 1): \think\Paginator
+    public function getMchList($userId, int $rows = 20, int $page = 1): \think\Paginator
     {
         $data = Merchant::order('id', 'desc')
+            ->where(function ($query) use ($userId) {
+                if (User::get($userId)) {
+                    $query->where('user_id', $userId);
+                }
+            })
             ->paginate($rows, false, [
                 'page' => $page
             ]);;
