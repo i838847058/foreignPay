@@ -242,7 +242,7 @@ class Mch extends Api
                 $this->error(__('miss check user.'));
             }
             $service = new MchService();
-            if (!$service->updateMchCheckState(Merchant::get($id), $user, $post['state'], $post['reason'])) {
+            if (!$service->updateMchCheckState(Merchant::get($id), $user, $post['state'], $post['reason'] ?? null)) {
                 $this->error(__('set check state fail'));
             }
         }
