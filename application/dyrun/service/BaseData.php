@@ -18,11 +18,11 @@ class BaseData
     /**
      * @param Model $model
      * @param string $columns
-     * @param string $value
+     * @param string|null $value
      * @return bool
      * @throws Exception
      */
-    public static function isValueExistsModel(Model $model, string $columns, string $value): bool
+    public static function isValueExistsModel(Model $model, string $columns, ?string $value): bool
     {
         try {
             return $model->where($columns, $value)->count() > 0;

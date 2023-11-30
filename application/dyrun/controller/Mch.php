@@ -21,7 +21,8 @@ use think\Validate;
  */
 class Mch extends Api
 {
-    protected $noNeedLogin = ['updateMchInfo', 'searchAccount', 'getMchList', 'createAccount', 'changeAccountMchStatus', 'createMch', 'getAccountList', 'changeAccountPassword'];
+    protected $noNeedLogin = [];
+
     protected $noNeedRight = '*';
 
     public function getMchList(Request $request)
@@ -223,26 +224,31 @@ class Mch extends Api
 
     public function setCheckState(Request $request)
     {
-        $validate = new Validate([
-            'id' => 'number',
-            'state' => 'in:-1,1',
-            'reason' => 'chsDash|max:200'
-        ]);
         $post = $request->post();
-        if (!$validate->check($post)) {
-            $this->error($validate->getError());
+        if (!is_array($post) and count($post) > 0) {
+            $this->error(__('need array data.'));
         }
-        // 判断是否存在数据表
-        if (!BaseData::isValueExistsModel(new Merchant(), 'id', $request->post('id'))) {
-            $this->error($this->NOT_EXISTS_MODEL_MSG('id'));
+        foreach ($post as $item) {
+            $validate = new Validate([
+                'id' => 'number',
+                'state' => 'in:-1,1',
+                'reason' => 'chsDash|max:200'
+            ]);
+            if (!$validate->check($item)) {
+                $this->error($validate->getError());
+            }
+            // 判断是否存在数据表
+            if (!BaseData::isValueExistsModel(new Merchant(), 'id', $item['id'])) {
+                $this->error($this->NOT_EXISTS_MODEL_MSG('id'));
+            }
+            if (!$user = $this->auth->getUser()) {
+                $this->error(__('miss check user.'));
+            }
+            $service = new MchService();
+            if (!$service->updateMchCheckState(Merchant::get($item['id']), $user, $item['state'], $item['reason'])) {
+                $this->error(__('set check state fail'));
+            }
         }
-        if (!$user = $this->auth->getUser()) {
-            $this->error(__('miss check user.'));
-        }
-        $service = new MchService();
-        if ($service->updateMchCheckState(Merchant::get($post['id']), $user, $post['state'], $post['reason'])) {
-            $this->error(__('set check state fail'));
-        }
-        $this->success(__('set check state successful'), ['check_state' => $post['state']]);
+        $this->success(__('set check state successful'));
     }
 }

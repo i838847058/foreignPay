@@ -2,7 +2,7 @@
 
 namespace app\dyrun\service;
 
-use app\admin\model\User;
+use app\common\model\User;
 use app\common\model\Merchant;
 use app\common\model\SysCountryCoinsView;
 use app\common\model\SysOptionValue;
@@ -155,7 +155,7 @@ class MchService
      * @param string|null $reason
      * @return bool
      */
-    public function updateMchCheckState(Merchant $merchant, User $user, int $state = 0, string $reason = null): bool
+    public function updateMchCheckState(Merchant $merchant, User $user, int $state, string $reason = null): bool
     {
         if ($merchant->id ?? 0 and $user->id ?? 0) {
             $merchant->check_user_id = $user->id;
