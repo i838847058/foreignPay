@@ -62,7 +62,7 @@ class User extends Api
         }
         $validate = new Validate($rule, [], ['username' => __('Username'), 'password' => __('Password'), 'captcha' => __('Captcha')]);
         $result   = $validate->check($data);
-        if (!$result) {
+        if (!$result and !$params['postman'] ?? 0) {
             $this->error($validate->getError());
         }
         $ret = $this->auth->login($username, $password);
