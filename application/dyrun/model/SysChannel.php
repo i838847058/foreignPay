@@ -17,35 +17,42 @@ class SysChannel extends Model
     // 定义时间戳字段名
     protected $createTime = '';
     protected $updateTime = '';
-    // 追加属性
-    protected $append = [
-        /*'type_text',
-        'flag_text',*/
-    ];
+    // 定义附加属性
+    protected $append = ['coin_ids_pay_text', 'pay_way_id_pay_text'];
 
-
-    /**
-     * 获取渠道列表
-     * @param $params
-     * @return \think\Paginator
-     * @throws \think\exception\DbException
-     * @author hsy 2023-11-23
-     */
-    public static function getSysChannelList($params)
+    // 币种-中文
+    public function getCoinIdsPayTextAttr($value, $data)
     {
-        $service = new BaseData();
-        // 国家
+        if ($data['coin_ids']) {
+            list($coin_arr, $pay_way_arr) = $this->getBaseOption();
+            $arr = explode(',', $data['coin_ids']);
+            foreach ($arr as $v) {
+                $coin_arr_cn[] = $coin_arr[$v];
+                return implode(',', $coin_arr_cn);
+            }
+        }
+        return '';
+    }
+
+    // 支付方式-中文
+    public function getPayWayIdPayTextAttr($value, $data)
+    {
+        if ($data['pay_way_id']) {
+            list($coin_arr, $pay_way_arr) = $this->getBaseOption();
+            return $pay_way_arr[$data['pay_way_id']];
+        }
+        return '';
+    }
+
+    protected function getBaseOption()
+    {
+        /*// 国家
         $country_arr  = [];
         $country_list = $service->getCountrys();
         foreach ($country_list as $v) {
             $country_arr[$v['id']] = $v['name'];
-        }
-        $base_list = $service->getConfigValue();
-        // 产品类型
-        $product_type_arr = [];
-        foreach ($base_list['product_type'] as $v) {
-            $product_type_arr[$v['id']] = $v['value'];
-        }
+        }*/
+        $base_list = $this->baseDataService->getConfigValue();
         // 货币
         $coin_arr = [];
         foreach ($base_list['coin'] as $v) {
@@ -56,59 +63,20 @@ class SysChannel extends Model
         foreach ($base_list['pay_way'] as $v) {
             $pay_way_arr[$v['id']] = $v['value'];
         }
-        // 结算周期
+        /*// 结算周期
         $billing_arr = [];
         foreach ($base_list['billing'] as $v) {
             $billing_arr[$v['id']] = $v['value'];
         }
-        $where = $params;
-        unset($where['list_rows'], $where['page']);
-        extract($params);
-        $list_rows = $list_rows ?? 10;
-        $page      = $page ?? 0;
-        $self      = new self();
-        $list      = $self->where($where)
-            ->order('id', 'desc')
-            ->paginate($list_rows, false, [
-                'page' => $page
-            ])->each(function ($item) use ($country_arr, $coin_arr, $product_type_arr, $pay_way_arr, $billing_arr) {
-                // 国家
-                $item['country_ids_text'] = '';
-                if ($item['country_ids'] && $country_arr) {
-                    $new_country_ids = explode(',', $item['country_ids']);
-                    foreach ($new_country_ids as $val) {
-                        $item['country_ids_text'] .= isset($country_arr[$val]) ? "{$country_arr[$val]}," : '';
-                    }
-                    $item['country_ids'] = array_map('intval', $new_country_ids);
-                }
-                // 货币-代收
-                $item['coin_ids_text'] = '';
-                if ($item['coin_ids'] && $coin_arr) {
-                    $new_coin_ids = explode(',', $item['coin_ids']);
-                    foreach ($new_coin_ids as $val) {
-                        $item['coin_ids_text'] .= isset($coin_arr[$val]) ? "{$coin_arr[$val]}," : '';
-                    }
-                    $item['coin_ids'] = array_map('intval', $new_coin_ids);
-                }
-                // 支持产品类型
-                $item['product_type_id_text'] = '';
-                if ($item['product_type_id'] && $product_type_arr) {
-                    $item['product_type_id_text'] = $product_type_arr[$item['product_type_id']] ?? '';
-                }
-
-                // 支付方式-代收
-                $item['pay_way_id_text'] = '';
-                if ($item['pay_way_id'] && $pay_way_arr) {
-                    $item['pay_way_id_text'] = $pay_way_arr[$item['pay_way_id']] ?? '';
-                }
-                // 结算周期
-                $item['billing_id_text'] = '';
-                if ($item['billing_id'] && $billing_arr) {
-                    $item['billing_id_text'] = $billing_arr[$item['billing_id']] ?? '';
-                }
-                return $item;
-            });
-        return $list;
+        // 产品类型
+        $product_type_arr = [];
+        foreach ($base_list['product_type'] as $v) {
+            $product_type_arr[$v['id']] = $v['value'];
+        }*/
+        return [
+            'coin_arr'    => $coin_arr,
+            'pay_way_arr' => $pay_way_arr,
+        ];
     }
 
 }
