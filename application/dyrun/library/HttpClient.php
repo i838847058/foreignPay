@@ -16,7 +16,7 @@ trait HttpClient
     /**
      * @var string
      */
-    public $host = 'https://www.payhayu.com';
+    public $host = null;
 
     /**
      * @var string
@@ -47,7 +47,7 @@ trait HttpClient
     {
         $this->httpClient = new Client([
             // Base URI is used with relative requests
-            'base_uri' => $host ?: $this->host,
+            'base_uri' => $host,
             // You can set any number of default request options.
             'timeout' => $timeout,
         ]);
