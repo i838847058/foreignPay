@@ -29,20 +29,7 @@ class PayHaYuClient
      */
     public function __construct(string $host = null)
     {
-        $this->setHttpClient($host ?: $this->host, 5);
-    }
-
-    /**
-     * @param array $data
-     * @return string
-     */
-    private function getSignKey(array $data): string
-    {// 对请求参数进行 ASCII 排序
-        ksort($data);
-        // 拼接加密内容
-        $content = http_build_query($data) . "&signKey=" . $this->PAY_KEY_IN;
-        // MD5 加密
-        return strtoupper(md5($content));
+        $this->setHttpClient($host ?: 'https://www.payhayu.com', 5);
     }
 
     /**
@@ -99,6 +86,19 @@ class PayHaYuClient
         $this->jsonRaw['merchantNo'] = $this->merchantNo;
         $this->jsonRaw['sign'] = $this->getSignKey($this->jsonRaw);
         return $this->requestClient($uri);
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    private function getSignKey(array $data): string
+    {// 对请求参数进行 ASCII 排序
+        ksort($data);
+        // 拼接加密内容
+        $content = http_build_query($data) . "&signKey=" . $this->PAY_KEY_IN;
+        // MD5 加密
+        return strtoupper(md5($content));
     }
 
 
