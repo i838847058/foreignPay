@@ -30,13 +30,14 @@ class Mch extends Api
         $validate = new Validate([
             'rows' => 'number',
             'page' => 'number',
-//            'user_id' => 'number',
+            'user_id' => 'number',
+            'check_state' => 'in:-1,0,1',
         ]);
         if (!$validate->check($request->get())) {
             $this->error($validate->getError());
         }
         $service = new MchService();
-        $list = $service->getMchList($request->get('user_id', 0), $request->get('rows', 20), $request->get('page', 1));
+        $list = $service->getMchList($request->get('user_id', 0), $request->get('rows', 20), $request->get('page', 1), $request->get('check_state', 999));
         $this->success(__('get Mch List successful'), $list);
     }
 
