@@ -21,31 +21,32 @@ class SysRunService
     // 列表
     public function getSysRun($params)
     {
-        $where          = [];
-        $merchant_where = [];
+        $where = [];
         extract($params);
-        if (isset($merchant_id)) {
+        if (!empty($merchant_id)) {
             $where['r.merchant_id'] = $merchant_id;
         }
-        if (isset($sys_channel_id)) {
+        if (!empty($sys_channel_id)) {
             $where['r.sys_channel_id '] = $sys_channel_id;
         }
         // 商户信息表的检索
-        if (isset($product_type_id)) {
+        if (!empty($product_type_id)) {
             $where['m.product_type_id'] = $product_type_id;
         }
-        if (isset($product_name)) {
+        if (!empty($product_name)) {
             $where['m.product_name'] = ['like', "{$product_name}%"];
         }
-        $list_rows = $list_rows ?? 10;
-        $page      = $page ?? 0;
-        $list      = $this->sysRunModel
+        $field = ['r.*','m.merchant_name','c.channel_name','c.channel_num','c.pay_rate','m.fee_rate_in','m.coins_in','m.pay_way_id'];
+        $rows = $rows ?? 10;
+        $page = $page ?? 0;
+        $list = $this->sysRunModel
+            ->field($field)
             ->where($where)
             ->order('r.id', 'desc')
             ->alias('r')
             ->join('merchant m', 'm.id = r.merchant_id')
             ->join('sys_channel c', 'c.id = r.sys_channel_id')
-            ->paginate($list_rows, false, [
+            ->paginate($rows, false, [
                 'page' => $page
             ]);
         return $list;

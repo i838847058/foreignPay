@@ -41,7 +41,7 @@ class SysRun extends Api
     'channel_num': 'ZH001',
     'created': '2023-11-22 18:04:09',
     'updated': '2023-11-22 18:04:09',
-    'list_rows': 10,
+    'rows': 10,
     'page': 1,
     })
      * @param int $merchant_id   商户信息表ID
@@ -50,7 +50,7 @@ class SysRun extends Api
      * @param string $product_name  产品名称
      * @param timestamp $created  创建时间
      * @param timestamp $updated  更新时间
-     * @param int $list_rows  每页条数
+     * @param int $rows  每页条数
      * @param int $page  页数
      * @ApiReturn ({
     'code':'1',
@@ -85,6 +85,8 @@ class SysRun extends Api
      * @param string $sys_channel_id  第三方支付支付配置信息表ID
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param int $weigh  权重：越小越优先排；权重相同则轮询
+     * @param decimal $single_day_limit_money  单日限额
+     * @param decimal $single_limit_money  单笔限额
      * @ApiReturn ({
     'code':'1',
     'msg':'成功',
@@ -105,11 +107,11 @@ class SysRun extends Api
         try {
             // 判断商家ID
             if (!$this->baseDataService::isValueExistsModel(new \app\common\model\Merchant(), 'id', $params['merchant_id'])) {
-                exception('商家记录不存在，请核实', 400);
+                exception('选择的商家记录不存在，请核实', 400);
             }
             // 判断渠道ID
             if (!$this->baseDataService::isValueExistsModel(new \app\dyrun\model\SysChannel(), 'id', $params['sys_channel_id'])) {
-                exception('渠道记录不存在，请核实', 400);
+                exception('选择的渠道记录不存在，请核实', 400);
             }
             $ret = $this->sysRunService->addSysRun($params);
             if (!$ret) {
@@ -131,17 +133,21 @@ class SysRun extends Api
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (POST)
      * @ApiBody ({
-    'id':1,
-    'merchant_id': '商户信息表ID',
-    'sys_channel_id': '第三方支付支付配置信息表ID',
+    'id': 1,
+    'merchant_id': 1,
+    'sys_channel_id': 1,
     'status': 0,
-    'weigh': 1,
+    'weigh': 0,
+    'single_day_limit_money': 0,
+    'single_limit_money': 0
     })
      * @param int $id  ID
      * @param string $merchant_id  商户信息表ID
      * @param string $sys_channel_id  第三方支付支付配置信息表ID
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param int $weigh  权重：越小越优先排；权重相同则轮询
+     * @param decimal $single_day_limit_money  单日限额
+     * @param decimal $single_limit_money  单笔限额
      * @ApiReturn ({
     'code':'1',
     'msg':'成功',

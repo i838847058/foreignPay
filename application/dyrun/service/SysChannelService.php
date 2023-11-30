@@ -50,13 +50,13 @@ class SysChannelService
             $billing_arr[$v['id']] = $v['value'];
         }
         $where = $params;
-        unset($where['list_rows'], $where['page']);
+        unset($where['rows'], $where['page']);
         extract($params);
-        $list_rows = $list_rows ?? 10;
+        $rows = $rows ?? 10;
         $page      = $page ?? 0;
         $list      = SysChannel::where($where)
             ->order('id', 'desc')
-            ->paginate($list_rows, false, [
+            ->paginate($rows, false, [
                 'page' => $page
             ])->each(function ($item) use ($country_arr, $coin_arr, $product_type_arr, $pay_way_arr, $billing_arr) {
                 // 国家
