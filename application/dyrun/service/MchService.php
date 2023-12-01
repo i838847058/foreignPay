@@ -50,6 +50,8 @@ class MchService
      */
     public function getMchNoList(string $text, int $user_id = 0)
     {
+        $SysChannelService = new \app\dyrun\service\SysChannelService();
+        list($product_type_arr, $coin_arr, $pay_way_arr, $billing_arr, $country_arr) = $SysChannelService->getBaseOption();
         $where = [
             'status'        => 1,
             'merchant_name' => ['like', "{$text}%"],
@@ -57,7 +59,22 @@ class MchService
         if ($user_id) {
             $where['user_id'] = $user_id;
         }
-        return Merchant::where($where)->select();
+        $merchants_data = [];
+        Merchant::where($where)->chunk(200, function ($merchants)
+        use (&$merchants_data, $country_arr, $coin_arr, $product_type_arr, $pay_way_arr, $billing_arr) {
+            foreach ($merchants as $merchant) {
+                // 支持产品类型
+                $merchant['product_type_id_text'] = $product_type_arr[$merchant['product_type_id']] ?? '';
+                // 支付方式-代收
+                $merchant['pay_way_id_text'] = $pay_way_arr[$merchant['pay_way_id']] ?? '';
+                // 货币-代收
+                $coins_in                  = is_array($merchant['coins_in']) ? $merchant['coins_in'] : explode(',', $merchant['coins_in']);
+                $merchant['coins_in_text'] = implode(',', array_intersect_key($coin_arr, array_flip($coins_in)));
+                // 处理每个商户的数据
+                $merchants_data[] = $merchant;
+            }
+        });
+        return $merchants_data;
     }
 
     /**

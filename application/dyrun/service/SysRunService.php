@@ -36,10 +36,12 @@ class SysRunService
         if (!empty($product_name)) {
             $where['m.product_name'] = ['like', "{$product_name}%"];
         }
-        $field = ['r.*', 'm.merchant_name', 'c.channel_name', 'c.channel_num', 'c.pay_rate', 'm.fee_rate_in', 'm.coins_in', 'm.pay_way_id'];
-        $rows  = $rows ?? 10;
-        $page  = $page ?? 0;
-        $list  = $this->sysRunModel
+        $field             = ['r.*', 'm.merchant_name', 'c.channel_name', 'c.channel_num', 'c.pay_rate', 'm.fee_rate_in', 'm.coins_in', 'm.pay_way_id'];
+        $rows              = $rows ?? 10;
+        $page              = $page ?? 0;
+        $SysChannelService = new \app\dyrun\service\SysChannelService();
+        list($product_type_arr, $coin_arr, $pay_way_arr, $billing_arr, $country_arr) = $SysChannelService->getBaseOption();
+        $list = $this->sysRunModel
             ->field($field)
             ->where($where)
             ->order('r.id', 'desc')
@@ -48,7 +50,15 @@ class SysRunService
             ->join('sys_channel c', 'c.id = r.sys_channel_id')
             ->paginate($rows, false, [
                 'page' => $page
-            ]);
+            ])
+            ->each(function ($item) use ($country_arr, $coin_arr, $product_type_arr, $pay_way_arr, $billing_arr) {
+                // 货币-代收
+                $coins_in              = is_array($item['coins_in']) ? $item['coins_in'] : json_decode($item['coins_in'], true);
+                $item['coins_in_text'] = implode(',', array_intersect_key($coin_arr, array_flip($coins_in)));
+                // 支付方式-代收
+                $item['pay_way_id_text'] = $pay_way_arr[$item['pay_way_id']] ?? '';
+                return $item;
+            });
         return $list;
     }
 

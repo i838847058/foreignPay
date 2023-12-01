@@ -31,8 +31,8 @@ class SysChannel extends Api
     })
      * @param string $channel_name  渠道名称
      * @param string $channel_num  渠道号
-     * @param timestamp $created  创建时间
-     * @param timestamp $updated  更新时间
+     * @param timestamp $created_start  创建时间-开始
+     * @param timestamp $created_end  创建时间-结束
      * @param int $rows  每页条数
      * @param int $page  页数
      * @ApiReturn ({
