@@ -36,7 +36,7 @@ class SysRunService
         if (!empty($product_name)) {
             $where['m.product_name'] = ['like', "{$product_name}%"];
         }
-        $field             = ['r.*', 'm.merchant_name', 'c.channel_name', 'c.channel_num', 'c.pay_rate', 'm.fee_rate_in', 'm.coins_in', 'm.pay_way_id'];
+        $field             = ['r.*', 'm.merchant_name', 'c.channel_name', 'c.channel_num', 'c.pay_rate', 'm.fee_rate_in', 'm.coins_in', 'm.pay_way_id', 'm.product_type_id', 'm.product_name'];
         $rows              = $rows ?? 10;
         $page              = $page ?? 0;
         $SysChannelService = new \app\dyrun\service\SysChannelService();
@@ -57,6 +57,8 @@ class SysRunService
                 $item['coins_in_text'] = implode(',', array_intersect_key($coin_arr, array_flip($coins_in)));
                 // 支付方式-代收
                 $item['pay_way_id_text'] = $pay_way_arr[$item['pay_way_id']] ?? '';
+                // 支持产品类型
+                $item['product_type_id_text'] = $product_type_arr[$item['product_type_id']] ?? '';
                 return $item;
             });
         return $list;
