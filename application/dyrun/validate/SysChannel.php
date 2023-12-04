@@ -18,9 +18,8 @@ class SysChannel extends Validate
         'billing_id'                 => 'require|number',
         'is_u'                       => 'require|in:0,1',
         'pay_rate'                   => 'require|float|between:0,99.99',
-        'status'                     => 'require|in:0,1',
+        'status'                     => 'in:0,1',
         'margin_balance'             => 'require|float',
-        'pay_way_id'                 => 'require|number',
         'sys_channel_pruduct_cfg_id' => 'require|float',
     ];
 
