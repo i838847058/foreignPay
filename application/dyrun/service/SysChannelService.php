@@ -70,13 +70,20 @@ class SysChannelService
         return $list;
     }
 
-    // 根据渠道名称-获取渠道信息
-    public function getChannelByChannelName($channel_name = '')
+    // 根据渠道名称-获取渠道信息-小于商户费率
+    public function getChannelByChannelName($fee_rate_in = '', $channel_name = '')
     {
         $where = [];
         if ($channel_name) {
             $where['channel_name'] = ['like', "{$channel_name}%"];
         }
+        if ($fee_rate_in) {
+            $where['pay_rate'] = ['egt', $fee_rate_in];
+        }
+        /*if (!$fee_rate_in) {
+            return [];
+        }
+        $where['fee_rate_in'] = ['egt', $fee_rate_in];*/
         $datas = SysChannel::where($where)->select();
         return $datas;
     }
