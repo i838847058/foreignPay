@@ -9,10 +9,12 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @property ResponseInterface $clientResponse
  * @property array $jsonRaw
+ * @property string $host
+ * @property string $method
+ * @property Client $httpClient
  */
 trait HttpClient
 {
-
     /**
      * @var string
      */
@@ -55,14 +57,21 @@ trait HttpClient
 
     /**
      * @param string $uri
+     * @param string $paramType
      * @return bool
      * @throws GuzzleException
      */
-    public function requestClient(string $uri): bool
+    public function requestClient(string $uri, string $paramType = 'json'): bool
     {
-        $this->clientResponse = $this->httpClient->request($this->method, $uri, [
-            'json' => $this->jsonRaw['sign']
-        ]);
+        switch ($paramType) {
+            case 'json':
+                $option['json'] = $this->jsonRaw;
+                break;
+            default:
+                $option = [];
+                break;
+        }
+        $this->clientResponse = $this->httpClient->request($this->method, $uri, $option);
         return true;
     }
 }
