@@ -253,6 +253,7 @@ class SysRun extends Api
      * @ApiBody ({
     'channel_name': '支付配置名称',
     })
+     * @param float $fee_rate_in  商家支付费率
      * @param string $channel_name  支付配置名称
      * @ApiReturn ({
     'code':'1',
@@ -265,8 +266,9 @@ class SysRun extends Api
     {
         $params = $this->request->get();
         try {
+            $fee_rate_in  = $params['fee_rate_in'] ?? '';
             $channel_name = $params['channel_name'] ?? '';
-            $datas        = $this->sysChannelService->getChannelByChannelName($channel_name);
+            $datas        = $this->sysChannelService->getChannelByChannelName($fee_rate_in, $channel_name);
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
