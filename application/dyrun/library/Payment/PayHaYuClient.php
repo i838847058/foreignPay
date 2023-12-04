@@ -24,6 +24,8 @@ class PayHaYuClient
      */
     private $PAY_KEY_OUT = 'laKZBIFGgQMTe0z4WagAoZmpGltqpLkY';
 
+    private $CALLBACK_URL = 'http://z.zz.com';
+
     /**
      * @param string|null $host
      */
@@ -38,22 +40,19 @@ class PayHaYuClient
      * @param string $name
      * @param string $tel
      * @param string $email
-     * @param string|null $callbackUrl
      * @param string|null $type
      * @param string|null $extra
      * @return bool
      * @throws GuzzleException
      */
-    public function paymentAdd(string $merTradeNo, string $amount, string $name, string $tel, string $email, string $callbackUrl = null, string $type = null, string $extra = null): bool
+    public function paymentAdd(string $merTradeNo, string $amount, string $name, string $tel, string $email, string $type = null, string $extra = null): bool
     {
         $this->jsonRaw['merTradeNo'] = $merTradeNo;
         $this->jsonRaw['amount'] = $amount;
         $this->jsonRaw['name'] = $name;
         $this->jsonRaw['tel'] = $tel;
         $this->jsonRaw['email'] = $email;
-        if (!empty($callbackUrl)) {
-            $this->jsonRaw['callbackUrl'] = $callbackUrl;
-        }
+        $this->jsonRaw['callbackUrl'] = $this->CALLBACK_URL;
         if (!empty($type)) {
             $this->jsonRaw['type'] = $type;
         }
