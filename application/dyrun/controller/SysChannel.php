@@ -97,16 +97,18 @@ class SysChannel extends Api
         if (!$this->request->isPost()) {
             $this->error('请求异常，请核实');
         }
+
         $params   = $this->request->post();
         $validate = Loader::validate('SysChannel');
         if (!$validate->scene('add')->check($params)) {
             $this->error($validate->getError());
-
         }
+
         try {
-            $params = $this->getParams($params);
-            $ret    = (new \app\dyrun\model\SysChannel)->insert($params);
-            if (!$ret) {
+            $params       = $this->getParams($params);
+            $channelModel = new SysChannelModel();
+            $channelModel->allowField(true)->save($params, true);
+            if (!$channelModel->id) {
                 exception('添加渠道失败', 400);
             }
         } catch (\Exception $e) {
@@ -116,6 +118,7 @@ class SysChannel extends Api
                 $this->error($e->getMessage());
             }
         }
+
         $this->success('成功');
     }
 
@@ -170,19 +173,17 @@ class SysChannel extends Api
             $this->error($validate->getError());
         }
         try {
-            $params = $this->getParams($params);
-            $ret    = (new \app\dyrun\model\SysChannel)->allowField(true)->save($params, [
-                'id' => $params['id']
-            ]);
-            if ($ret === false) {
-                exception('编辑渠道失败，请稍后重试', 400);
+            $params       = $this->getParams($params);
+            $channelModel = new SysChannelModel();
+            $result       = $channelModel->allowField(true)->save($params, ['id' => $params['id']]);
+            if ($result === false) {
+                exception('编辑渠道失败', 400);
             }
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
         $this->success('编辑成功');
     }
-
 
     /**
      * 更新渠道状态
