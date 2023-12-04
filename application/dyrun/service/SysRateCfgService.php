@@ -24,7 +24,6 @@ class SysRateCfgService
         $rows = $rows ?? 10;
         $page = $page ?? 0;
         $list = $this->sysRateCfgModel
-            ->where($params)
             ->order('id', 'desc')
             ->paginate($rows, false, [
                 'page' => $page
