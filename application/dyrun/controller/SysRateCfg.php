@@ -108,7 +108,7 @@ class SysRateCfg extends Api
     }
 
     /**
-     * 获取列表
+     * 更新费率
      * @ApiSummary  (dyrun/sys_rate_cfg/editSysRate)
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (GET)
@@ -123,7 +123,6 @@ class SysRateCfg extends Api
     'time': '1700731394',
     'data': {}
     })
-     * 这样的操作对于大量数据是非常低效的，但是在数据量小的情况下可以使用。
      */
     public function editSysRate()
     {
@@ -151,7 +150,7 @@ class SysRateCfg extends Api
     }
 
     /**
-     * 支付配置开关
+     * 汇率配置开关
      * @ApiSummary  (dyrun/sys_rate_cfg/updatestatus)
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiMethod (POST)

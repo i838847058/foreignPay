@@ -80,10 +80,6 @@ class SysChannelService
         if ($fee_rate_in) {
             $where['pay_rate'] = ['egt', $fee_rate_in];
         }
-        /*if (!$fee_rate_in) {
-            return [];
-        }
-        $where['fee_rate_in'] = ['egt', $fee_rate_in];*/
         $datas = SysChannel::where($where)->select();
         return $datas;
     }

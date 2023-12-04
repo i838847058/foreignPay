@@ -21,13 +21,20 @@ class SysRateCfgService
     // 列表
     public function getSysRate($params)
     {
-        $rows = $rows ?? 10;
-        $page = $page ?? 0;
+        $rows              = $rows ?? 10;
+        $page              = $page ?? 0;
+        $SysChannelService = new \app\dyrun\service\SysChannelService();
+        list($product_type_arr, $coin_arr, $pay_way_arr, $billing_arr, $country_arr) = $SysChannelService->getBaseOption();
         $list = $this->sysRateCfgModel
             ->order('id', 'desc')
             ->paginate($rows, false, [
                 'page' => $page
-            ]);
+            ])
+            ->each(function ($item) use ($coin_arr) {
+                // 货币
+                $item['coin_id_text'] = $coin_arr[$item['coin_id']] ?? '';
+                return $item;
+            });;
         return $list;
     }
 
@@ -40,10 +47,8 @@ class SysRateCfgService
     // 编辑
     public function editSysRate($params)
     {
-        $id = (int)$params['id'];
-        unset($params['id']);
         return $this->sysRateCfgModel->allowField(true)->save($params, [
-            'id' => $id
+            'id' => $params['id']
         ]);
     }
 
