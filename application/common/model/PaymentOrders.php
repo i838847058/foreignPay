@@ -62,34 +62,4 @@ class PaymentOrders extends Model
 //        return $status[$value] ?? '未知状态';
 //    }
 
-    public function getGatewayParamsAttr($value)
-    {
-        return json_decode($value, true);
-    }
-
-    public function setGatewayParamsAttr($value)
-    {
-        return json_encode($value, JSON_UNESCAPED_UNICODE);
-    }
-
-    public function getGatewayResponseAttr($value)
-    {
-        return json_decode($value, true);
-    }
-
-    public function setGatewayResponseAttr($value)
-    {
-        return json_encode($value, JSON_UNESCAPED_UNICODE);
-    }
-
-    public function getCallbackResponseAttr($value)
-    {
-        return json_decode($value, true);
-    }
-
-    public function setCallbackResponseAttr($value)
-    {
-        return json_encode($value, JSON_UNESCAPED_UNICODE);
-    }
-
 }
