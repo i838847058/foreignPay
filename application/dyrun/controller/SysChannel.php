@@ -85,6 +85,8 @@ class SysChannel extends Api
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param decimal $margin_balance  保证金
      * @param decimal $balance  余额
+     * @param tinyint $is_pay_product  支付产品：0=代收；1=代付；
+     * @param text $tc_options  技术参数
      * @ApiReturn ({
     'code':'1',
     'msg':'成功',
@@ -155,6 +157,8 @@ class SysChannel extends Api
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param decimal $margin_balance  保证金
      * @param decimal $balance  余额
+     * @param tinyint $is_pay_product  支付产品：0=代收；1=代付；
+     * @param text $tc_options  技术参数
      * @ApiReturn ({
     'code':'1',
     'msg':'成功',

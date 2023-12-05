@@ -36,7 +36,7 @@ class SysRunService
         if (!empty($product_name)) {
             $where['m.product_name'] = ['like', "{$product_name}%"];
         }
-        $field             = ['r.*', 'm.merchant_name', 'c.channel_name', 'c.channel_num', 'c.pay_rate', 'm.fee_rate_in', 'm.coins_in', 'm.pay_way_id', 'm.product_type_id', 'm.product_name'];
+        $field             = ['r.*', 'm.merchant_name', 'c.channel_name', 'c.channel_num', 'c.pay_rate', 'c.is_pay_product', 'm.fee_rate_in', 'm.coins_in', 'm.pay_way_id', 'm.product_type_id', 'm.product_name'];
         $rows              = $rows ?? 10;
         $page              = $page ?? 0;
         $SysChannelService = new \app\dyrun\service\SysChannelService();

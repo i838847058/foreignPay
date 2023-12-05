@@ -21,11 +21,13 @@ class SysChannel extends Validate
         'status'                     => 'in:0,1',
         'margin_balance'             => 'require|float',
         'sys_channel_pruduct_cfg_id' => 'require|float',
+        'is_pay_product'             => 'require|in:0,1',
+        // 'tc_options'
     ];
 
     protected $scene = [
-        'add'          => ['channel_name', 'channel_num', 'country_ids', 'coin_ids', 'product_type_id', 'pay_way_id', 'billing_id', 'is_u', 'pay_rate', 'status', 'margin_balance', 'balance', 'sys_channel_pruduct_cfg_id'],
-        'edit'         => ['id' => 'require', 'channel_name', 'channel_num', 'country_ids', 'coin_ids', 'product_type_id', 'pay_way_id', 'billing_id', 'is_u', 'pay_rate', 'status', 'margin_balance', 'balance', 'sys_channel_pruduct_cfg_id'],
+        'add'          => ['channel_name', 'channel_num', 'country_ids', 'coin_ids', 'product_type_id', 'pay_way_id', 'billing_id', 'is_u', 'pay_rate', 'status', 'margin_balance', 'balance', 'sys_channel_pruduct_cfg_id', 'is_pay_product'],
+        'edit'         => ['id' => 'require', 'channel_name', 'channel_num', 'country_ids', 'coin_ids', 'product_type_id', 'pay_way_id', 'billing_id', 'is_u', 'pay_rate', 'status', 'margin_balance', 'balance', 'sys_channel_pruduct_cfg_id', 'is_pay_product'],
         'updateStatus' => ['id' => 'require', 'status'],
     ];
 
