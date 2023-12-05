@@ -33,12 +33,12 @@ trait HttpClient
     /**
      * @var Client
      */
-    public $httpClient;
+    public Client $httpClient;
 
     /**
      * @var ResponseInterface
      */
-    public $clientResponse;
+    public ResponseInterface $clientResponse;
 
     /**
      * @param string $host
@@ -71,6 +71,7 @@ trait HttpClient
                 $option = [];
                 break;
         }
+        $this->requestParams = $option;
         $this->clientResponse = $this->httpClient->request($this->method, $uri, $option);
         return true;
     }
@@ -82,5 +83,21 @@ trait HttpClient
     {
         $bodyRaw = $this->clientResponse->getBody()->getContents();
         return json_decode($bodyRaw, true) ?: [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getRequestParams(): array
+    {
+        return $this->requestParams;
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getClientResponse(): ResponseInterface
+    {
+        return $this->clientResponse;
     }
 }

@@ -157,4 +157,12 @@ class Merchant extends BaseModel
         }
         return '[]';
     }
+
+    /**
+     * @return string
+     */
+    public function getMchName(): string
+    {
+        return $this->merchant_name;
+    }
 }

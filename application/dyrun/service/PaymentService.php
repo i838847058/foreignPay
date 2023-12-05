@@ -3,9 +3,9 @@
 namespace app\dyrun\service;
 
 use app\common\model\Merchant;
+use app\dyRun\dao\PaymentDao;
 use app\dyrun\library\Payment\PayHaYuClient;
 use GuzzleHttp\Exception\GuzzleException;
-use PaymentDao;
 
 /**
  * PaymentService
@@ -58,12 +58,22 @@ class PaymentService extends PaymentDao
      */
     private function payForPayHaYu(array $params)
     {
-        // TODO 写接口订单
-        $this->createOrUpdatePaymentOrder($this->mch, $params);
-        // TODO 请求第三方
-        $payLib = new PayHaYuClient();
-        $payLib->paymentAdd('', '', '', '', '', '', '');
-        $this->result = $payLib->getJsonResponse();
+        // 写入订单数据
+        if ($this->createPaymentOrder($this->mch, $params)) {
+            // 请求上游接口
+            $payLib = new PayHaYuClient();
+            if ($payLib->paymentAdd($this->payOderNo, (string)$this->payAmount, $params['mch_name'] ?? $this->mch->getMchName(), $params['mch_tel'] ?? ('130100' . (10000 + $this->mch->id)), $params['mch_email'] ?? ((10000 + $this->mch->id) . '@foreign.pay'), $params['pay_type'] ?? PayHaYuClient::TYPE_INR)) {
+                $this->status = 1; // 请求成功
+            } else {
+                $this->status = -2;
+            }
+            // 记录请求结果
+            $this->updatePaymentOrder('gateway_params', $payLib->getRequestParams());
+            $this->updatePaymentOrder('gateway_response', $payLib->getJsonResponse());
+            // 赋值服务
+            $this->response= $payLib->getClientResponse();
+            $this->result = $payLib->getJsonResponse();
+        }
     }
 
 }

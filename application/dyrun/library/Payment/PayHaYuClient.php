@@ -9,22 +9,32 @@ class PayHaYuClient
 {
     use HttpClient;
 
-    /**
-     * @var string
-     */
-    private $merchantNo = '6559218556';
+    const TYPE_INR = 'upi';  // （印度INR）
 
     /**
      * @var string
      */
-    private $PAY_KEY_IN = 'dVptATLGMtIiDaZ2eGvpkw4L5prRXy0I';
+    private string $merchantNo = '6559218556';
 
     /**
      * @var string
      */
-    private $PAY_KEY_OUT = 'laKZBIFGgQMTe0z4WagAoZmpGltqpLkY';
+    private string $PAY_KEY_IN = 'dVptATLGMtIiDaZ2eGvpkw4L5prRXy0I';
 
-    private $CALLBACK_URL = 'http://z.zz.com';
+    /**
+     * @var string
+     */
+    private string $PAY_KEY_OUT = 'laKZBIFGgQMTe0z4WagAoZmpGltqpLkY';
+
+    /**
+     * @var string
+     */
+    private string $CALLBACK_URL = 'http://z.zz.com';
+
+    /**
+     * @var array
+     */
+    private array $requestParams;
 
     /**
      * @param string|null $host

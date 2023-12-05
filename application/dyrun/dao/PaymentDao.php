@@ -1,7 +1,9 @@
 <?php
+namespace app\dyRun\dao;
 
 use app\common\model\Merchant;
 use app\common\model\PaymentOrders;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class PaymentDao
 {
@@ -9,13 +11,15 @@ abstract class PaymentDao
 
     protected string $payOderNo;
 
-    protected float $payAmount;
+    protected float $payAmount = 0;
 
-    protected string $msg;
+    protected string $msg = 'OK';
 
-    protected string $apiMsg;
+    protected string $apiMsg = 'OK';
 
     protected array $result = [];
+
+    protected ResponseInterface $response;
 
     protected int $status = 0;
 
@@ -34,7 +38,7 @@ abstract class PaymentDao
      * @param array $params
      * @return bool
      */
-    public function createOrUpdatePaymentOrder(Merchant $merchant, array $params): bool
+    public function createPaymentOrder(Merchant $merchant, array $params): bool
     {
         if ($merchant->id ?? 0) {
             return false;
@@ -44,6 +48,21 @@ abstract class PaymentDao
         $this->paymentOrders->order_amount = $this->payAmount;
         $this->paymentOrders->gateway_name = $this->payGateway;
         $this->paymentOrders->gateway_params = $params;
+        $this->paymentOrders->save();
+        return true;
+    }
+
+    /**
+     * @param string $key
+     * @param $value
+     * @return bool
+     */
+    public function updatePaymentOrder(string $key, $value): bool
+    {
+        if ($merchant->id ?? 0) {
+            return false;
+        }
+        $this->paymentOrders->$key = $value;
         $this->paymentOrders->save();
         return true;
     }
@@ -126,5 +145,21 @@ abstract class PaymentDao
     public function setPayAmount(float $payAmount): void
     {
         $this->payAmount = $payAmount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param mixed $response
+     */
+    public function setResponse($response): void
+    {
+        $this->response = $response;
     }
 }
