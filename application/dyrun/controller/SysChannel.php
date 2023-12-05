@@ -109,7 +109,7 @@ class SysChannel extends Api
         try {
             $params       = $this->getParams($params);
             $channelModel = new SysChannelModel();
-            $channelModel->allowField(true)->save($params, true);
+            $channelModel->allowField(true)->save($params, false);
             if (!$channelModel->id) {
                 exception('添加渠道失败', 400);
             }

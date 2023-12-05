@@ -11,8 +11,8 @@ class SysChannel extends Validate
         'id'                         => 'number',
         'channel_name'               => 'require|max:255|unique:sys_channel',
         'channel_num'                => 'require|max:100',
-        'country_ids'                => 'require|array|number',
-        'coin_ids'                   => 'require|array|number',
+        'country_ids'                => 'require|number',
+        'coin_ids'                   => 'require|number',
         'product_type_id'            => 'require|number',
         'pay_way_id'                 => 'require|number',
         'billing_id'                 => 'require|number',
@@ -20,7 +20,6 @@ class SysChannel extends Validate
         'pay_rate'                   => 'require|float|between:0,99.99',
         'status'                     => 'in:0,1',
         'margin_balance'             => 'require|float',
-        'sys_channel_pruduct_cfg_id' => 'require|float',
         'is_pay_product'             => 'require|in:0,1',
         // 'tc_options'
     ];
