@@ -243,10 +243,10 @@
                                                 <a href="javascript:;" data-id="19" class="list-group-item">新增汇率                            <span class="tag">
                                                             </span>
                         </a>
-                                                <a href="javascript:;" data-id="20" class="list-group-item">获取列表                            <span class="tag">
+                                                <a href="javascript:;" data-id="20" class="list-group-item">更新费率                            <span class="tag">
                                                             </span>
                         </a>
-                                                <a href="javascript:;" data-id="21" class="list-group-item">支付配置开关                            <span class="tag">
+                                                <a href="javascript:;" data-id="21" class="list-group-item">汇率配置开关                            <span class="tag">
                                                             </span>
                         </a>
                                             </div>
@@ -2304,6 +2304,18 @@
                                                         <td>是</td>
                                                         <td>余额</td>
                                                     </tr>
+                                                                                                        <tr>
+                                                        <td>is_pay_product</td>
+                                                        <td>tinyint</td>
+                                                        <td>是</td>
+                                                        <td>支付产品：0=代收；1=代付；</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>tc_options</td>
+                                                        <td>text</td>
+                                                        <td>是</td>
+                                                        <td>技术参数</td>
+                                                    </tr>
                                                                                                     </tbody>
                                             </table>
                                                                                     </div>
@@ -2397,6 +2409,14 @@
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="balance">balance</label>
                                                             <input type="text" class="form-control input-sm" id="balance" required placeholder="余额" name="balance">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="is_pay_product">is_pay_product</label>
+                                                            <input type="text" class="form-control input-sm" id="is_pay_product" required placeholder="支付产品：0=代收；1=代付；" name="is_pay_product">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="tc_options">tc_options</label>
+                                                            <input type="text" class="form-control input-sm" id="tc_options" required placeholder="技术参数" name="tc_options">
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
                                                             <button type="submit" class="btn btn-success send" rel="14">提交</button>
@@ -2597,6 +2617,18 @@
                                                         <td>是</td>
                                                         <td>余额</td>
                                                     </tr>
+                                                                                                        <tr>
+                                                        <td>is_pay_product</td>
+                                                        <td>tinyint</td>
+                                                        <td>是</td>
+                                                        <td>支付产品：0=代收；1=代付；</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>tc_options</td>
+                                                        <td>text</td>
+                                                        <td>是</td>
+                                                        <td>技术参数</td>
+                                                    </tr>
                                                                                                     </tbody>
                                             </table>
                                                                                     </div>
@@ -2695,6 +2727,14 @@
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="balance">balance</label>
                                                             <input type="text" class="form-control input-sm" id="balance" required placeholder="余额" name="balance">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="is_pay_product">is_pay_product</label>
+                                                            <input type="text" class="form-control input-sm" id="is_pay_product" required placeholder="支付产品：0=代收；1=代付；" name="is_pay_product">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="tc_options">tc_options</label>
+                                                            <input type="text" class="form-control input-sm" id="tc_options" required placeholder="技术参数" name="tc_options">
                                                         </div>
                                                                                                                 <div class="form-group form-group-submit">
                                                             <button type="submit" class="btn btn-success send" rel="15">提交</button>
@@ -3434,7 +3474,7 @@
                     <div class="panel-heading" id="heading-20">
                         <h4 class="panel-title">
                             <span class="label label-success">GET</span>
-                            <a data-toggle="collapse" data-parent="#accordion20" href="#collapseOne20"> 获取列表 <span class="text-muted">/dyrun/sys_rate_cfg/editSysRate</span></a>
+                            <a data-toggle="collapse" data-parent="#accordion20" href="#collapseOne20"> 更新费率 <span class="text-muted">/dyrun/sys_rate_cfg/editSysRate</span></a>
                         </h4>
                     </div>
                     <div id="collapseOne20" class="panel-collapse collapse">
@@ -3610,7 +3650,7 @@
                     <div class="panel-heading" id="heading-21">
                         <h4 class="panel-title">
                             <span class="label label-primary">POST</span>
-                            <a data-toggle="collapse" data-parent="#accordion21" href="#collapseOne21"> 支付配置开关 <span class="text-muted">/dyrun/sys_rate_cfg/updateStatus</span></a>
+                            <a data-toggle="collapse" data-parent="#accordion21" href="#collapseOne21"> 汇率配置开关 <span class="text-muted">/dyrun/sys_rate_cfg/updateStatus</span></a>
                         </h4>
                     </div>
                     <div id="collapseOne21" class="panel-collapse collapse">
@@ -5809,7 +5849,7 @@
 
                 </div>
                 <div class="col-md-6" align="right">
-                    Generated on 2023-12-04 18:19:36 <a href="./" target="_blank">大娱海外支付平台</a>
+                    Generated on 2023-12-05 15:02:18 <a href="./" target="_blank">大娱海外支付平台</a>
                 </div>
             </div>
 

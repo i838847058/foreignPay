@@ -85,6 +85,8 @@ class SysChannel extends Api
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param decimal $margin_balance  保证金
      * @param decimal $balance  余额
+     * @param tinyint $is_pay_product  支付产品：0=代收；1=代付；
+     * @param text $tc_options  技术参数
      * @ApiReturn ({
     'code':'1',
     'msg':'成功',
@@ -105,9 +107,9 @@ class SysChannel extends Api
         }
 
         try {
-            $params       = $this->getParams($params);
+            // $params       = $this->getParams($params);
             $channelModel = new SysChannelModel();
-            $channelModel->allowField(true)->save($params, true);
+            $channelModel->allowField(true)->save($params, false);
             if (!$channelModel->id) {
                 exception('添加渠道失败', 400);
             }
@@ -155,6 +157,8 @@ class SysChannel extends Api
      * @param tinyint $status  状态：0=禁用；1=启用；
      * @param decimal $margin_balance  保证金
      * @param decimal $balance  余额
+     * @param tinyint $is_pay_product  支付产品：0=代收；1=代付；
+     * @param text $tc_options  技术参数
      * @ApiReturn ({
     'code':'1',
     'msg':'成功',
@@ -173,7 +177,7 @@ class SysChannel extends Api
             $this->error($validate->getError());
         }
         try {
-            $params       = $this->getParams($params);
+            // $params       = $this->getParams($params);
             $channelModel = new SysChannelModel();
             $result       = $channelModel->allowField(true)->save($params, ['id' => $params['id']]);
             if ($result === false) {
