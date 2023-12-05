@@ -1,0 +1,1 @@
+const l=[{label:"全部",value:"ALL"},{label:"成功",value:"SUCCESS"},{label:"处理中",value:"PENDDING"},{label:"失败",value:"FAIL"}],e={"-1":{label:"已拒绝",type:"danger"},1:{label:"已通过",type:"success"},0:{label:"待审批",type:"info"}};export{e as A,l as O};
