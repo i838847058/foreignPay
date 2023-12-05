@@ -2,10 +2,11 @@
 
 abstract class PaymentDao
 {
-    protected string $payType;
+    protected array $payOption;
 
     protected string $payName;
 
-    protected string $payWay;
+    protected array $result = [];
 
+    protected int $status = 0;
 }
