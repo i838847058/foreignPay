@@ -71,8 +71,8 @@ class PaymentService extends PaymentDao
             $this->updatePaymentOrder('gateway_params', $payLib->getRequestParams());
             $this->updatePaymentOrder('gateway_response', $payLib->getJsonResponse());
             // 赋值服务
-            $this->response= $payLib->getClientResponse();
             $this->result = $payLib->getJsonResponse();
+            $this->response = $payLib->getClientResponse();
         }
     }
 

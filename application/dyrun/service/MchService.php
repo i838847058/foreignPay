@@ -197,17 +197,17 @@ class MchService
     public function paymentTest()
     {
         $service = new PaymentService(Merchant::get(1));
-        // bool
-        $service->createOrderIn(PaymentService::PAY_NAME_PAYHAYU, '123', 0.01, [
+        // createOrderIn bool
+        if($service->createOrderIn(PaymentService::PAY_NAME_PAYHAYU, '123', 0.01, [
 //            'mch_email' => '',  // 可选 String
 //            'mch_name' => '',  // 可选 String
 //            'mch_tel' => '', // 可选 String
             'pay_type' => PayHaYuClient::TYPE_INR, // 暂仅支持 INR 印度
-        ]);
-        // $service->getStatus() > 1
-        // $service->getMsg(); // string
-        $result = $service->getResult(); // array 上游接口调用结果
-
+        ])){
+            // $service->getStatus() > 1
+            // $service->getMsg(); // string
+            $result = $service->getResult(); // array 上游接口调用结果
+        }
 
     }
 

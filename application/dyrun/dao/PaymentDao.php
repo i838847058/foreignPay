@@ -1,4 +1,5 @@
 <?php
+
 namespace app\dyRun\dao;
 
 use app\common\model\Merchant;
@@ -19,7 +20,7 @@ abstract class PaymentDao
 
     protected array $result = [];
 
-    protected ResponseInterface $response;
+    protected ?ResponseInterface $response = null;
 
     protected int $status = 0;
 
@@ -40,9 +41,10 @@ abstract class PaymentDao
      */
     public function createPaymentOrder(Merchant $merchant, array $params): bool
     {
-        if ($merchant->id ?? 0) {
+        if (!$merchant->id ?? 0) {
             return false;
         }
+        $this->paymentOrders = new PaymentOrders();
         $this->paymentOrders->merchant_id = $merchant->id;
         $this->paymentOrders->order_no = $this->payOderNo;
         $this->paymentOrders->order_amount = $this->payAmount;

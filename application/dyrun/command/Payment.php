@@ -3,7 +3,6 @@
 namespace app\dyRun\command;
 
 use app\common\model\Merchant;
-use app\dyrun\library\Payment\PayHaYuClient;
 use app\dyrun\service\PaymentService;
 use think\console\Command;
 use think\console\Input;
@@ -19,21 +18,22 @@ class Payment extends Command
 
     protected function execute(Input $input, Output $output)
     {
-        $output->writeln("开始测试");
+        $output->writeln("执行开始");
+
         $mch = Merchant::get(1); // 加载商户
         $service = new PaymentService($mch);
         // bool
-        $service->createOrderIn(PaymentService::PAY_NAME_PAYHAYU, '123456789', 0.01, [
+        if($service->createOrderIn(PaymentService::PAY_NAME_PAYHAYU, '123456789', 0.01, [
 //            'mch_email' => '',  // 可选 String
 //            'mch_name' => '',  // 可选 String
 //            'mch_tel' => '', // 可选 String
 //            'pay_type' => PayHaYuClient::TYPE_INR, // 暂仅支持 INR 印度
-        ]);
+        ])){
+            $result = $service->getResult(); // array 上游接口调用结果
+            $output->writeln("状态：" . $service->getStatus());
+            $output->writeln("消息：" . $service->getMsg());
+            $output->writeln("API结果：" . $service->getResponse());
+        }
         $output->writeln("执行完成");
-        $output->writeln("状态：" . $service->getStatus());
-        $output->writeln("消息：" . $service->getMsg());
-        $output->writeln("API结果：" . $service->getResponse()->getBody()->getContents());
-//        $result = $service->getResult(); // array 上游接口调用结果
-
     }
 }
