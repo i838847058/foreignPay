@@ -107,7 +107,6 @@ class SysChannel extends Api
         }
 
         try {
-            // $params       = $this->getParams($params);
             $channelModel = new SysChannelModel();
             $channelModel->allowField(true)->save($params, false);
             if (!$channelModel->id) {
@@ -177,7 +176,6 @@ class SysChannel extends Api
             $this->error($validate->getError());
         }
         try {
-            // $params       = $this->getParams($params);
             $channelModel = new SysChannelModel();
             $result       = $channelModel->allowField(true)->save($params, ['id' => $params['id']]);
             if ($result === false) {
@@ -228,19 +226,6 @@ class SysChannel extends Api
             $this->error($e->getMessage());
         }
         $this->success('更新渠道状态成功');
-    }
-
-    /**
-     * ${CARET}
-     * @param $params
-     * @return mixed
-     * @author hsy 2023-11-27
-     */
-    private function getParams($params)
-    {
-        $params['country_ids'] = is_array($params['country_ids']) ? implode(',', $params['country_ids']) : '';
-        $params['coin_ids']    = is_array($params['coin_ids']) ? implode(',', $params['coin_ids']) : '';
-        return $params;
     }
 
 }

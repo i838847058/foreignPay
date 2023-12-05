@@ -210,4 +210,32 @@ class MchService
 
 
     }
+
+    // TODO 查询商户币种余额，返回对象/数组
+
+    public function getMerchantBalanceList($user_id): array
+    {
+        if (empty($user_id)) {
+            return [];
+        }
+        return [
+            [
+                'id'            => 1,
+                'merchant_name' => '小明-商户名称1',
+                'merchant_no'   => '商户号123',
+                'coin_id'       => 1,
+                'coin_id_text'  => '人民币',
+                'balance'       => 30,
+            ],
+            [
+                'id'            => 2,
+                'merchant_name' => '小明-商户名称2',
+                'merchant_no'   => '商户号2123',
+                'coin_id'       => 1,
+                'coin_id_text'  => '人民币',
+                'balance'       => 40,
+            ]
+        ];
+    }
+
 }
