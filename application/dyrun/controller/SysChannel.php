@@ -107,7 +107,7 @@ class SysChannel extends Api
         }
 
         try {
-            $params       = $this->getParams($params);
+            // $params       = $this->getParams($params);
             $channelModel = new SysChannelModel();
             $channelModel->allowField(true)->save($params, false);
             if (!$channelModel->id) {
@@ -177,7 +177,7 @@ class SysChannel extends Api
             $this->error($validate->getError());
         }
         try {
-            $params       = $this->getParams($params);
+            // $params       = $this->getParams($params);
             $channelModel = new SysChannelModel();
             $result       = $channelModel->allowField(true)->save($params, ['id' => $params['id']]);
             if ($result === false) {
