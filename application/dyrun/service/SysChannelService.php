@@ -41,7 +41,7 @@ class SysChannelService
             ->paginate($rows, false, [
                 'page' => $page
             ])->each(function ($item) use ($country_arr, $coin_arr, $product_type_arr, $pay_way_arr, $billing_arr) {
-                // 国家
+                /*// 国家
                 $item['country_ids_text'] = '';
                 if ($item['country_ids'] && $country_arr) {
                     $new_country_ids          = explode(',', $item['country_ids']);
@@ -58,7 +58,11 @@ class SysChannelService
                         return $coin_arr[$val] ?? '';
                     }, $new_coin_ids));
                     $item['coin_ids']      = array_map('intval', $new_coin_ids);
-                }
+                }*/
+                // 国家
+                $item['country_ids_text'] = $country_arr[$item['country_ids']] ?? '';
+                // 货币
+                $item['coin_ids_text'] = $coin_arr[$item['coin_ids']] ?? '';
                 // 支持产品类型
                 $item['product_type_id_text'] = $product_type_arr[$item['product_type_id']] ?? '';
                 // 支付方式-代收
