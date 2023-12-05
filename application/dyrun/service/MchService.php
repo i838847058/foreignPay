@@ -42,11 +42,8 @@ class MchService
 
     /**
      * @param string $text
-     * @param int    $user_id
-     * @return bool|\PDOStatement|string|Collection
-     * @throws DataNotFoundException
-     * @throws DbException
-     * @throws ModelNotFoundException
+     * @param int $user_id
+     * @return array
      */
     public function getMchNoList(string $text, int $user_id = 0)
     {

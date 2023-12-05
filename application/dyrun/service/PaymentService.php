@@ -2,45 +2,33 @@
 
 namespace app\dyrun\service;
 
+use app\common\model\Merchant;
 use PaymentDao;
 
 /**
  * PaymentService
  * @property int $orderId
+ * @property Merchant $Merchant
  */
 class PaymentService extends PaymentDao
 {
-    /**
-     * @var int
-     */
-    private $orderId;
+    const PAY_NAME_PAYHAYU = 'PayHaYu';
 
-    public function __construct($payWay, $payName, $payType, $orderId = 0)
+    public function __construct(Merchant $merchant)
     {
-        $this->payWay = $payWay;
+        $this->Merchant = $merchant;
+    }
+
+    public function createOrder(string $payName, float $amount, array $option = [])
+    {
         $this->payName = $payName;
-        $this->payType = $payType;
-        $this->orderId = $orderId;
+        $this->payOption = $option;
+        switch ($payName) {
+            case self::PAY_NAME_PAYHAYU:
+                break;
+            default:
+                return $this;
+        }
     }
 
-    public function createOrder(float $amount, string $out_trade_no, array $option = [])
-    {
-
-    }
-
-    /**
-     * @return int|mixed
-     */
-    public function getOrderId()
-    {
-        return $this->orderId;
-    }
-
-    /**
-     * @param int|mixed $orderId
-     */
-    public function setOrderId($orderId): void
-    {
-        $this->orderId = $orderId;
-    }
 }
