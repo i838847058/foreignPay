@@ -61,9 +61,6 @@ abstract class PaymentDao
      */
     public function updatePaymentOrder(string $key, $value): bool
     {
-        if ($merchant->id ?? 0) {
-            return false;
-        }
         $this->paymentOrders->$key = $value;
         $this->paymentOrders->save();
         return true;

@@ -23,17 +23,18 @@ class Payment extends Command
         $mch = Merchant::get(1); // 加载商户
         $service = new PaymentService($mch);
         // bool
-        if($service->createOrderIn(PaymentService::PAY_NAME_PAYHAYU, '123456789', 0.01, [
+        $service->createOrderIn(PaymentService::PAY_NAME_PAYHAYU, 'test' . rand(10000, 88888), 0.01, [
 //            'mch_email' => '',  // 可选 String
 //            'mch_name' => '',  // 可选 String
 //            'mch_tel' => '', // 可选 String
 //            'pay_type' => PayHaYuClient::TYPE_INR, // 暂仅支持 INR 印度
-        ])){
-            $result = $service->getResult(); // array 上游接口调用结果
-            $output->writeln("状态：" . $service->getStatus());
-            $output->writeln("消息：" . $service->getMsg());
-            $output->writeln("API结果：" . $service->getResponse());
-        }
+        ]);
+//            $result = $service->getResult(); // array 上游接口调用结果
+        $output->writeln("状态：" . $service->getStatus());
+        $output->writeln("消息：" . $service->getMsg());
+        $output->writeln("API消息：" . $service->getApiMsg());
+        $output->writeln("API结果：" . json_encode($service->getResult(), JSON_UNESCAPED_UNICODE));
+
         $output->writeln("执行完成");
     }
 }
