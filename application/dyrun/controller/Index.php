@@ -2,6 +2,7 @@
 
 namespace app\dyrun\controller;
 
+use think\Cache;
 use think\Db;
 use app\common\controller\Api;
 
@@ -18,7 +19,7 @@ class Index extends Api
      * @ApiTitle    (测试名称)
      * @ApiSummary  (测试描述信息)
      * @ApiMethod   (POST)
-     * @ApiRoute    (/api/demo/test/id/{id}/name/{name})
+     * @ApiRoute    (dyrun/index/index)
      * @ApiHeaders  (name=token, type=string, required=true, description="请求的Token")
      * @ApiParams   (name="id", type="integer", required=true, description="会员ID")
      * @ApiParams   (name="name", type="string", required=true, description="用户名")
@@ -33,10 +34,9 @@ class Index extends Api
      */
     public function index()
     {
-        /*$info = Db::name('sys_channel')->where([
-            'id' => 24
-        ])->find();
-        dd($info['margin_balance'],898);*/
-        $this->success('请求成功');
+        // 生成唯一ID
+        $redis              = Cache::store('redis')->handler();
+        $params['order_no'] = $redis->incr('global_unique_id');
+        $this->success('请求成功', $params['order_no']);
     }
 }
