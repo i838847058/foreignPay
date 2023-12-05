@@ -18,17 +18,17 @@ trait HttpClient
     /**
      * @var string
      */
-    public $host = null;
+    public string $host;
 
     /**
      * @var string
      */
-    public $method = 'POST';
+    public string $method = 'POST';
 
     /**
      * @var string[]
      */
-    public $jsonRaw = [];
+    public array $jsonRaw = [];
 
     /**
      * @var Client
@@ -73,5 +73,14 @@ trait HttpClient
         }
         $this->clientResponse = $this->httpClient->request($this->method, $uri, $option);
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function getJsonResponse(): array
+    {
+        $bodyRaw = $this->clientResponse->getBody()->getContents();
+        return json_decode($bodyRaw, true) ?: [];
     }
 }

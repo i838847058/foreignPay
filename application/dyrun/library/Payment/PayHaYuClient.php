@@ -99,6 +99,4 @@ class PayHaYuClient
         // MD5 加密
         return strtoupper(md5($content));
     }
-
-
 }

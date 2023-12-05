@@ -6,6 +6,8 @@ use app\common\model\User;
 use app\common\model\Merchant;
 use app\common\model\SysCountryCoinsView;
 use app\common\model\SysOptionValue;
+use GuzzleHttp\Exception\GuzzleException;
+use think\addons\Service;
 use think\Collection;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\ModelNotFoundException;
@@ -17,8 +19,8 @@ class MchService
 {
     /**
      * @param string $text
-     * @param int    $rows
-     * @param int    $role
+     * @param int $rows
+     * @param int $role
      * @return bool|\PDOStatement|string|Collection
      * @throws DataNotFoundException
      * @throws DbException
@@ -50,7 +52,7 @@ class MchService
         $SysChannelService = new \app\dyrun\service\SysChannelService();
         list($product_type_arr, $coin_arr, $pay_way_arr, $billing_arr, $country_arr) = $SysChannelService->getBaseOption();
         $where = [
-            'status'        => 1,
+            'status' => 1,
             'merchant_name' => ['like', "{$text}%"],
         ];
         if ($user_id) {
@@ -65,7 +67,7 @@ class MchService
                 // 支付方式-代收
                 $merchant['pay_way_id_text'] = $pay_way_arr[$merchant['pay_way_id']] ?? '';
                 // 货币-代收
-                $coins_in                  = is_array($merchant['coins_in']) ? $merchant['coins_in'] : explode(',', $merchant['coins_in']);
+                $coins_in = is_array($merchant['coins_in']) ? $merchant['coins_in'] : explode(',', $merchant['coins_in']);
                 $merchant['coins_in_text'] = implode(',', array_intersect_key($coin_arr, array_flip($coins_in)));
                 // 处理每个商户的数据
                 $merchants_data[] = $merchant;
@@ -81,11 +83,11 @@ class MchService
      */
     public function createOrUpdateMchOne(array $data): Merchant
     {
-        $merchant            = new Merchant();
+        $merchant = new Merchant();
         $data['merchant_no'] = BaseData::makeMerchantNo($data['user_id']);
-        $data['api_key']     = BaseData::makeKeyMd5($data['merchant_no']);
+        $data['api_key'] = BaseData::makeKeyMd5($data['merchant_no']);
         if ($data['agent_rate_in'] ?? 0 and $data['agent_rate_out'] ?? 0) {
-            $data['agent_rate_in']  = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
+            $data['agent_rate_in'] = $data['agent_user_id'] ? $data['agent_rate_in'] : 0;
             $data['agent_rate_out'] = $data['agent_user_id'] ? $data['agent_rate_out'] : 0;
         }
         if ($id = ($data['id'] ?? 0)) {
@@ -126,9 +128,9 @@ class MchService
             ]);;
         $data->each(function ($item) {
             $item->agent_user_text = $item->agent_user_id ? User::get($item->agent_user_id)->value('username') : null;
-            $countrys              = '';
-            $coins_in              = '';
-            $coins_out             = '';
+            $countrys = '';
+            $coins_in = '';
+            $coins_out = '';
             foreach ($item->countrys as $id) {
                 $countrys .= SysCountryCoinsView::where('country_id', $id)->value('country_name') . '，';
             }
@@ -138,11 +140,11 @@ class MchService
             foreach ($item->coins_out as $id) {
                 $coins_out .= SysCountryCoinsView::where('currency_id', $id)->value('currency_name') . '，';
             }
-            $item->countrys_text        = mb_substr($countrys, 0, -1);
-            $item->coins_in_text        = mb_substr($coins_in, 0, -1);
-            $item->coins_out_text       = mb_substr($coins_out, 0, -1);
+            $item->countrys_text = mb_substr($countrys, 0, -1);
+            $item->coins_in_text = mb_substr($coins_in, 0, -1);
+            $item->coins_out_text = mb_substr($coins_out, 0, -1);
             $item->product_type_id_text = SysOptionValue::getValue($item->product_type_id);
-            $item->pay_way_id_text      = SysOptionValue::getValue($item->pay_way_id);
+            $item->pay_way_id_text = SysOptionValue::getValue($item->pay_way_id);
             unset($item->api_key);
         });
         return $data;
@@ -150,7 +152,7 @@ class MchService
 
     /**
      * @param Merchant $merchant
-     * @param string   $key
+     * @param string $key
      * @param          $value
      * @return bool
      */
@@ -169,9 +171,9 @@ class MchService
     }
 
     /**
-     * @param Merchant    $merchant
-     * @param User        $user
-     * @param int         $state
+     * @param Merchant $merchant
+     * @param User $user
+     * @param int $state
      * @param string|null $reason
      * @return bool
      */
@@ -179,12 +181,29 @@ class MchService
     {
         if ($merchant->id ?? 0 and $user->id ?? 0) {
             $merchant->check_user_id = $user->id;
-            $merchant->check_time    = date('Y-m-d H:i:s');
-            $merchant->check_reason  = $reason;
-            $merchant->check_state   = $state;
+            $merchant->check_time = date('Y-m-d H:i:s');
+            $merchant->check_reason = $reason;
+            $merchant->check_state = $state;
             $merchant->save();
             return true;
         }
         return false;
+    }
+
+    /**
+     * @throws DbException
+     */
+    public function paymentTest()
+    {
+        $service = new PaymentService(Merchant::get(1));
+        // bool
+        $service->createOrderIn(PaymentService::PAY_NAME_PAYHAYU, '123',0.01, [
+            'a'=>'b'
+        ]);
+        // $service->getStatus() > 1
+        // $service->getMsg(); // string
+         $result = $service->getResult(); // array 上游接口调用结果
+
+
     }
 }
