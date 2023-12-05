@@ -23,18 +23,19 @@ class PaymentService extends PaymentDao
 
     /**
      * 统一代收 上游服务
-     * @param string $payName
+     * @param string $payGateway
      * @param string $oderNo
      * @param float $amount
      * @param array $option
      * @return bool
      */
-    public function createOrderIn(string $payName, string $oderNo, float $amount, array $option = []): bool
+    public function createOrderIn(string $payGateway, string $oderNo, float $amount, array $option = []): bool
     {
-        $this->payName = $payName;
-        $this->payOption = $option;
+        $this->payGateway = $payGateway;
+        $this->payOderNo = $oderNo;
+        $this->payAmount = $amount;
         try {
-            switch ($payName) {
+            switch ($payGateway) {
                 case self::PAY_NAME_PAYHAYU:
                     $this->payForPayHaYu($option);
                     break;
@@ -51,20 +52,18 @@ class PaymentService extends PaymentDao
     }
 
     /**
-     * @param array $option
+     * @param array $params
      * @return void
      * @throws GuzzleException
      */
-    private function payForPayHaYu(array $option)
+    private function payForPayHaYu(array $params)
     {
         // TODO 写接口订单
-
+        $this->createOrUpdatePaymentOrder($this->mch, $params);
         // TODO 请求第三方
         $payLib = new PayHaYuClient();
         $payLib->paymentAdd('', '', '', '', '', '', '');
-        $payLib->jsonRaw;
-        $this->result = [];
-//        dd($payLib->getJsonResponse());
+        $this->result = $payLib->getJsonResponse();
     }
 
 }
